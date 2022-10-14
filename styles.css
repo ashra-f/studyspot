@@ -1,0 +1,102 @@
+body {
+    padding-top: 80px;
+}
+
+.navbar {
+    justify-content: space-between;
+}
+
+.pull-right {
+    width: 20vw;
+    justify-content: end;
+}
+
+/* Increase create post "plus" icon */
+.bi-plus {
+    font-size: 30px;
+}
+
+.search-bar {
+    border-radius: 100px;
+    width: 40vw;
+}
+
+.bi {
+    color: black;
+    border: none;
+    background: none;
+}
+
+.login {
+    background: #00b8ff;
+    margin: 2px;
+}
+
+.login:hover {
+    background: #039ad6;
+}
+
+.signup {
+    background: #00cf35;
+    margin: 2px;
+}
+
+.signup:hover {
+    background: #029927;
+}
+
+.main-body {
+    height: 88vh;
+}
+
+.create-post-wrapper, .misc-wrapper, .uni-wrapper, .social-wrapper {
+    border: solid 2px black;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.misc-wrapper, .uni-wrapper, .social-wrapper {
+    text-align: center;
+}
+
+.create-post {
+    display: flex;
+    align-items: center;
+}
+
+.bi-person-circle {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+#createPostInput {
+    width: 50vw;
+    display: inline-flex;
+    border-radius: 5px;
+}
+
+.main-body {
+    display: flex;
+}
+
+.rightside {
+    width: 500px;
+}
+
+.leftside {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.top-posts {
+    border: solid 2px black;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.top-forums {
+    border: solid 2px black;
+    border-radius: 5px;
+}
