@@ -128,6 +128,7 @@ body {
     margin-top: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
+    text-align: center;
 }
 
 .posts-header {
@@ -137,8 +138,19 @@ body {
     color: white;
     margin-top: 5px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .top-posts, .top-forums {
     padding: 10px;
+}
+
+a:link,  a:visited, a:hover{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+}
+
+.navbar {
+    background-color: #002c5a;
 }
