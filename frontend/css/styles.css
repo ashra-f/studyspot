@@ -29,21 +29,21 @@ body {
 }
 
 .login {
-    background: #00b8ff;
+    background: #ffcb0b;
     margin: 2px;
 }
 
 .login:hover {
-    background: #039ad6;
+    background: #d3a708;
 }
 
 .signup {
-    background: #00cf35;
+    background: #ffcb0b;
     margin: 2px;
 }
 
 .signup:hover {
-    background: #029927;
+    background: #d3a708;
 }
 
 .main-body {
