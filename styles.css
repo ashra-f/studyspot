@@ -105,20 +105,13 @@ body {
     background-color: #FFFFFF;
 }
 
-.uni-wrapper, .misc-wrapper {
-    background-color: #99a3e3;
-}
-
 .uni-header, .misc-header {
     background-color: #002c5a;
     color: white;
     padding: 10px;
     font-size: 20px;
     border-radius: 5px;
-}
-
-.social-wrapper {
-    background-color: #eef2d6;
+    margin-bottom: 10px;
 }
 
 .social-header {
@@ -126,4 +119,26 @@ body {
     padding: 10px;
     font-size: 20px;
     border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.forums-header {
+    background-color: #ffcb0b;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.posts-header {
+    background-color: #002c5a;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.top-posts, .top-forums {
+    padding: 10px;
 }
