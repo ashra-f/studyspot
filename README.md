@@ -1,4 +1,5 @@
 # study-spot
 
-- [] Improve responsivity.
-- [] Clean, refactor code
+## To-do
+- [ ] Improve responsivity.
+- [ ] Clean, refactor code
