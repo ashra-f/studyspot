@@ -173,3 +173,15 @@ a:link,  a:visited, a:hover{
     color: #002c5a;
     font-size: 18px;
 }
+
+.bi-hand-thumbs-up, .bi-hand-thumbs-down, .bi-chat-left-text {
+    font-size: 22px; 
+    color: #ffcb0b; 
+    background-color: #002c5a;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+.comment-count, .like-count, .dislike-count {
+    font-size: 13px;
+}
