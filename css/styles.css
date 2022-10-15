@@ -201,3 +201,21 @@ a:link,  a:visited, a:hover{
     flex-direction: row;
     margin-bottom: 30px;
 }
+
+.submit-btn {
+    float: right;
+}
+
+.form-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.rightside-form {
+    flex-grow: 4;
+}
+
+.profile-pic {
+    margin-top: 25px;
+}
