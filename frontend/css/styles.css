@@ -58,7 +58,7 @@ body {
     background-color: #FFFFFF;
 }
 
-.misc-wrapper, .uni-wrapper, .social-wrapper {
+.misc-header, .uni-header, .social-header {
     text-align: center;
 }
 
@@ -153,4 +153,23 @@ a:link,  a:visited, a:hover{
 
 .navbar {
     background-color: #002c5a;
+}
+
+.list-group-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.offcanvas-header {
+    background-color: #002c5a;
+}
+
+#offcanvasNavbarLabel, .offcanvas-header > .bi-person-circle {
+    color: #ffcb0b;
+}
+
+.navbar-nav > .nav-item {
+    color: #002c5a;
+    font-size: 18px;
 }
