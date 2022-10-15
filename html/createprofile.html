@@ -14,51 +14,25 @@
 	<body>
 		<div class="container-fluid">
 			<!-- Navigation Bar -->
-			<nav class="navbar fixed-top">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="index.html">
-						<div class="title-wrapper">
-							<img src="../assets/imgs/study.png" alt="" width="35">
-							<span style="color: #ffcb0b">studySpot</span> 
-						</div>
-					</a>
+            <nav class="navbar fixed-top">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="index.html">
+                    <div class="title-wrapper">
+                      <img src="../assets/imgs/study.png" alt="" width="35px">
+                      <span style="color: #ffcb0b">studySpot</span> 
+                    </div>
+                  </a>
 
-					<form class="d-flex" role="search">
-						<input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
-					</form>
+                  <form class="d-flex" role="search">
+                    <input class="form-control me-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+                  </form>
 
-					<div class="nav pull-right">
-						<button onclick="location.href='createpost.html'" type="button" class="navbar-btn bi bi-plus" title="Create Post"  style="color: #ffcb0b;"></button>                
-						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-							<span class="bi bi-person-lines-fill"  style="color: #ffcb0b;"></span>
-						</button>
-					</div>
-
-					<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-						<div class="offcanvas-header" style="border-bottom: 1px solid rgb(62, 60, 60)">
-							<span class="bi bi-person-circle"></span>
-							<h5 class="offcanvas-title" id="offcanvasNavbarLabel">John Smith</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: #ffcb0b; opacity: 100;"></button>
-						</div>
-						<div class="offcanvas-body">
-							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-								<li class="nav-item">
-									<a class="nav-link" href="createpost.html">Create a Post</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">View Your Posts</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="">Settings</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="">Log Out</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
+                  <div class="nav pull-right">
+                    <button onclick="location.href=''" type="button" title="Create Post" class="btn navbar-btn login">Log in</button>
+                    <button onclick="location.href='createprofile.html'" type="button" title="Create Post" class="btn navbar-btn signup">Sign up</button>               
+                  </div>                  
+                </div>
+            </nav>
 
 			<div class="container-fluid main-body">
 				<div class="container-fluid leftside">
