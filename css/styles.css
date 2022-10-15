@@ -185,3 +185,19 @@ a:link,  a:visited, a:hover{
 .comment-count, .like-count, .dislike-count {
     font-size: 13px;
 }
+
+.post-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.forum-options {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
