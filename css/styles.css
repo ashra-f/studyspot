@@ -121,15 +121,41 @@ a:link,  a:visited, a:hover{
     font-weight: 400;
 }
 
-/* Non-mainpage styling  */
-.post-btns {
+/* Create Profile  */
+.form-body {
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-rightside {
+    flex-grow: 4;
+}
+
+.pfp-input {
+    margin-top: 25px;
+}
+
+.bi-person-circle {
+    font-size: 30px;
+    margin-right: 10px;
 }
 
 .form-group {
     margin-bottom: 10px;
+}
+
+/* Create Post  */
+#createPostInput {
+    width: 50vw;
+    display: inline-flex;
+    border-radius: 5px;
+}
+
+.post-btns {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .forum-options {
@@ -142,31 +168,7 @@ a:link,  a:visited, a:hover{
     float: right;
 }
 
-.form-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.rightside-form {
-    flex-grow: 4;
-}
-
-.profile-pic {
-    margin-top: 25px;
-}
-
-.bi-person-circle {
-    font-size: 30px;
-    margin-right: 10px;
-}
-
-#createPostInput {
-    width: 50vw;
-    display: inline-flex;
-    border-radius: 5px;
-}
-
+/* Used when not logged in  */
 .login {
     background: #ffcb0b;
     margin: 2px;

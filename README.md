@@ -1,5 +1,6 @@
 # study-spot
 
 ## To-do
-- Improve responsivity.
-- Clean, refactor code
+- Improve responsiveness.
+- Clean, refactor code.
+- Change create profile layout
