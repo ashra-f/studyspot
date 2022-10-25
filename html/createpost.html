@@ -13,7 +13,7 @@
 		<!-- <a href="https://www.flaticon.com/free-icons/study" title="study icons">Study icons created by Prosymbols - Flaticon</a> -->
 	</head>
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" style="height: 71vh;">
 			<!-- Navigation Bar -->
 			<nav class="navbar fixed-top">
 				<div class="container-fluid navbar-body">
@@ -32,7 +32,6 @@
 
 					<!-- Create Post Button and Hamburger Menu -->
 					<div class="nav pull-right">
-						<button onclick="location.href='createpost.html'" type="button" class="navbar-btn bi bi-plus" title="Create Post"  style="color: #ffcb0b;"></button>                
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
 							<span class="bi bi-person-lines-fill"  style="color: #ffcb0b;"></span>
 						</button>
@@ -48,10 +47,10 @@
 						<div class="offcanvas-body">
 							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 								<li class="nav-item">
-									<a class="nav-link" href="createpost.html">Create a Post</a>
+									<a class="nav-link" href="">View Your Posts</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="">View Your Posts</a>
+									<a class="nav-link" aria-current="page" href="">Edit Profile</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" aria-current="page" href="">Settings</a>
@@ -136,6 +135,18 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Footer -->
+			<div class="container">
+				<footer class="py-3 my-4">
+				  <ul class="nav justify-content-center border-bottom">
+					<li class="nav-item"><img src="../assets/imgs/study.png" alt="" width="40" id="site-logo"></li>
+				  </ul>
+				  <hr>
+				  <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+				</footer>
+			</div>
+
 		</div>
 	</body>
 </html>

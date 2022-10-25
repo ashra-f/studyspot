@@ -1,12 +1,17 @@
+:root {
+    --mich-blue: #002c5a;
+    --mich-yellow: #ffcb0b;
+  }
+
 body {
     padding-top: 80px;
-    background-color: #DAE0E6;
+    background-color: #e0e3e7;
 }
 
 /* Navigation Bar Styling  */
 .navbar {
     justify-content: space-between;
-    background-color: #002c5a;
+    background-color: var(--mich-blue);
 }
 
 .search-bar {
@@ -19,16 +24,25 @@ body {
     justify-content: end;
 }
 
+.h-menu-toggler, .h-menu-content {
+    display: none;
+}
+
 .offcanvas-header {
-    background-color: #002c5a;
+    background-color: var(--mich-blue);
 }
 
 #offcanvasNavbarLabel, .offcanvas-header > .bi-person-circle {
-    color: #ffcb0b;
+    color: var(--mich-yellow);
+}
+
+.bi-person-circle {
+    font-size: 30px;
+    margin-right: 10px;
 }
 
 .navbar-nav > .nav-item {
-    color: #002c5a;
+    color: var(--mich-blue);
     font-size: 18px;
 }
 
@@ -41,11 +55,13 @@ body {
 
 /* Main Body Styling  */
 .main-body {
-    height: 88vh;
+    height: 100%;
     display: flex;
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
 
-/* Left Side Content  */
+/* Left Side Content Main Page */
 .left-side {
     display: flex;
     flex-direction: column;
@@ -62,12 +78,13 @@ body {
 
 .create-post {
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .topic-title {
     text-align: center;
-    background-color: #002c5a;
+    background-color: var(--mich-blue);
     color: white;
     padding: 10px;
     font-size: 20px;
@@ -77,14 +94,18 @@ body {
 
 .post-item {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
+.post {
+    margin-bottom: 12px;
+}
+
 .bi-hand-thumbs-up, .bi-hand-thumbs-down, .bi-chat-left-text {
-    font-size: 22px; 
-    color: #ffcb0b; 
-    background-color: #002c5a;
+    font-size: 18px; 
+    color: var(--mich-yellow); 
+    background-color: var(--mich-blue);
     border-radius: 5px;
     padding: 6px;
 }
@@ -93,7 +114,30 @@ body {
     font-size: 13px;
 }
 
-/* Right Side Content  */
+small {
+    font-size: 13px;
+}
+
+
+.interactions {
+    display: flex;
+    flex-direction: row;
+}
+
+.interaction-btn {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50px;
+    border: none;
+    margin-right: 5px;
+}
+
+.interaction-btn:hover {
+    background-color:#044488;
+}
+
+
+/* Right Side Content Main Page */
 .right-side {
     width: 500px;
 }
@@ -107,7 +151,7 @@ body {
 }
 
 .side-content-header {
-    background-color: #ffcb0b;
+    background-color: var(--mich-yellow);
     padding: 5px;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -119,30 +163,6 @@ a:link,  a:visited, a:hover{
     text-decoration: none;
     color: black;
     font-weight: 400;
-}
-
-/* Create Profile  */
-.form-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.form-rightside {
-    flex-grow: 4;
-}
-
-.pfp-input {
-    margin-top: 25px;
-}
-
-.bi-person-circle {
-    font-size: 30px;
-    margin-right: 10px;
-}
-
-.form-group {
-    margin-bottom: 10px;
 }
 
 /* Create Post  */
@@ -170,7 +190,7 @@ a:link,  a:visited, a:hover{
 
 /* Used when not logged in  */
 .login {
-    background: #ffcb0b;
+    background: var(--mich-yellow);
     margin: 2px;
 }
 
@@ -179,10 +199,52 @@ a:link,  a:visited, a:hover{
 }
 
 .signup {
-    background: #ffcb0b;
+    background: var(--mich-yellow);
     margin: 2px;
 }
 
 .signup:hover {
     background: #d3a708;
+}
+
+/* Responsive */
+@media (max-width: 815px) {
+    .right-side, .bi-plus {
+        display: none;
+    }
+    .pull-right {
+        width: 50px;
+    }
+    .main-body {
+        padding: 0;
+    }
+
+    .h-menu-toggler, .h-menu-content {
+        display: unset;
+    }
+
+    .signup, .login {
+        display: none;
+    }
+}
+
+/* Signup/Login Modals  */
+.modal-body {
+    padding: 0;
+}
+
+.input-field {
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }

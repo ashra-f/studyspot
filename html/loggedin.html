@@ -1,4 +1,4 @@
-<!-- What you see when you are logged out -->
+<!-- What you see when you are logged in -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@
 			<nav class="navbar fixed-top">
 				<div class="container-fluid navbar-body">
 					<!-- studySpot Brand and Icon -->
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="loggedin.html">
 						<div class="title-wrapper">
 							<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35">
 							<span style="color: #ffcb0b">studySpot</span> 
@@ -32,10 +32,40 @@
 						<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
 					</form>
 
-					<!-- Login and Signup Btns -->
+					<!-- Create Post Button and Hamburger Menu -->
 					<div class="nav pull-right">
-            			<button onclick="location.href=''" type="button" title="Create Post" class="btn navbar-btn login">Log in</button>
-            			<button onclick="location.href='createprofile.html'" type="button" title="Create Post" class="btn navbar-btn signup">Sign up</button>                           
+						<button onclick="location.href='createpost.html'" type="button" class="navbar-btn bi bi-plus" title="Create Post"  style="color: #ffcb0b;"></button>                
+						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+							<span class="bi bi-person-lines-fill"  style="color: #ffcb0b;"></span>
+						</button>
+					</div>
+
+					<!-- Everything Inside the Hamburger Menu -->
+					<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+						<div class="offcanvas-header" style="border-bottom: 1px solid rgb(62, 60, 60)">
+							<span class="bi bi-person-circle"></span>
+							<h5 class="offcanvas-title" id="offcanvasNavbarLabel">John Smith</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: #ffcb0b; opacity: 100;"></button>
+						</div>
+						<div class="offcanvas-body">
+							<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+								<li class="nav-item">
+									<a class="nav-link" href="createpost.html">Create a Post</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="">View Your Posts</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" href="">Edit Profile</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" href="">Settings</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" aria-current="page" href="">Log Out</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</nav>
@@ -64,107 +94,107 @@
 							<!-- University Section Posts -->	
 							<ul class="list-group">
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Any good CIS electives to take?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>CompSci • Post by youngwizard3 5 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Best Spot to Study at CASL?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>UMD • Post by FLYING_4 16 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>New Psychology Professor at UMD. AMA!</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Psychology • Post by profsunshine 6 hours ago</small>
 										</div>
 									</div>
-									<span>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
-									</span>
+									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Final Exams Coming Up</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Business • Post by -snake-231 1 hour ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
@@ -183,111 +213,111 @@
 							<!-- Social Section Posts -->
 							<ul class="list-group">
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Any good CIS electives to take?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>CompSci • Post by youngwizard3 5 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Best Spot to Study at CASL?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>UMD • Post by FLYING_4 16 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>New Psychology Professor at UMD. AMA!</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Psychology • Post by profsunshine 6 hours ago</small>
 										</div>
 									</div>
-									<span>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
-									</span>
+									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Final Exams Coming Up</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Business • Post by -snake-231 1 hour ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
-							</ul> 
+							</ul>
 						</div>	
 					</div>
 
@@ -302,111 +332,111 @@
 							<!-- Miscellaneous Section Posts-->	
 							<ul class="list-group">
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Any good CIS electives to take?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>CompSci • Post by youngwizard3 5 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Best Spot to Study at CASL?</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>UMD • Post by FLYING_4 16 hours ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>New Psychology Professor at UMD. AMA!</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Psychology • Post by profsunshine 6 hours ago</small>
 										</div>
 									</div>
-									<span>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
-									</span>
+									</div>
 								</li>
 								<li class="list-group-item post-item">
-									<div>
-										<div>
+									<div class="post">
+										<div class="post-title">
 											<h5>Final Exams Coming Up</h5>
 										</div>
-										<div>
+										<div class="poster-info">
 											<small>Business • Post by -snake-231 1 hour ago</small>
 										</div>
 									</div>
-									<div>
-										<button class="bi bi-hand-thumbs-up">
-											<span class="like-count">16</span>
+									<div class="interactions">
+										<button class="bi bi-hand-thumbs-up interaction-btn">
+											<span class="like-count">&nbsp;16</span>
 										</button>
-										<button class="bi bi-hand-thumbs-down">
-											<span class="dislike-count">3</span>
+										<button class="bi bi-hand-thumbs-down interaction-btn">
+											<span class="dislike-count">&nbsp;3</span>
 										</button>
-										<button class="bi bi-chat-left-text">
-											<span class="comment-count">20</span>
+										<button class="bi bi-chat-left-text interaction-btn">
+											<span class="comment-count">&nbsp;20</span>
 										</button>
 									</div>
 								</li>
-							</ul> 
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -469,6 +499,17 @@
 						</ol>
 					</div>
 				</div>
+			</div>
+
+			<!-- Footer -->
+			<div class="container">
+				<footer class="py-3 my-4">
+					<ul class="nav justify-content-center border-bottom">
+					<li class="nav-item"><img src="../assets/imgs/study.png" alt="" width="40" id="site-logo"></li>
+					</ul>
+					<hr>
+					<p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+				</footer>
 			</div>
 		</div>
 	</body>
