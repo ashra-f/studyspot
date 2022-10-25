@@ -2,5 +2,5 @@
 
 ## To-do
 - Improve responsiveness.
-- Clean, refactor code.
-- Change create profile layout
+- Replace hamburger menus with dropdowns
+- Add new features: edit profile, view all post, logout, settings?
