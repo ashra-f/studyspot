@@ -13,15 +13,15 @@
 		<!-- <a href="https://www.flaticon.com/free-icons/study" title="study icons">Study icons created by Prosymbols - Flaticon</a> -->
 	</head>
 	<body>
-		<div class="container-fluid" style="height: 71vh;">
+		<div class="container-fluid" style="height: 89vh;">
 			<!-- Navigation Bar -->
 			<nav class="navbar fixed-top">
 				<div class="container-fluid navbar-body">
 					<!-- studySpot Brand and Icon -->
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="loggedin.html">
 						<div class="title-wrapper">
 							<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35">
-							<span style="color: #ffcb0b">studySpot</span> 
+							<span style="color: #FFCB05">studySpot</span> 
 						</div>
 					</a>
 
@@ -33,7 +33,7 @@
 					<!-- Create Post Button and Hamburger Menu -->
 					<div class="nav pull-right">
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-							<span class="bi bi-person-lines-fill"  style="color: #ffcb0b;"></span>
+							<span class="bi bi-person-lines-fill"  style="color: #FFCB05;"></span>
 						</button>
 					</div>
 
@@ -68,13 +68,14 @@
 			<div class="container-fluid main-body">
 				<div class="container-fluid left-side">
 					<div class="container-fluid create-post-wrapper">
-						<form method="post" action="">
+						<form method="post" action="" id="new-post">
 							<div class="form-group">
-								<label for="exampleFormControlInput1" style="margin-bottom: 10px; font-size: 22px; font-weight: bold;">Create A Post</label>
-								<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+								<label style="margin-bottom: 10px; font-size: 22px; font-weight: bold;">Create A Post</label>
+								<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
 							</div>
+
 							<div class="form-group">
-							  	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Text"></textarea>
+							  	<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Text" style="resize: none; height: 50vh;"></textarea>
 							</div>
 
 							<div class="forum-options">
@@ -91,15 +92,13 @@
 
 							<div class="post-btns">
 								<button type="submit" class="btn btn-secondary" style="background-color: #002c5a;">Cancel</button>
-								<div>
-									<button type="submit" class="btn btn-secondary" style="background-color: #002c5a;">Save Draft</button>
-									<button type="submit" class="btn" style="background-color: #ffcb0b; color: #002c5a;">Post</button>
-								</div>
+								<button type="submit" class="btn" style="background-color: #ffcb0b; color: #002c5a;">Post</button>
 							</div>
 						</form>
 					</div>
 				</div>
 
+				<!-- Rules and Guidelines -->
 				<div class="container-fluid right-side">
 					<div class="container-fluid side-content">
 						<div class="container side-content-header">
@@ -134,17 +133,6 @@
 						</ol>
 					</div>
 				</div>
-			</div>
-
-			<!-- Footer -->
-			<div class="container">
-				<footer class="py-3 my-4">
-				  <ul class="nav justify-content-center border-bottom">
-					<li class="nav-item"><img src="../assets/imgs/study.png" alt="" width="40" id="site-logo"></li>
-				  </ul>
-				  <hr>
-				  <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
-				</footer>
 			</div>
 
 		</div>

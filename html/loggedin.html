@@ -15,7 +15,7 @@
 		<!-- <a href="https://www.flaticon.com/free-icons/study" title="study icons">Study icons created by Prosymbols - Flaticon</a> -->
 	</head>
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" id="main-container">
 			<!-- Navigation Bar -->
 			<nav class="navbar fixed-top">
 				<div class="container-fluid navbar-body">
@@ -36,7 +36,7 @@
 					<div class="nav pull-right">
 						<button onclick="location.href='createpost.html'" type="button" class="navbar-btn bi bi-plus" title="Create Post"  style="color: #ffcb0b;"></button>                
 						<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-							<span class="bi bi-person-lines-fill"  style="color: #ffcb0b;"></span>
+							<span class="bi bi-person-lines-fill"  style="color: #FFCB05;"></span>
 						</button>
 					</div>
 
@@ -82,361 +82,532 @@
 							<input type="text" name="createPost" id="createPostInput" placeholder="Create Post..." class="form-control" onclick="location.href='createpost.html'">
 						</div>
 					</div>
+
 					<!-- University Section -->
 					<div class="container-fluid topic-wrapper">
-
-						<!-- University Section Content -->
+						<!-- University Content -->
 						<div class="container-fluid topic-body">
-							<!-- University Section Title -->
+							<!-- University Title -->
 							<div class="container-fluid topic-title">
 								University
 							</div> 
-							<!-- University Section Posts -->	
-							<ul class="list-group">
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Any good CIS electives to take?</h5>
-										</div>
-										<div class="poster-info">
-											<small>CompSci • Post by youngwizard3 5 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
-										</div>
-										<div class="poster-info">
-											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Best Spot to Study at CASL?</h5>
-										</div>
-										<div class="poster-info">
-											<small>UMD • Post by FLYING_4 16 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>New Psychology Professor at UMD. AMA!</h5>
-										</div>
-										<div class="poster-info">
-											<small>Psychology • Post by profsunshine 6 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Final Exams Coming Up</h5>
-										</div>
-										<div class="poster-info">
-											<small>Business • Post by -snake-231 1 hour ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-							</ul>
+							<!-- Bulletin Board -->
+							<div class="container" id="stickies-wrapper" style="overflow-y: auto">
+								<ul class="sticky-notes">
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>CompSci</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>CompSci</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>CompSci</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Biology</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Any good electives to take?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>youngwizard3 • 2 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Chemistry</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>thinkingishard • 15 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>UMD</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Best Spot to Study at CASL?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>FLYING_4 • 11 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Psych</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>New Psychology Professor at UMD. AMA!</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>profsunshine • 22 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Business</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Final Exams Coming Up</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>-snake-231 • 1 hour ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>	
 						</div>
 					</div>
 
 					<!-- Social Section -->
 					<div class="container-fluid topic-wrapper">
-						<!-- Social Section Content -->
+						<!-- Social Content -->
 						<div class="container-fluid topic-body">
-							<!-- Social Section Title -->
+							<!-- Social Title -->
 							<div class="container-fluid topic-title">
 								Social
-							</div>
-							<!-- Social Section Posts -->
-							<ul class="list-group">
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Any good CIS electives to take?</h5>
-										</div>
-										<div class="poster-info">
-											<small>CompSci • Post by youngwizard3 5 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
-										</div>
-										<div class="poster-info">
-											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Best Spot to Study at CASL?</h5>
-										</div>
-										<div class="poster-info">
-											<small>UMD • Post by FLYING_4 16 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>New Psychology Professor at UMD. AMA!</h5>
-										</div>
-										<div class="poster-info">
-											<small>Psychology • Post by profsunshine 6 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Final Exams Coming Up</h5>
-										</div>
-										<div class="poster-info">
-											<small>Business • Post by -snake-231 1 hour ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-							</ul>
-						</div>	
+							</div> 
+							<!-- Bulletin Board -->
+							<div class="container" id="stickies-wrapper" style="overflow-y: auto">
+								<ul class="sticky-notes">
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>CompSci</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Biology</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Any good electives to take?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>youngwizard3 • 2 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Chemistry</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>thinkingishard • 15 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>UMD</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Best Spot to Study at CASL?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>FLYING_4 • 11 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Psych</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>New Psychology Professor at UMD. AMA!</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>profsunshine • 22 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Business</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Final Exams Coming Up</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>-snake-231 • 1 hour ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>	
+						</div>
 					</div>
 
-					<!-- Miscellaneous Section -->
+					<!-- Others Section -->
 					<div class="container-fluid topic-wrapper">
-						<!-- Miscellaneous Section Content-->
+						<!-- Others Content -->
 						<div class="container-fluid topic-body">
-							<!-- Miscellaneous Section Title-->
+							<!-- Others Title -->
 							<div class="container-fluid topic-title">
-								Miscellaneous
-							</div>
-							<!-- Miscellaneous Section Posts-->	
-							<ul class="list-group">
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Any good CIS electives to take?</h5>
-										</div>
-										<div class="poster-info">
-											<small>CompSci • Post by youngwizard3 5 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
-										</div>
-										<div class="poster-info">
-											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Best Spot to Study at CASL?</h5>
-										</div>
-										<div class="poster-info">
-											<small>UMD • Post by FLYING_4 16 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>New Psychology Professor at UMD. AMA!</h5>
-										</div>
-										<div class="poster-info">
-											<small>Psychology • Post by profsunshine 6 hours ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Final Exams Coming Up</h5>
-										</div>
-										<div class="poster-info">
-											<small>Business • Post by -snake-231 1 hour ago</small>
-										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-							</ul>
+								Social
+							</div> 
+							<!-- Bulletin Board -->
+							<div class="container" id="stickies-wrapper" style="overflow-y: auto">
+								<ul class="sticky-notes">
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>CompSci</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Biology</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Any good electives to take?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>youngwizard3 • 2 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Chemistry</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>thinkingishard • 15 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>UMD</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Best Spot to Study at CASL?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>FLYING_4 • 11 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Psych</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>New Psychology Professor at UMD. AMA!</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>profsunshine • 22 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="btn sticky-note" data-bs-toggle="modal" data-bs-target="#exampleModal">
+											<div class="sticky-note-info">
+												<small>Business</small> 
+											</div>
+											<div class="sticky-note-title">
+												<h6>Final Exams Coming Up</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>-snake-231 • 1 hour ago</small> 
+											</div>
+											<div class="interactions">
+												<button class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -501,16 +672,26 @@
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<div class="container">
-				<footer class="py-3 my-4">
-					<ul class="nav justify-content-center border-bottom">
-					<li class="nav-item"><img src="../assets/imgs/study.png" alt="" width="40" id="site-logo"></li>
-					</ul>
-					<hr>
-					<p class="text-center text-muted">&copy; 2022 Company, Inc</p>
-				</footer>
+			<!-- Sticky Note Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						body goes here...
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+				</div>
 			</div>
+  
+
 		</div>
 	</body>
 </html>
