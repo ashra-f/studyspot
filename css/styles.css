@@ -21,13 +21,14 @@ body {
 }
 
 .search-bar {
-    border-radius: 100px;
-    width: 40vw;
-    border: none;
+    border-radius: 6px;
+    width: 30vw;
+    border: 1px solid var(--mich-maize);
 }
 
 .pull-right {
-    width: 20vw;
+    width: 35vw;
+    display: flex;
     justify-content: end;
 }
 
@@ -43,20 +44,31 @@ body {
     color: var(--mich-maize);
 }
 
-.bi-person-circle {
-    font-size: 30px;
-    margin-right: 10px;
-}
-
 .navbar-nav > .nav-item {
     color: var(--mich-blue);
     font-size: 18px;
 }
 
-.bi-plus {
-    font-size: 30px;
-    border: none;
-    background: none;
+.navbar-body {
+    display: flex;
+}
+
+.navbar-brand {
+    width: 15vw;
+}
+
+/* Add something btn */
+.add-sm-btn {
+    color: #ffcb0b; 
+    border: none !important;
+}
+
+.add-sm-btn:hover, .add-sm-btn:focus, .add-sm-btn:active {
+    color: #ffcb0b !important;
+    transform: scale(1.25);
+    position:relative;
+    z-index:5; 
+    border: none !important;
 }
 
 /* Main Body Styling  */
@@ -75,22 +87,63 @@ body {
     height: 100%;
 }
 
-.create-post-wrapper, .topic-wrapper {
+.top-body-wrapper, .topic-wrapper {
     border: solid 1px #ccc;
-    border-radius: 5px;
     padding: 15px;
-    margin-bottom: 10px;
     background-color: #FFFFFF;
+    border-radius: 5px
 }
 
 .topic-wrapper {
     height: 100%;
+    margin-bottom: 12px;
+}
+
+.title {
+    color: var(--mich-maize)
+}
+
+.top-body-wrapper {
+    background-color: var(--mich-blue);
+}
+
+.top-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .create-post {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
+    padding-left: 0;
+}
+
+.communities-dropdown {
+    background-color: var(--mich-blue);
+    color: var(--mich-maize);
+    font-size: 18px;
+    border: 1px solid var(--mich-maize);
+}
+
+.communities-dropdown:hover, .communities-dropdown:active, .communities-dropdown:focus {
+    background-color: var(--mich-blue);
+    color: var(--mich-maize) !important;
+}
+
+#community-dropdown-menu {
+    background-color: var(--mich-blue);
+    border: none !important;
+}
+
+#community-dropdown-menu li a {
+    color: var(--mich-maize);
+}
+
+#community-dropdown-menu li a:hover {
+    background-color: var(--mich-maize);
+    color: var(--mich-blue);
 }
 
 .topic-title {
@@ -101,6 +154,10 @@ body {
     font-size: 20px;
     border-radius: 5px;
     margin-bottom: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .post-item {
@@ -126,12 +183,14 @@ body {
 }
 
 small {
-    font-size: 13px;
+    font-size: 12px;
+    padding: 3px;
 }
 
 /* Right Side Content Main Page */
 .right-side {
-    width: 500px;
+    width: 400px;
+    max-width: 40%;
 }
 
 .side-content {
@@ -140,6 +199,11 @@ small {
     margin-bottom: 10px;
     background-color: #FFFFFF;
     padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .side-content-header {
@@ -151,6 +215,13 @@ small {
     text-align: center;
 }
 
+.side-content-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 a:link,  a:visited, a:hover{
     text-decoration: none;
     color: black;
@@ -158,10 +229,12 @@ a:link,  a:visited, a:hover{
 }
 
 /* Create Post  */
-#createPostInput {
-    width: 50vw;
-    display: inline-flex;
+.create-post-wrapper {
+    border: solid 1px #ccc;
     border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
 }
 
 .post-btns {
@@ -203,11 +276,32 @@ a:link,  a:visited, a:hover{
     background: #d3a708;
 }
 
+#browse-mainbody {
+    display: none;
+    border: none;
+}
+
 /* Responsive */
 @media (max-width: 815px) {
-    .right-side, .bi-plus {
-        display: none;
+    .right-side, .add-sm-btn, #navbar-browse {
+        display: none !important;
     }
+    .search-bar {
+        width: 40vw;
+    }
+
+    #browse-mainbody {
+        display: block;
+    }
+
+    .topic-title {
+        justify-content: space-around;
+    }
+
+    #searchbar-dropdown {
+        justify-content: center;
+    }
+
     .pull-right {
         width: 50px;
     }
@@ -261,6 +355,8 @@ input[type="file"] {
 .sticky-note-info {
     height: 17%;
     font-style: italic;
+    display: flex;
+    justify-content: space-between;
 }
 
 .interactions {
@@ -291,7 +387,8 @@ small {
 }
 
 .interaction-btn:hover {
-    background-color: #00417e;
+    background-color: var(--mich-maize);
+    color: var(--mich-blue);
 }
 
 h6 {
@@ -333,6 +430,7 @@ p {
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
     transform: rotate(-6deg);
     transition: transform .15s linear;
+    border-radius: 1px;
 }
   
 .sticky-notes li:nth-child(even) .sticky-note {
@@ -368,4 +466,78 @@ p {
 
 .sticky-note {
     text-align: left;
+}
+
+
+.top-btn {
+    background-color: var(--mich-maize);
+    padding: 7px;
+    color: var(--mich-blue);
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+
+.img-wrapper {
+    border: 1px solid #FFCB05;
+    border-radius: 20px; 
+}
+
+#searchbar-dropdown {
+    display: flex;
+    justify-content: end;
+    width: 50vw;
+}
+
+.navbar > .container, .navbar > .container-fluid {
+    flex-wrap: nowrap;
+}
+
+hr {
+    color: #000 !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.side-content-body {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Dropdown arrow color */
+.navbar .dropdown-toggle:after {
+    color: var(--mich-maize);
+}
+
+.dropdown-menu-end .nav-item .nav-link {
+    color: var(--mich-blue) !important;
+}
+
+.dropdown-menu-end .nav-item .nav-link:hover, .dropdown-menu-end .nav-item .nav-link:focus, .dropdown-menu-end .nav-item .nav-link:active {
+   background-color: rgb(237, 235, 235) !important;
+}
+
+.site-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+}
+
+.page-item .page-link:hover {
+    color: var(--mich-blue);
+}
+
+.bi-arrows-angle-expand {
+    cursor: pointer;
+    padding: 3px;
+    display: none;
+}
+
+.sticky-note:hover  .sticky-note-info .bi-arrows-angle-expand {
+    display: flex;
 }
