@@ -1,12 +1,15 @@
 :root {
     --mich-blue: #00274C;
     --mich-maize: #FFCB05;
-  }
+}
+
+.fixed-top {
+    height: 72px;
+}
 
 body {
     padding-top: 80px;
     background-color:#CAD2DA;
-    /* background-color:#1B1C1E; */
 }
 
 #main-container {
@@ -281,43 +284,6 @@ a:link,  a:visited, a:hover{
     border: none;
 }
 
-/* Responsive */
-@media (max-width: 815px) {
-    .right-side, .add-sm-btn, #navbar-browse {
-        display: none !important;
-    }
-    .search-bar {
-        width: 40vw;
-    }
-
-    #browse-mainbody {
-        display: block;
-    }
-
-    .topic-title {
-        justify-content: space-around;
-    }
-
-    #searchbar-dropdown {
-        justify-content: center;
-    }
-
-    .pull-right {
-        width: 50px;
-    }
-    .main-body {
-        padding: 0;
-    }
-
-    .h-menu-toggler, .h-menu-content {
-        display: unset;
-    }
-
-    .signup, .login {
-        display: none;
-    }
-}
-
 /* Signup/Login Modals  */
 .modal-body {
     padding: 0;
@@ -488,6 +454,8 @@ p {
     display: flex;
     justify-content: end;
     width: 50vw;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar > .container, .navbar > .container-fluid {
@@ -540,4 +508,53 @@ hr {
 
 .sticky-note:hover  .sticky-note-info .bi-arrows-angle-expand {
     display: flex;
+}
+
+#join-dropdown {
+    display: none;
+}
+
+
+
+/* Responsive */
+@media (max-width: 815px) {
+    .right-side, .add-sm-btn, #navbar-browse {
+        display: none !important;
+    }
+    .search-bar {
+        width: 40vw;
+    }
+
+    #browse-mainbody {
+        display: block;
+    }
+
+    .topic-title {
+        justify-content: space-around;
+    }
+
+    #searchbar-dropdown, #searchbar-dropdown > .d-flex {
+        display: flex;
+        justify-content: end;
+    }
+
+    .pull-right {
+        width: 50px;
+    }
+    .main-body {
+        padding: 0;
+    }
+
+    .h-menu-toggler, .h-menu-content {
+        display: unset;
+    }
+
+    .signup, .login {
+        display: none;
+    }
+
+    #join-dropdown {
+        display: block;
+        font-size: 18px;
+    }
 }
