@@ -22,9 +22,9 @@
 				<div class="container-fluid navbar-body">
 					<!-- studySpot Brand and Icon -->
 					<a class="navbar-brand" href="../pages/loggedIn.html">
-						<div class="title-wrapper">
+						<div class="brand-wrapper">
 							<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35">
-							<span style="color: #ffcb0b">studySpot</span> 
+							<span>studySpot</span> 
 						</div>
 					</a>
 
@@ -47,12 +47,12 @@
 
 					<!-- Create Buttons and Dropdown -->
 					<div class="nav pull-right">
-						<button tabindex="-1" onclick="location.href='../pages/create.html'" type="button" class="btn material-symbols-outlined add-sm-btn" title="Create a Post" style="font-size: 25px;">library_add</button>
-						<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined add-sm-btn" title="Create a Community" style="font-size: 25px;">group_add</button>
+						<button tabindex="-1" onclick="location.href='../pages/create.html'" type="button" class="btn material-symbols-outlined create-btn" title="Create a Post">library_add</button>
+						<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined create-btn" title="Create a Community">group_add</button>
 						
 						<div class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">				
-								<img src="../assets/imgs/homer.jpg" alt="" width="40" height="40" style="border-radius: 100%; border: 2px solid #FFCB05;">
+								<img src="../assets/imgs/homer.jpg" alt="" width="40" height="40">
 							</a>
 							<ul class="dropdown-menu dropdown-menu-end">
 								<li class="nav-item">
@@ -102,7 +102,7 @@
 							</div> 
 							
 							<!-- Bulletin Board -->
-							<div class="container" id="stickies-wrapper" style="overflow-y: auto">
+							<div class="container" id="stickies-wrapper">
 								<ul class="sticky-notes">
 									<li>
 										<a class="sticky-note">
@@ -375,8 +375,8 @@
 									</div>
 								</li>
 							</ul>
-							<nav aria-label="Page navigation example" style="padding: 10px;">
-								<ul class="pagination justify-content-center" style="margin: 0; margin-top: 10px;">
+							<nav class="nav-pager" aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
 								  <li class="page-item">
 									<a class="page-link" href="#" aria-label="Previous">
 									  <span aria-hidden="true">&laquo;</span>
@@ -393,7 +393,7 @@
 									</a>
 								  </li>
 								</ul>
-							  </nav>
+							</nav>
 						</div>
 					</div>
 				</div>
@@ -406,7 +406,7 @@
 							studySpot
 						</div>
 						<div class="container side-content-body">
-							<img src="../assets/imgs/study.png" alt width="150" style="border-radius: 5px;">
+							<img src="../assets/imgs/study.png" alt width="150">
 						</div>
 						<div class="container side-content-footer">
 							<hr class="w-100" color="#000">
@@ -432,11 +432,11 @@
 			</div>
 
 			<!-- Footer -->
-			<footer class="bg-light text-center text-lg-start site-footer" style="color: #FFCB05">
+			<footer class="bg-light text-center text-lg-start site-footer">
 				<!-- Copyright -->
-				<div class="text-center p-3" style="background-color: #00274C;">
+				<div class="text-center p-3">
 					Copyright © 2022 
-					<a href="../pages/loggedIn.html" style="color: #FFCB05">studySpot Inc</a>
+					<a href="../pages/loggedIn.html">studySpot Inc</a>
 					. All rights reserved.
 				</div>
 			</footer>

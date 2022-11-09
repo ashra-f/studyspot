@@ -3,10 +3,6 @@
     --mich-maize: #FFCB05;
 }
 
-.fixed-top {
-    height: 72px;
-}
-
 body {
     padding-top: 80px;
     background-color:#CAD2DA;
@@ -21,12 +17,18 @@ body {
 .navbar {
     justify-content: space-between;
     background-color: var(--mich-blue);
+    height: 72px !important;
 }
+
 
 .search-bar {
     border-radius: 6px;
     width: 30vw;
     border: 1px solid var(--mich-maize);
+}
+
+.brand-wrapper span {
+    color: #ffcb0b;
 }
 
 .pull-right {
@@ -60,18 +62,39 @@ body {
     width: 15vw;
 }
 
-/* Add something btn */
-.add-sm-btn {
+.nav-link label {
+    color:#FFCB05;
+}
+
+/* Create a post or community btn */
+.create-btn {
     color: #ffcb0b; 
+    font-size: 25px;
     border: none !important;
 }
 
-.add-sm-btn:hover, .add-sm-btn:focus, .add-sm-btn:active {
+.create-btn:hover, .create-btn:focus, .create-btn:active {
     color: #ffcb0b !important;
     transform: scale(1.25);
-    position:relative;
-    z-index:5; 
+    position: relative;
+    z-index: 5; 
     border: none !important;
+}
+
+#add-cmty-btn {
+    font-size: 25px; 
+    color: #ffcb0b; 
+    border: none !important;
+    background-color: #00274C; 
+    margin-left: 5px;
+}
+
+#community-options {
+    margin-top: 10px;
+}
+
+.pagination {
+    margin: 0;
 }
 
 /* Main Body Styling  */
@@ -104,6 +127,12 @@ body {
 
 .title {
     color: var(--mich-maize)
+}
+
+.create-title {
+    margin-bottom: 10px; 
+    font-size: 22px; 
+    font-weight: bold;
 }
 
 .top-body-wrapper {
@@ -209,6 +238,10 @@ small {
     align-items: center;
 }
 
+.side-content-body img {
+    border-radius: 5px;
+}
+
 .side-content-header {
     background-color: var(--mich-maize);
     padding: 5px;
@@ -243,7 +276,16 @@ a:link,  a:visited, a:hover{
 .post-btns {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: row;   
+}
+
+#cancel-btn {
+    background-color: #002c5a;
+}
+
+#post-btn {
+    background-color: #ffcb0b; 
+    color: #002c5a;
 }
 
 .forum-options {
@@ -305,14 +347,14 @@ input[type="file"] {
     cursor: pointer;
 }
 
-
 #stickies-wrapper {
     display: flex;
     height: 100%;
     padding: 14px;
+    overflow-y: auto;
 }
 
-/* Template */
+/* Sticky Notes Template */
 .sticky-note-title {
     height: 45%;
     width: 100%;
@@ -434,7 +476,6 @@ p {
     text-align: left;
 }
 
-
 .top-btn {
     background-color: var(--mich-maize);
     padding: 7px;
@@ -443,7 +484,6 @@ p {
     margin-right: 5px;
     border-radius: 5px;
 }
-
 
 .img-wrapper {
     border: 1px solid #FFCB05;
@@ -489,11 +529,10 @@ hr {
    background-color: rgb(237, 235, 235) !important;
 }
 
-.site-footer {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100vw;
+
+.dropdown-toggle img {
+    border-radius: 100%; 
+    border: 2px solid #FFCB05;
 }
 
 .page-item .page-link:hover {
@@ -514,7 +553,45 @@ hr {
     display: none;
 }
 
+/* Footer */
+.site-footer {
+    color: #FFCB05;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+}
 
+.site-footer .p-3 {
+    background-color: #00274C;
+}
+
+.site-footer .p-3 a {
+    color: #FFCB05;
+}
+
+.signup-container {
+    padding: 20px;
+}
+
+.nav-pager {
+    padding: 10px;
+}
+
+.nav-pager u {
+    margin: 0;
+    margin-top: 10px;
+}
+
+.modal-footer button {
+    background-color: var(--mich-blue);
+}
+
+#full-featured-non-premium {
+    resize: none; 
+    height: 50vh !important; 
+    margin-bottom: 5px;
+}
 
 /* Responsive */
 @media (max-width: 815px) {
