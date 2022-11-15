@@ -17,94 +17,124 @@
 	</head>
 	<body>
 		<div class="container-fluid" id="main-container">
-			<!-- Navigation Bar -->
-			<nav class="navbar fixed-top">
-				<div class="container-fluid navbar-body">
-					<!-- studySpot Brand and Icon -->
-					<a class="navbar-brand" href="index.html">
-						<div class="brand-wrapper">
-							<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35">
-							<span>studySpot</span> 
-						</div>
-					</a>
-
-					<!-- Forum Search Bar and Community Dropdown -->
-					<div class="container" id="searchbar-dropdown">
-						<form class="d-flex" role="search" method="POST" action="">
-							<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
-						</form>
-						<div class="dropdown">
-							<button tabindex="-1" class="btn communities-dropdown dropdown-toggle" id="navbar-browse" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Browse our communities">
-								Browse
-							</button>
-							<ul class="dropdown-menu" id="community-dropdown-menu">
-								<li><a class="dropdown-item" href="#">CompSci</a></li>
-								<li><a class="dropdown-item" href="#">Chemistry</a></li>
-								<li><a class="dropdown-item" href="#">UMD</a></li>
-							</ul>
-						</div>
+			<!-- Navbar -->
+			<nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
+				<!-- studySpot Brand and Icon -->
+				<a class="navbar-brand border-bottom" href="index.html">
+					<div class="brand-wrapper">
+						<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
 					</div>
-
-					<!-- Login and Signup Btns -->
-					<div class="nav pull-right">
+				</a>
+				<!-- Options -->
+				<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+					<li class="nav-item">
 						<!-- Log in btn trigger modal -->
-						<button type="button" class="btn navbar-btn login" data-bs-toggle="modal" data-bs-target="#login-modal">
-							Log in
-						</button>						
+						<button type="button" class="btn navbar-btn create-btn material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#login-modal" title="Log In">Login</button>		
+					</li>
+					<li class="nav-item">
 						<!-- Sign up btn trigger modal -->
-						<button type="button" class="btn navbar-btn signup" data-bs-toggle="modal" data-bs-target="#signup-modal">
-							Sign up
-						</button>
-						<div class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" id="join-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">				
-								<label>Join!</label>
-							</a>
-							<ul class="dropdown-menu dropdown-menu-end">
-								<li class="nav-item">
-									<!-- Log in btn trigger modal -->
-									<a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#login-modal">Log in</a>		
-								</li>
-								<li class="nav-item">
-									<!-- Sign up btn trigger modal -->
-									<a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#signup-modal">Sign up</a>
-								</li>
-							</ul>
-						</div>                      
-					</div>
-				</div>
+						<button type="button" class="btn navbar-btn create-btn material-symbols-outlined" data-bs-toggle="modal" data-bs-target="#signup-modal" title="Sign Up">person_add</button>      
+					</li>
+					<li class="nav-item">
+						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" title="Browse Communities">search</button>
+					</li>
+					<li class="nav-item">
+						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" title="Help">help</button>
+					</li>
+				</ul>
 			</nav>
 
 			<!-- Main Body -->
 			<div class="container-fluid main-body">
-				<!-- Left Side of Main Body -->
-				<div class="container-fluid left-side">
+				<!-- Body -->
+				<div class="container body-wrapper">
+					<!-- About the Cmty -->
+					<div class="card text-center" id="cmty-card">
+						<div class="card-header" style="display: flex; flex-direction: row; background-color:#00274C; justify-content:space-between ;">
+							<!-- Dropdown Cmty -->
+							<div class="dropdown">
+								<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#00274C; color:#FFCB05">
+									<label style="font-size: 25px;">CompSci</label> 
+								</button>
+								<ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
+									<li>
+										<a class="dropdown-item" href="#">								
+											<form class="d-flex" role="search" method="POST" action="">
+												<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
+											</form>
+										</a>
+									</li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="#">Chemistry</a></li>
+									<li><a class="dropdown-item" href="#">Bio</a></li>
+									<li><a class="dropdown-item" href="#">Maths</a></li>
+								</ul>
+							</div>
+							<!-- Search bar -->
+							<div class="container" id="searchbar">
+								<form class="d-flex" role="search" method="POST" action="">
+									<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
+									<button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse Communities">search</button>
+								</form>
+							</div>
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">About CompSci</h5>
+							<p class="card-text">
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+								Vel repellat quos quidem commodi excepturi hic! Beatae, necessitatibus enim 
+								possimus saepe quasi consectetur nobis? Veniam obcaecati voluptatem minima soluta, ut aliquid?
+							</p>
+							<a href="#" class="btn" id="join-btn">Join</a>
+						</div>
+						<div class="card-footer text-muted">
+							50 Members • 32 Posts
+						</div>
+					</div>
 					<!-- Top Posts Section -->
-					<div class="container-fluid topic-wrapper" id="top-posts">
+					<div class="container-fluid posts-wrapper" id="top-posts">
 						<!-- Top Posts Content -->
-						<div class="container-fluid topic-body">
-							<!-- Top Posts Title -->
-							<div class="container-fluid topic-title">
-								<label class="title">Top Posts</label>
-								<div class="dropdown">
-									<button tabindex="-1" class="btn communities-dropdown dropdown-toggle" id="browse-mainbody" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Browse our communities">
-										Browse
-									</button>
-									<ul class="dropdown-menu dropdown-menu-end" id="community-dropdown-menu">
-										<li><a class="dropdown-item" href="#">CompSci</a></li>
-										<li><a class="dropdown-item" href="#">Chemistry</a></li>
-										<li><a class="dropdown-item" href="#">UMD</a></li>
-									</ul>
-								</div> 
-							</div> 
-							
+						<div class="container-fluid posts-body">
+							<div class="container" id="posts-title">
+								<label>Top Posts</label>
+								<!-- All posts -->
+								<div class="all-posts-btn-wrapper">
+									<button class="btn all-posts-btn">View All Posts</button>
+								</div>
+							</div>
 							<!-- Bulletin Board -->
 							<div class="container" id="stickies-wrapper">
 								<ul class="sticky-notes">
 									<li>
 										<a class="sticky-note">
 											<div class="sticky-note-info">
+												<small>UMD</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Best Spot to Study at CASL?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>FLYING_4 • 11 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
 												<small>CompSci</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?</h6>
@@ -129,7 +159,7 @@
 										<a class="sticky-note">
 											<div class="sticky-note-info">
 												<small>Biology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>Any good electives to take?</h6>
@@ -154,7 +184,7 @@
 										<a class="sticky-note">
 											<div class="sticky-note-info">
 												<small>Chemistry</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
@@ -179,7 +209,7 @@
 										<a class="sticky-note">
 											<div class="sticky-note-info">
 												<small>UMD</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>Best Spot to Study at CASL?</h6>
@@ -204,7 +234,7 @@
 										<a class="sticky-note">
 											<div class="sticky-note-info">
 												<small>Psychology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>New Psychology Professor at UMD. AMA!</h6>
@@ -229,7 +259,157 @@
 										<a class="sticky-note">
 											<div class="sticky-note-info">
 												<small>Business</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#exampleModal"></btn>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Final Exams Coming Up</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>-snake-231 • 1 hour ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>CompSci</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>edwad2 • 5 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>Biology</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Any good electives to take?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>youngwizard3 • 2 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>Chemistry</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>thinkingishard • 15 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>UMD</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>Best Spot to Study at CASL?</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>FLYING_4 • 11 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>Psychology</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+											</div>
+											<div class="sticky-note-title">
+												<h6>New Psychology Professor at UMD. AMA!</h6>
+											</div>
+											<div class="sticky-note-info">
+												<small>profsunshine • 22 hours ago</small> 
+											</div>
+											<div class="interactions">
+												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
+													<span class="like-count">&nbsp;16</span>
+												</button>
+												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
+													<span class="dislike-count">&nbsp;3</span>
+												</button>
+												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+													<span class="comment-count">&nbsp;20</span>
+												</button>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="sticky-note">
+											<div class="sticky-note-info">
+												<small>Business</small>
+												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 											</div>
 											<div class="sticky-note-title">
 												<h6>Final Exams Coming Up</h6>
@@ -254,188 +434,162 @@
 							</div>	
 						</div>
 					</div>
-
 					<!-- All Posts Section -->
-					<div class="container-fluid topic-wrapper">
-						<!-- All Posts Section Content-->
-						<div class="container-fluid topic-body">
-							<!-- All Posts Section Title-->
-							<div class="container-fluid topic-title">
-								<label class="title">All Posts</label> 
+					<div class="container-fluid posts-wrapper" id="all-posts">
+						<!-- All Posts Content -->
+						<div class="container-fluid posts-body">
+							<div class="container" id="posts-title">
+								<label>All Posts</label>
 							</div>
-							<!-- All Posts Section Posts-->	
-							<ul class="list-group">
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Any good CIS electives to take?</h5>
+							<!-- All Posts Section Posts-->
+							<div class="container all-posts-wrapper">
+								<ul class="list-group all-posts">
+									<li class="list-group-item post-item">
+										<div class="post">
+											<div class="post-title">
+												<h5>Any good CIS electives to take?</h5>
+											</div>
+											<div class="poster-info">
+												<small>CompSci • Post by youngwizard3 5 hours ago</small>
+											</div>
 										</div>
-										<div class="poster-info">
-											<small>CompSci • Post by youngwizard3 5 hours ago</small>
+										<div class="interactions">
+											<button class="bi bi-hand-thumbs-up interaction-btn">
+												<span class="like-count">&nbsp;16</span>
+											</button>
+											<button class="bi bi-hand-thumbs-down interaction-btn">
+												<span class="dislike-count">&nbsp;3</span>
+											</button>
+											<button class="bi bi-chat-left-text interaction-btn">
+												<span class="comment-count">&nbsp;20</span>
+											</button>
 										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
+									</li>
+									<li class="list-group-item post-item">
+										<div class="post">
+											<div class="post-title">
+												<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
+											</div>
+											<div class="poster-info">
+												<small>Chemistry • Post by thinkingishard 2 hours ago</small>
+											</div>
 										</div>
-										<div class="poster-info">
-											<small>Chemistry • Post by thinkingishard 2 hours ago</small>
+										<div class="interactions">
+											<button class="bi bi-hand-thumbs-up interaction-btn">
+												<span class="like-count">&nbsp;16</span>
+											</button>
+											<button class="bi bi-hand-thumbs-down interaction-btn">
+												<span class="dislike-count">&nbsp;3</span>
+											</button>
+											<button class="bi bi-chat-left-text interaction-btn">
+												<span class="comment-count">&nbsp;20</span>
+											</button>
 										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Best Spot to Study at CASL?</h5>
+									</li>
+									<li class="list-group-item post-item">
+										<div class="post">
+											<div class="post-title">
+												<h5>Best Spot to Study at CASL?</h5>
+											</div>
+											<div class="poster-info">
+												<small>UMD • Post by FLYING_4 16 hours ago</small>
+											</div>
 										</div>
-										<div class="poster-info">
-											<small>UMD • Post by FLYING_4 16 hours ago</small>
+										<div class="interactions">
+											<button class="bi bi-hand-thumbs-up interaction-btn">
+												<span class="like-count">&nbsp;16</span>
+											</button>
+											<button class="bi bi-hand-thumbs-down interaction-btn">
+												<span class="dislike-count">&nbsp;3</span>
+											</button>
+											<button class="bi bi-chat-left-text interaction-btn">
+												<span class="comment-count">&nbsp;20</span>
+											</button>
 										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>New Psychology Professor at UMD. AMA!</h5>
+									</li>
+									<li class="list-group-item post-item">
+										<div class="post">
+											<div class="post-title">
+												<h5>New Psychology Professor at UMD. AMA!</h5>
+											</div>
+											<div class="poster-info">
+												<small>Psychology • Post by profsunshine 6 hours ago</small>
+											</div>
 										</div>
-										<div class="poster-info">
-											<small>Psychology • Post by profsunshine 6 hours ago</small>
+										<div class="interactions">
+											<button class="bi bi-hand-thumbs-up interaction-btn">
+												<span class="like-count">&nbsp;16</span>
+											</button>
+											<button class="bi bi-hand-thumbs-down interaction-btn">
+												<span class="dislike-count">&nbsp;3</span>
+											</button>
+											<button class="bi bi-chat-left-text interaction-btn">
+												<span class="comment-count">&nbsp;20</span>
+											</button>
 										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-								<li class="list-group-item post-item">
-									<div class="post">
-										<div class="post-title">
-											<h5>Final Exams Coming Up</h5>
+									</li>
+									<li class="list-group-item post-item">
+										<div class="post">
+											<div class="post-title">
+												<h5>Final Exams Coming Up</h5>
+											</div>
+											<div class="poster-info">
+												<small>Business • Post by -snake-231 1 hour ago</small>
+											</div>
 										</div>
-										<div class="poster-info">
-											<small>Business • Post by -snake-231 1 hour ago</small>
+										<div class="interactions">
+											<button class="bi bi-hand-thumbs-up interaction-btn">
+												<span class="like-count">&nbsp;16</span>
+											</button>
+											<button class="bi bi-hand-thumbs-down interaction-btn">
+												<span class="dislike-count">&nbsp;3</span>
+											</button>
+											<button class="bi bi-chat-left-text interaction-btn">
+												<span class="comment-count">&nbsp;20</span>
+											</button>
 										</div>
-									</div>
-									<div class="interactions">
-										<button class="bi bi-hand-thumbs-up interaction-btn">
-											<span class="like-count">&nbsp;16</span>
-										</button>
-										<button class="bi bi-hand-thumbs-down interaction-btn">
-											<span class="dislike-count">&nbsp;3</span>
-										</button>
-										<button class="bi bi-chat-left-text interaction-btn">
-											<span class="comment-count">&nbsp;20</span>
-										</button>
-									</div>
-								</li>
-							</ul>
-							<nav class="nav-pager" aria-label="Page navigation example">
-								<ul class="pagination justify-content-center">
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Previous">
-									  <span aria-hidden="true">&laquo;</span>
-									  <span class="sr-only">Previous</span>
-									</a>
-								  </li>
-								  <li class="page-item"><a class="page-link" href="#">1</a></li>
-								  <li class="page-item"><a class="page-link" href="#">2</a></li>
-								  <li class="page-item"><a class="page-link" href="#">3</a></li>
-								  <li class="page-item">
-									<a class="page-link" href="#" aria-label="Next">
-									  <span aria-hidden="true">&raquo;</span>
-									  <span class="sr-only">Next</span>
-									</a>
-								  </li>
+									</li>
 								</ul>
-							</nav>
+								<nav class="nav-pager" aria-label="Page navigation example">
+									<ul class="pagination justify-content-center">
+										<li class="page-item">
+										<a class="page-link" href="#" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+											<span class="sr-only">Previous</span>
+										</a>
+										</li>
+										<li class="page-item"><a class="page-link" href="#">1</a></li>
+										<li class="page-item"><a class="page-link" href="#">2</a></li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li class="page-item">
+										<a class="page-link" href="#" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+											<span class="sr-only">Next</span>
+										</a>
+										</li>
+									</ul>
+								</nav>
+							</div>	
 						</div>
 					</div>
 				</div>
-
-				<!-- Right Side of Main Body -->
-				<div class="container-fluid right-side">
-					<!-- Community Pic -->
-					<div class="container-fluid side-content">
-						<div class="container side-content-header">
-							studySpot
-						</div>
-						<div class="container side-content-body">
-							<img src="../assets/imgs/study.png" alt="" width="150">
-						</div>
-						<div class="container side-content-footer">
-							<hr class="w-100" color="#000">
-							<div class="community-count">13 Communities</div>
-							<div class="member-count">500 Members</div> 
-							<div class="post-count">234 Posts</div>
-						</div>
-					</div>
-					<!-- About Community Section -->
-					<div class="container-fluid side-content">
-						<!-- About Community Section Title-->
-						<div class="container side-content-header">
-							About Us
-						</div>
-						<!-- About the community body -->
-						<div class="side-content-body">
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat dolore molestias laboriosam. 
-							Alias natus distinctio possimus amet ducimus voluptas dolor. Assumenda mollitia quis aliquid maxime 
-							deleniti facere, rerum excepturi provident!
-						</div>
-					</div>
+				<!-- Footer -->
+				<div class="container">
+					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+					<p class="col-md-4 mb-0" style="color: #00274C;">&copy; 2022 studySpot, Inc</p>
+				
+					<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+						<img src="../assets/imgs/study.png" alt="" width="40">
+					</a>
+				
+					<ul class="nav col-md-4 justify-content-end">
+						<li class="nav-item"><a href="../pages/loggedIn.html" class="nav-link px-2">Home</a></li>
+						<li class="nav-item"><a href="#" class="nav-link px-2">About</a></li>
+						<li class="nav-item"><a href="#" class="nav-link px-2">Help</a></li>
+					</ul>
+					</footer>
 				</div>
 			</div>
-
-			<!-- Footer -->
-			<footer class="bg-light text-center text-lg-start site-footer">
-				<!-- Copyright -->
-				<div class="text-center p-3">
-					Copyright © 2022 
-					<a href="index.html">studySpot Inc</a>
-					. All rights reserved.
-				</div>
-			</footer>
 
 			<!-- Sticky Note Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

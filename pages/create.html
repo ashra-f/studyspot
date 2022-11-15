@@ -16,78 +16,58 @@
 	</head>
 	<body>
 		<div class="container-fluid" id="main-container">
-			<!-- Navigation Bar -->
-			<nav class="navbar fixed-top">
-				<div class="container-fluid navbar-body">
-					<!-- studySpot Brand and Icon -->
-					<a class="navbar-brand" href="../pages/loggedIn.html">
-						<div class="brand-wrapper">
-							<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35">
-							<span>studySpot</span> 
-						</div>
-					</a>
-
-					<!-- Forum Search Bar and Community Dropdown -->
-					<div class="container" id="searchbar-dropdown">
-						<form class="d-flex" role="search" method="post" action="">
-							<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
-						</form>
-						<div class="dropdown">
-							<button tabindex="-1" class="btn communities-dropdown dropdown-toggle" id="navbar-browse" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Browse our communities">
-								Browse
-							</button>
-							<ul class="dropdown-menu" id="community-dropdown-menu">
-								<li><a class="dropdown-item" href="#">CompSci</a></li>
-								<li><a class="dropdown-item" href="#">Chemistry</a></li>
-								<li><a class="dropdown-item" href="#">UMD</a></li>
-							</ul>
-						</div>
+			<!-- Navbar -->
+			<nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
+				<!-- studySpot Brand and Icon -->
+				<a class="navbar-brand border-bottom" href="../pages/loggedIn.html">
+					<div class="brand-wrapper">
+						<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
 					</div>
-
-					<!-- Create Buttons and Dropdown -->
-					<div class="nav pull-right">
+				</a>
+				<!-- Options -->
+				<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+					<li class="nav-item">
+						<button tabindex="-1" onclick="location.href='../pages/create.html'" type="button" class="btn material-symbols-outlined create-btn" title="Create a Post">library_add</button>			
+					</li>
+					<li class="nav-item">
 						<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined create-btn" title="Create a Community">group_add</button>
-						
-						<div class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">				
-								<img src="../assets/imgs/homer.jpg" alt="" width="40" height="40">
-							</a>
-							<ul class="dropdown-menu dropdown-menu-end">
-								<li class="nav-item">
-									<a class="nav-link" data-bs-toggle="modal" data-bs-target="#cmtyModal">
-										Create a Community
-									</a>	
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="">Edit Profile</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="">Settings</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" aria-current="page" href="">Log Out</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+					</li>
+					<li class="nav-item">
+						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" title="Browse Communities">search</button>
+					</li>
+					<li class="nav-item">
+						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" title="Help">help</button>
+					</li>
+				</ul>
+				<!-- User settings, logout -->
+				<div class="dropdown border-top user-settings">
+				  <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">
+					<img src="../assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
+				  </a>
+				  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+					<li><a class="dropdown-item" href="#">Settings</a></li>
+					<li><a class="dropdown-item" href="#">Profile</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" href="#">Sign out</a></li>
+				  </ul>
 				</div>
 			</nav>
 
 			<!-- Main Body -->
 			<div class="container-fluid main-body">
-				<div class="container-fluid left-side">
+				<!-- Body -->
+				<div class="container" id="create-field">
+					<!-- Create a post -->
 					<div class="container-fluid create-post-wrapper">
+						<div class="create-title">Create A Post</div>
 						<form method="post" action="" id="new-post">
 							<div class="form-group">
-								<label class="create-title">Create A Post</label>
 								<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
 							</div>
-
 							<div class="form-group">
-								<textarea id="full-featured-non-premium" placeholder="Description">
+								<textarea id="my_tinymce" placeholder="Description">
 								</textarea>
 							</div>
-
 							<div class="forum-options" id="community-options">
 								<div class="form-group col-md-4">
 										<select id="inputState" class="form-control">
@@ -100,52 +80,64 @@
 								</div>
 								<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined" title="Create a Community"  id="add-cmty-btn">group_add</button>
 							</div>
-
 							<div class="post-btns">
 								<button type="submit" id="cancel-btn" class="btn btn-secondary">Cancel</button>
 								<button type="submit" id="post-btn" class="btn">Post</button>
 							</div>
 						</form>
 					</div>
-				</div>
-
-				<!-- Rules and Guidelines -->
-				<div class="container-fluid right-side">
-					<div class="container-fluid side-content">
-						<div class="container side-content-header">
-							studySpot
+					<!-- Rules and Guidelines -->
+					<div class="container-fluid side-content-wrapper">
+						<div class="container-fluid side-content">
+							<div class="container side-content-header">
+								studySpot
+							</div>
+							<ol class="list-group list-group-numbered posts">
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+										<div class="fw-bold">Respect other members</div>
+									</div>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+										<div class="fw-bold">Read the community's rules</div>
+									</div>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+										<div class="fw-bold">Look for the original source of content</div>
+									</div>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+									<div class="fw-bold">Foster meaningful and genuine interactions</div>
+									</div>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-start">
+									<div class="ms-2 me-auto">
+									<div class="fw-bold">Have fun!</div>
+									</div>
+								</li>
+							</ol>
 						</div>
-						<ol class="list-group list-group-numbered posts">
-							<li class="list-group-item d-flex justify-content-between align-items-start">
-								<div class="ms-2 me-auto">
-									<div class="fw-bold">Respect other members</div>
-							  	</div>
-							</li>
-							<li class="list-group-item d-flex justify-content-between align-items-start">
-								<div class="ms-2 me-auto">
-									<div class="fw-bold">Read the community's rules</div>
-							  	</div>
-							</li>
-							<li class="list-group-item d-flex justify-content-between align-items-start">
-							  	<div class="ms-2 me-auto">
-									<div class="fw-bold">Look for the original source of content</div>
-							  	</div>
-							</li>
-							<li class="list-group-item d-flex justify-content-between align-items-start">
-								<div class="ms-2 me-auto">
-								  <div class="fw-bold">Foster meaningful and genuine interactions</div>
-								</div>
-						  	</li>
-							<li class="list-group-item d-flex justify-content-between align-items-start">
-								<div class="ms-2 me-auto">
-								  <div class="fw-bold">Have fun!</div>
-								</div>
-						  	</li>
-						</ol>
 					</div>
 				</div>
-
+				<!-- Footer -->
+				<div class="container">
+					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+					<p class="col-md-4 mb-0" style="color: #00274C;">&copy; 2022 studySpot, Inc</p>
 				
+					<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+						<img src="../assets/imgs/study.png" alt="" width="40">
+					</a>
+				
+					<ul class="nav col-md-4 justify-content-end">
+						<li class="nav-item"><a href="../pages/loggedIn.html" class="nav-link px-2" style="color: #00274C;">Home</a></li>
+						<li class="nav-item"><a href="#" class="nav-link px-2" style="color: #00274C;">About</a></li>
+						<li class="nav-item"><a href="#" class="nav-link px-2" style="color: #00274C;">Help</a></li>
+					</ul>
+					</footer>
+				</div>			
 			</div>
 
 			<!-- Create Community Modal -->
@@ -157,31 +149,42 @@
 							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							body goes here...
+							<form method="post" action="">
+								<div class="form-body" style="padding: 15px;">
+									<!-- Cmty info -->
+									<div class="form-group">
+										<div class="form-group input-field">
+											<label for="inputFirstName">Community Name:</label>
+											<input type="text" class="form-control" id="inputCmtyName" placeholder="">
+										</div>
+										<div class="form-group input-field">
+											<label for="inputLastName">About the Community:</label>
+											<textarea class="form-control" id="inputAbtCmty" placeholder=""></textarea>
+										</div>
+										<!-- Profile photo -->
+										<div class="form-group input-field">
+											<label for="file-upload" class="custom-file">
+												<i class="bi bi-upload"></i>
+												Upload an image
+											</label>
+											<input type="file" class="form-control-file custom-file" id="file-upload" accept="image/png, image/jpeg, image/jpg">
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 						<div class="modal-footer">
-							<button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<button tabindex="-1" type="button" class="btn btn-primary">Submit</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- Footer -->
-			<footer class="bg-light text-center text-lg-start site-footer">
-				<!-- Copyright -->
-				<div class="text-center p-3">
-					Copyright © 2022 
-					<a href="index.html">studySpot Inc</a>
-					. All rights reserved.
-				</div>
-			</footer>
 		</div>
 
 		<!-- WYSIWYG HTML Editor -->
 		<script>
 			tinymce.init({
-			  selector: 'textarea',
+			  selector: 'textarea#my_tinymce',
 			  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
 			  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
 			  tinycomments_mode: 'embedded',
