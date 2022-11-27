@@ -5,6 +5,7 @@
 
 body {
     background-color:#CAD2DA;
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 #main-container {
@@ -75,10 +76,12 @@ body {
 /* Main Body Styling  */
 .main-body {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     margin-left: 72px;
     margin-top: 10px;
     padding-left: 100px;
@@ -91,6 +94,13 @@ body {
 
 #cmty-card {
     margin-bottom: 12px;
+}
+
+.card-header {
+    display: flex; 
+    flex-direction: row; 
+    background-color:#00274C; 
+    justify-content: space-between;
 }
 
 #join-btn {
@@ -128,9 +138,8 @@ body {
 
 #posts-title {
     display: flex; 
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: center; 
     background-color: var(--mich-blue); 
     color: white; 
     height: 50px;
@@ -212,6 +221,10 @@ small {
     align-items: center;
 }
 
+.hidden-info {
+    display: none;
+}
+
 .side-content-body img {
     border-radius: 5px;
 }
@@ -258,8 +271,12 @@ a:link,  a:visited, a:hover{
 #create-field {
     display: flex;
     justify-content: space-around;
-    flex-direction: row;
+    flex-direction: row-reverse;
     padding: 10px;
+}
+
+#guidelines-popover {
+    display: none;
 }
 
 .post-btns {
@@ -270,6 +287,11 @@ a:link,  a:visited, a:hover{
 
 #cancel-btn {
     background-color: #002c5a;
+}
+
+#add-cmty-btn {
+    background-color: var(--mich-blue);
+    margin-left: 5px;
 }
 
 #post-btn {
@@ -294,7 +316,7 @@ a:link,  a:visited, a:hover{
 .create-title {
     margin-bottom: 10px; 
     font-size: 22px; 
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px 5px 0 0;
     background-color: var(--mich-blue); 
     color: var(--mich-maize);
@@ -500,12 +522,19 @@ small {
 }
 
 .pagination {
-    margin: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 45vw;
+    display: flex;
+    justify-content: center;
 }
 
 .nav-pager {
     padding: 10px;
     padding-bottom: 25px;
+    width: 45vw;
+    display: flex;
+    justify-content: center;
 }
 
 .nav-pager u {
@@ -533,42 +562,46 @@ small {
     background-color: var(--mich-blue);
 }
 
-/* Responsive */
-@media (max-width: 815px) {
-    .right-side, .add-sm-btn, #navbar-browse {
-        display: none !important;
-    }
-    .search-bar {
-        width: 40vw;
+#footer {
+    display: flex;
+    flex-direction: column;
+}
+
+#footer-img {
+    margin: 0 !important;
+    margin-bottom: 10px !important;
+}
+
+/* Responsiveness */
+@media (max-width: 590px) {
+    .body-wrapper, .footer-wrapper, #create-field  {
+        width: 320px !important;
     }
 
-    #browse-mainbody {
-        display: block;
+    .main-body {
+        margin-left: 0;
+    }
+}
+
+
+@media (max-width: 750px) {
+    #create-field {
+        width: 100%;
+        flex-direction: column;
     }
 
-    .topic-title {
-        justify-content: space-around;
+    #create-mbody {
+        margin-left: 0;
     }
 
-    #searchbar-dropdown > .d-flex {
-        display: flex;
-        justify-content: end;
-    }
-
-    .pull-right {
-        width: 50px;
-    }
-
-    .h-menu-toggler, .h-menu-content {
-        display: unset;
-    }
-
-    .signup, .login {
+    .side-content, .side-content-wrapper {
         display: none;
     }
 
-    #join-dropdown {
-        display: block;
+    #guidelines-popover {
+        display: inline;
         font-size: 18px;
+        padding: 0;
+        padding-bottom: 5px;
     }
 }
