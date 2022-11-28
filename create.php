@@ -6,14 +6,14 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Create a Post</title>
-		<link rel="icon" href="../assets/imgs/study.png" type="image/icon">
+		<link rel="icon" href="assets/imgs/study.png" type="image/icon">
 
 		<!-- Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 		<!-- Our Styling and Scripts -->
-		<link rel="stylesheet" href="../css/styles.css">
-		<script src="../scripts/index.js" defer></script>
+		<link rel="stylesheet" href="css/styles.css">
+		<script src="scripts/index.js" defer></script>
 
 		<!-- jQuery first, then jQuery min.js, then Bootstrap Bundle JS -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -33,15 +33,15 @@
 			<!-- Navbar -->
 			<nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
 				<!-- studySpot Brand and Icon -->
-				<a class="navbar-brand border-bottom" href="../index.php">
+				<a class="navbar-brand border-bottom" href="index.php">
 					<div class="brand-wrapper">
-						<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
+						<img src="assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
 					</div>
 				</a>
 				<!-- Options: create post, create cmty, browse cmties, and help -->
 				<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
 					<li class="nav-item">
-						<button tabindex="-1" onclick="location.href='../pages/create.html'" 
+						<button tabindex="-1" onclick="location.href='pages/create.html'" 
 										type="button" class="btn material-symbols-outlined create-btn" 
 										data-toggle="tooltip" data-placement="right" title="Create Post" id="createPostBtn">
 								library_add
@@ -70,7 +70,7 @@
 				<!-- User settings, logout -->
 				<div class="dropdown border-top user-settings">
 					<a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">
-						<img src="../assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
+						<img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
 						<li><a class="dropdown-item" href="#">Settings</a></li>
@@ -242,7 +242,7 @@
 				<div class="container footer-wrapper">
 					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" id="footer">					
 						<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 link-dark text-decoration-none" id="title-img">
-							<img src="../assets/imgs/study.png" alt="" width="40">
+							<img src="assets/imgs/study.png" alt="" width="40">
 						</a>
 						<p class="col-md-4 mb-0" style="color: #00274C; text-align: center;">&copy; 2022 studySpot, Inc</p>
 					</footer>

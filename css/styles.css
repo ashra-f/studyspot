@@ -357,10 +357,6 @@ a:link,  a:visited, a:hover{
     margin-bottom: 10px;
 }
 
-input[type="file"] {
-    display: none;
-}
-
 .custom-file {
     margin-top: 10px;
     border: 1px solid #ccc;

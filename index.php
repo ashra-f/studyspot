@@ -1,76 +1,328 @@
-<!-- What you see when you are logged out -->
+            <?php 
+                session_start();
+                readfile("scripts/header.php");
+            ?>
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<!-- Required Meta Tags -->
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>studySpot</title>
-		<link rel="icon" href="../assets/imgs/study.png" type="image/icon">
+            <!-- Check if the user is logged in or not -->
+            <?php if (!isset($_SESSION['userID'])){ ?>
+                <!-- USER IS NOT LOGGED IN -->
+                <!-- Navbar -->
+                <nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
+                    <!-- studySpot Brand and Icon -->
+                    <a class="navbar-brand border-bottom" href="index.php">
+                        <div class="brand-wrapper">
+                            <img src="assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
+                        </div>
+                    </a>
+                    <!-- Options -->
+                    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                        <li class="nav-item">
+                            <!-- Log in btn trigger modal -->						  
+                            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
+                                            data-bs-toggle="modal" data-bs-target="#login-modal"
+                                            data-toggle="tooltip" data-placement="right" title="Login">
+                                Login
+                            </button>	
+                        </li>
+                        <li class="nav-item">
+                            <!-- Sign up btn trigger modal -->
+                            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
+                                            data-bs-toggle="modal" data-bs-target="#signup-modal"
+                                            data-toggle="tooltip" data-placement="right" title="Sign Up">
+                                person_add
+                            </button>      
+                        </li>
+                        <li class="nav-item">
+                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
+                                            data-toggle="tooltip" data-placement="right" title="Browse Communities">
+                                search
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
+                                            data-toggle="tooltip" data-placement="right" title="Help">
+                                    help
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <!-- MODALS -->
+                <!-- Sticky Note Modal -->
+                <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
+                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <small>what community?</small>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
+                                            dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
+                                            rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
+                                    </p>
+                                    <small>username • datetime</small>
+                                    <button>Likes</button>
+                                    <button>Disikes</button>
+                                    <div class="comments">
+                                        comments (scrollable):
+                                        <ul>
+                                            <li>
+                                                username: comment
+                                                <ul>
+                                                    <li>username: reply</li>
+                                                    <li>username: reply</li>
+                                                </ul>
+                                            </li>
+                                            <li>username: comment</li>
+                                            <li>username: comment</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+                <!-- Sign up Modal -->
+                <div class="modal fade" id="signup-modal" tabindex="-1" aria-labelledby="signup-modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="signup-modalLabel">Sign Up</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Main Body -->
+                                <div class="container-fluid signup-container" style="padding-bottom: 0;">
+                                    <?php
+                                        if (isset($_GET['error'])) {
+                                            if ($_GET['error'] == "emptyFields") {
+                                                echo '<p class="signuperror" style="color: red">Fill in all fields!</p>';
+                                            }
+                                        }
+                                    ?>
+                                    <form class="signup-form" method="post" action="scripts/signup.php">
+                                        <div class="form-body">
+                                            <!-- User info -->
+                                            <div class="form-group">
+                                                <div class="form-group input-field">
+                                                    <label for="inputUserName">Username:</label>
+                                                    <input type="text" class="form-control" name="username" for="inputUserName" placeholder="">
+                                                </div>
+                                                <div class="form-group input-field">
+                                                    <label for="inputEmail4">Email:</label>
+                                                    <input type="email" class="form-control" name="mail" for="inputEmail4" placeholder="">
+                                                </div>
+                                                <div class="form-group input-field">
+                                                    <label for="inputPassword4">Password:</label>
+                                                    <input type="password" class="form-control" name="password" for="inputPassword4" placeholder="">
+                                                </div>
+                                                <div class="form-group input-field">
+                                                    <label for="inputPassword5">Confirm Password:</label>
+                                                    <input type="password" class="form-control" name="password-repeat" for="inputPassword5" placeholder="">
+                                                </div>
+                                                <!-- Profile photo -->
+                                                <div class="form-group input-field">
+                                                    <label for="file-upload">
+                                                        Upload a profile picture: 
+                                                    </label>
+                                                    <br>
+                                                    <input type="file" name="photo" accept="image/png, image/jpeg, image/jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="margin-top: 10px;">
+                                            <button type="submit" class="btn btn-primary" name="signup-submit">Sign up</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-		<!-- Our Styling and Scripts -->
-		<link rel="stylesheet" href="../css/styles.css">
-		<script src="scripts/index.js" defer></script>
+                <!-- Login in Modal -->
+                <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="signup-modalLabel">Login</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Main Body -->
+                                <div class="container-fluid signup-container" style="padding-bottom: 0;">
+                                    <form method="post" action="scripts/login.php" class="login-form">
+                                        <div class="form-body">
+                                            <!-- User info -->
+                                            <div class="form-group">
+                                                <div class="form-group input-field">
+                                                    <label for="input4">Email or Username:</label>
+                                                    <input type="text" class="form-control" name="mailUsername" id="input4" placeholder="">
+                                                </div>
+                                                <div class="form-group input-field">
+                                                    <label for="inputPassword4">Password:</label>
+                                                    <input type="password" class="form-control" name="pwd" id="inputPassword4" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="margin-top: 20px;">
+                                            <button type="submit" class="btn btn-primary" name="login-submit">Log in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            <?php } else { ?>
+                <!-- USER IS LOGGED IN -->
+                <!-- Sidebar -->
+                <nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
+                    <!-- studySpot Brand and Icon -->
+                    <a class="navbar-brand border-bottom" href="index.php">
+                        <div class="brand-wrapper">
+                            <img src="assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
+                        </div>
+                    </a>
+                    <!-- Options: create post, create cmty, browse cmties, and help -->
+                    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+                        <li class="nav-item">
+                            <button tabindex="-1" onclick="location.href='create.php'" 
+                                            type="button" class="btn material-symbols-outlined create-btn" 
+                                            data-toggle="tooltip" data-placement="right" title="Create Post" id="createPostBtn">
+                                    library_add
+                            </button>			
+                        </li>
+                        <li class="nav-item">
+                            <button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" 
+                                            type="button" class="btn material-symbols-outlined create-btn" 
+                                            data-toggle="tooltip" data-placement="right" title="Create Community" id="createCmtyBtn">
+                                group_add
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
+                                            data-toggle="tooltip" data-placement="right" title="Browse">
+                                search
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
+                                            data-toggle="tooltip" data-placement="right" title="Help">
+                                    help
+                            </button>
+                        </li>
+                    </ul>
+                    <!-- User settings, logout -->
+                    <div class="dropdown border-top user-settings">
+                        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">
+                            <img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small shadow settings-dropdown" aria-labelledby="dropdownUser3">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="scripts/logout.php" class="logout-form" method="post">
+                                    <button type="submit" class="dropdown-item logout-submit">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
-		<!-- jQuery first, then jQuery min.js, then Bootstrap Bundle JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous" defer></script>
-		
-		<!-- Icons -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-		<!-- <a href="https://www.flaticon.com/free-icons/study" title="study icons">Study icons created by Prosymbols - Flaticon</a> -->
-	</head>
-	<body>
-		<div class="container-fluid" id="main-container">
-			<!-- Navbar -->
-			<nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
-				<!-- studySpot Brand and Icon -->
-				<a class="navbar-brand border-bottom" href="index.html">
-					<div class="brand-wrapper">
-						<img src="../assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
-					</div>
-				</a>
-				<!-- Options -->
-				<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-					<li class="nav-item">
-						<!-- Log in btn trigger modal -->						  
-						<button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
-									  data-bs-toggle="modal" data-bs-target="#login-modal"
-									  data-toggle="tooltip" data-placement="right" title="Login">
-							Login
-						</button>	
-					</li>
-					<li class="nav-item">
-						<!-- Sign up btn trigger modal -->
-						<button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
-									  data-bs-toggle="modal" data-bs-target="#signup-modal"
-									  data-toggle="tooltip" data-placement="right" title="Sign Up">
-							person_add
-						</button>      
-					</li>
-					<li class="nav-item">
-						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
-										data-toggle="tooltip" data-placement="right" title="Browse Communities">
-							search
-						</button>
-					</li>
-					<li class="nav-item">
-						<button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
-										data-toggle="tooltip" data-placement="right" title="Help">
-							 help
-						</button>
-					</li>
-				</ul>
-			</nav>
+                <!-- Sticky Note Modal -->
+                <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
+                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <small>what community?</small>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
+                                            dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
+                                            rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
+                                    </p>
+                                    <small>username • datetime</small>
+                                    <button>Likes</button>
+                                    <button>Disikes</button>
+                                    <div class="comments">
+                                        comments (scrollable):
+                                        <ul>
+                                            <li>
+                                                username: comment
+                                                <ul>
+                                                    <li>username: reply</li>
+                                                    <li>username: reply</li>
+                                                </ul>
+                                            </li>
+                                            <li>username: comment</li>
+                                            <li>username: comment</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-			<!-- Main Body -->
+                <!-- Create Community Modal -->
+                <div class="modal fade" id="cmtyModal" tabindex="-1" aria-labelledby="cmtyModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="cmtyModalLabel">Add a Community</h1>
+                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="">
+                                    <div class="form-body" style="padding: 15px;">
+                                        <!-- Cmty info -->
+                                        <div class="form-group">
+                                            <div class="form-group input-field">
+                                                <label for="inputFirstName">Community Name:</label>
+                                                <input type="text" class="form-control" id="inputCmtyName" placeholder="">
+                                            </div>
+                                            <div class="form-group input-field">
+                                                <label for="inputLastName">About the Community:</label>
+                                                <textarea class="form-control" id="inputAbtCmty" placeholder=""></textarea>
+                                            </div>
+                                            <!-- Profile photo -->
+                                            <div class="form-group input-field">
+                                                <label for="file-upload" class="custom-file">
+                                                    <i class="bi bi-upload"></i>
+                                                    Upload an image
+                                                </label>
+                                                <input type="file" class="form-control-file" accept="image/png, image/jpeg, image/jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button tabindex="-1" type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <!-- Main Body -->
 			<div class="container-fluid main-body">
 				<!-- Body -->
 				<div class="container body-wrapper">
@@ -606,187 +858,12 @@
 				<div class="container footer-wrapper">
 					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" id="footer">					
 						<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 link-dark text-decoration-none" id="title-img">
-							<img src="../assets/imgs/study.png" alt="" width="40">
+							<img src="assets/imgs/study.png" alt="" width="40">
 						</a>
 						<p class="col-md-4 mb-0" style="color: #00274C; text-align: center;">&copy; 2022 studySpot, Inc</p>
 					</footer>
 				</div>
 			</div>
-
-			<!-- MODALS -->
-			<!-- Sticky Note Modal -->
-			<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
-							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="container">
-								<small>what community?</small>
-								<p>
-									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
-									 dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
-									 rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
-								</p>
-								<small>username • datetime</small>
-								<button>Likes</button>
-								<button>Disikes</button>
-								<div class="comments">
-									comments (scrollable):
-									<ul>
-										<li>
-											username: comment
-											<ul>
-												<li>username: reply</li>
-												<li>username: reply</li>
-											</ul>
-										</li>
-										<li>username: comment</li>
-										<li>username: comment</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Sign up Modal -->
-			<div class="modal fade" id="signup-modal" tabindex="-1" aria-labelledby="signup-modalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="signup-modalLabel">Sign Up</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<!-- Main Body -->
-							<div class="container-fluid signup-container">
-								<form method="post" action="">
-									<div class="form-body">
-										<!-- User info -->
-										<div class="form-group">
-											<div class="form-group input-field">
-												<label for="inputFirstName">First Name:</label>
-												<input type="text" class="form-control" id="inputFirstName" placeholder="">
-											</div>
-											<div class="form-group input-field">
-												<label for="inputLastName">Last Name:</label>
-												<input type="text" class="form-control" id="inputLastName" placeholder="">
-											</div>
-											<div class="form-group input-field">
-												<label for="inputEmail4">Email:</label>
-												<input type="email" class="form-control" id="inputEmail4" placeholder="">
-											</div>
-											<div class="form-group input-field">
-												<label for="inputPassword4">Password:</label>
-												<input type="password" class="form-control" id="inputPassword4" placeholder="">
-											</div>
-											<div class="form-group input-field">
-												<label for="inputPassword5">Confirm Password:</label>
-												<input type="password" class="form-control" id="inputPassword5" placeholder="">
-											</div>
-											<!-- Profile photo -->
-											<div class="form-group input-field">
-												<label for="file-upload" class="custom-file">
-													<i class="bi bi-upload"></i>
-													Upload a profile picture
-												</label>
-												<input type="file" class="form-control-file custom-file" id="file-upload" accept="image/png, image/jpeg, image/jpg">
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">Sign up</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Login in Modal -->
-			<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="signup-modalLabel">Login</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<!-- Main Body -->
-							<div class="container-fluid signup-container">
-								<form method="post" action="">
-									<div class="form-body">
-										<!-- User info -->
-										<div class="form-group">
-											<div class="form-group input-field">
-												<label for="inputEmail4">Email:</label>
-												<input type="email" class="form-control" id="inputEmail4" placeholder="">
-											</div>
-											<div class="form-group input-field">
-												<label for="inputPassword4">Password:</label>
-												<input type="password" class="form-control" id="inputPassword4" placeholder="">
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">Log in</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Create Community Modal -->
-			<div class="modal fade" id="cmtyModal" tabindex="-1" aria-labelledby="cmtyModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="cmtyModalLabel">Add a Community</h1>
-							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<form method="post" action="">
-								<div class="form-body" style="padding: 15px;">
-									<!-- Cmty info -->
-									<div class="form-group">
-										<div class="form-group input-field">
-											<label for="inputFirstName">Community Name:</label>
-											<input type="text" class="form-control" id="inputCmtyName" placeholder="">
-										</div>
-										<div class="form-group input-field">
-											<label for="inputLastName">About the Community:</label>
-											<textarea class="form-control" id="inputAbtCmty" placeholder=""></textarea>
-										</div>
-										<!-- Profile photo -->
-										<div class="form-group input-field">
-											<label for="file-upload" class="custom-file">
-												<i class="bi bi-upload"></i>
-												Upload an image
-											</label>
-											<input type="file" class="form-control-file" accept="image/png, image/jpeg, image/jpg">
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button tabindex="-1" type="button" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-
+        </div>
 	</body>
 </html>
