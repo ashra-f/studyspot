@@ -11,7 +11,7 @@
     $servername = "141.215.80.154";
     $username = "group12";
     $password = "MVOPz@9EvNs";
-    $dbname = "group12_db";
+    $dbName = "group12_db";
 
     $connection = mysqli_connect($servername, $username, $password, $dbName);
 
