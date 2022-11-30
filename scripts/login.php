@@ -1,5 +1,5 @@
 <?php
-        if (isset($_POST['login-submit'])) {
+        if (isset($_POST['login-submit']) || isset($_POST['signup-submit'])) {
             
             require 'db_handler.php';
 
@@ -32,6 +32,9 @@
                             session_start();
                             $_SESSION['userID'] = $row['id'];
                             $_SESSION['username'] = $row['username'];
+                            ?>
+                            <b>helloo</b>
+                            <?php
                             header("Location: ../index.php?login=success");
                             exit();
                         }

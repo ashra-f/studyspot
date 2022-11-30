@@ -85,7 +85,33 @@
                             $hashedPwd = password_hash($password1, PASSWORD_DEFAULT);
                             mysqli_stmt_bind_param($statement, "sss", $username, $email, $hashedPwd);
                             mysqli_stmt_execute($statement);
-                            header("Location: ../index.php?signup=success");
+                
+                            $sql = "SELECT * FROM users WHERE username=?;";
+                            $statement = mysqli_stmt_init($connection);
+            
+                            if (!mysqli_stmt_prepare($statement, $sql)) {
+                                header("Location: ../index.php?error=sqlError");
+                                exit();
+                            }
+                            else {
+                                mysqli_stmt_bind_param($statement, "s", $username);
+                                mysqli_stmt_execute(($statement));
+            
+                                $results = mysqli_stmt_get_result($statement);
+            
+                                if ($row = mysqli_fetch_assoc($results)) {
+                                        session_start();
+                                        $_SESSION['userID'] = $row['id'];
+                                        $_SESSION['username'] = $row['username'];
+                                        header("Location: ../index.php?login=success");
+                                        exit();
+                                    }
+                                else {
+                                    header("Location: ../index.php?error=noUserFound");
+                                    exit();
+                                }
+                            }
+                            
                             exit();
                         }
                     }
