@@ -210,10 +210,10 @@
 									<!-- connect to db and get all the communities this user is in -->
 										<select id="inputState" class="form-select" name="cmty">
 											<option selected disabled>Select a Community</option>
-											<option>CompSci</option>
-											<option>UMD</option>
-											<option>Gaming</option>
-											<option>Sports</option>
+											<option>compsci</option>
+											<option>umd</option>
+											<option>gaming</option>
+											<option>chemistry</option>
 										</select>
 								</div>
 								<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined create-btn" title="Create a Community"  id="add-cmty-btn">group_add</button>

@@ -6,7 +6,7 @@
         session_start();
 
         $cmtyName = $_POST['cmtyName'];
-        $cmtyAbout = $_POST['aboutCmty'];
+        $cmtyAbout = strtolower($_POST['aboutCmty']);
 
         // Error handling
         if (empty($cmtyName) || empty($cmtyAbout)) {
@@ -43,7 +43,7 @@
                 }
                 else {
                     // ADDED A NEW CMTY SUCCESSFULLY
-                    mysqli_stmt_bind_param($statement, "ss", $cmtyName, $cmtyAbout);
+                    mysqli_stmt_bind_param($statement, "ss", strtolower($cmtyName), $cmtyAbout);
                     mysqli_stmt_execute($statement);
 
                     // Get Cmty ID

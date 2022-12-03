@@ -41,9 +41,9 @@
 										</a>
 									</li>
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="#">Chemistry</a></li>
-									<li><a class="dropdown-item" href="#">Bio</a></li>
-									<li><a class="dropdown-item" href="#">Maths</a></li>
+									<li><a class="dropdown-item" href="cmty.php?cmty=chemistry">Chemistry</a></li>
+									<li><a class="dropdown-item" href="cmty.php?cmty=bio">Bio</a></li>
+									<li><a class="dropdown-item" href="cmty.php?cmty=compsci">CompSci</a></li>
 								</ul>
 							</div>
 							<!-- Search bar -->
