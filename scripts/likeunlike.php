@@ -33,6 +33,19 @@
     $totalUnlikes = $fetchunlikes['cntUnlike'];
     
     $return_arr = array("likes"=>$totalLikes,"unlikes"=>$totalUnlikes);
-    
+
+    // update post's likes and dislikes
+    $sql = 'UPDATE posts SET likes=?, dislikes=? where id=?;';
+    $statement = mysqli_stmt_init($connection);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        header("Location: ../index.php?error=sqlError");
+        exit();
+    }
+    else {
+        mysqli_stmt_bind_param($statement, "sss", $totalLikes, $totalUnlikes, $postid);
+        mysqli_stmt_execute(($statement));
+    }
+   
     echo json_encode($return_arr);
 ?>

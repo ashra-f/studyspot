@@ -9,7 +9,7 @@
         header("Location: index.php");
         exit();
     }
-    
+
     $sql = "SELECT * FROM communities WHERE cmty_name=?;";
     $statement = mysqli_stmt_init($connection);
 
@@ -112,47 +112,48 @@
 								<ul class="sticky-notes">
 									<?php
 										$userid = $_SESSION['userID'];
-										$query = "SELECT * FROM posts WHERE community_name=?;";
+                                        $query = "SELECT * FROM posts WHERE community_name=?;";
 
                                         if (!mysqli_stmt_prepare($statement, $query)) {
-                                            header("Location: ../index.php?error=sqlError");
+                                            header("Location: index.php?error=sqlError");
                                             exit();
                                         }
-                                        
+
                                         mysqli_stmt_bind_param($statement, "s", $cmtyName);
                                         mysqli_stmt_execute(($statement));
 
-                                        $results = mysqli_stmt_get_result($statement);
-
-										while($row = mysqli_fetch_array($results)) {
-
-											$postid = $row['id'];
+                                        $result = mysqli_stmt_get_result($statement);
+										while($row = mysqli_fetch_array($result)) {
 											$title = $row['title'];
 											$type = -1;
 											$cmtyID = $row['community_id'];
 											$description = $row['descr'];
+											$cmtyName = $row['community_name'];
 											$username = $row['author'];
 											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
 											$comments = $row['comments'];
+											$postid = $row['id'];
 						
-											$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
-											$status_result = mysqli_query($connection,$status_query);
-											$status_row = mysqli_fetch_array($status_result);
-											$count_status = $status_row['cntStatus'];
+											if (isset($_SESSION['userID'])) {
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_result = mysqli_query($connection,$status_query);
+												$status_row = mysqli_fetch_array($status_result);
+												$count_status = $status_row['cntStatus'];
 
-											if($count_status > 0){
-												$type = $status_row['type'];
+												if($count_status > 0){
+													$type = $status_row['type'];
+												}
+							
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_result = mysqli_query($connection,$like_query);
+												$like_row = mysqli_fetch_array($like_result);
+												$total_likes = $like_row['cntLikes'];
+							
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_result = mysqli_query($connection,$unlike_query);
+												$unlike_row = mysqli_fetch_array($unlike_result);
+												$total_unlikes = $unlike_row['cntUnlikes'];
 											}
-						
-											$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
-											$like_result = mysqli_query($connection,$like_query);
-											$like_row = mysqli_fetch_array($like_result);
-											$total_likes = $like_row['cntLikes'];
-						
-											$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
-											$unlike_result = mysqli_query($connection,$unlike_query);
-											$unlike_row = mysqli_fetch_array($unlike_result);
-											$total_unlikes = $unlike_row['cntUnlikes'];
 						
 									?>
 										<li>
@@ -167,17 +168,60 @@
 												<div class="sticky-note-info">
 													<small><?php echo $username?> • <?php if ($timeDiff < 1) { echo 'just now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
 												</div>
-												<div class="interactions">
-													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
-														<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
-													</button>
-													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
-															<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
-													</button>
-													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-														<span class="comment-count"><?php echo ' '.$comments?></span>
-													</button>
-												</div>
+													<?php
+														if (!isset($_SESSION['userID'])) {
+															// get likes and dislikes for each post
+															$sql = 'SELECT * FROM posts where community_name=?;';
+															$statement = mysqli_stmt_init($connection);
+
+															if (!mysqli_stmt_prepare($statement, $sql)) {
+																header("Location: index.php?error=sqlError");
+																exit();
+															}
+															else {
+																mysqli_stmt_bind_param($statement, "s", $cmtyName);
+																mysqli_stmt_execute(($statement));
+											
+																$results = mysqli_stmt_get_result($statement);
+											
+																if ($row = mysqli_fetch_assoc($results)) {
+																	$likes = $row['likes'];
+																	$dislikes = $row['dislikes'];
+																	$comments = $row['comments'];
+																}
+																else {
+																	header("Location: index.php?error=sqlError");
+																	exit();
+																}
+															}
+													?>
+													<div class="interactions">
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
+															<span class="like-count"><?php echo $likes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
+																<span class="dislike-count"><?php echo $dislikes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" onclick="loginAlert()">
+															<span class="comment-count"><?php echo $comments?></span>
+														</button>
+													</div>
+													<?php
+														}
+														else {
+													?>
+													<div class="interactions">
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
+															<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
+																<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+															<span class="comment-count"><?php echo ' '.$comments?></span>
+														</button>
+													</div>
+												<?php } ?>
 											</a>
 										</li>
 									<?php
@@ -199,20 +243,19 @@
 							<div class="container all-posts-wrapper">
 								<ul class="list-group all-posts">
 									<?php
-										$userid = $_SESSION['userID'];
-										$query = "SELECT * FROM posts WHERE community_name=?;";
+                                        $userid = $_SESSION['userID'];
+                                        $query = "SELECT * FROM posts WHERE community_name=?;";
 
                                         if (!mysqli_stmt_prepare($statement, $query)) {
                                             header("Location: index.php?error=sqlError");
                                             exit();
                                         }
-                                        
+
                                         mysqli_stmt_bind_param($statement, "s", $cmtyName);
                                         mysqli_stmt_execute(($statement));
 
                                         $result = mysqli_stmt_get_result($statement);
 										while($row = mysqli_fetch_array($result)) {
-											$postid = $row['id'];
 											$title = $row['title'];
 											$type = -1;
 											$cmtyID = $row['community_id'];
@@ -221,25 +264,28 @@
 											$username = $row['author'];
 											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
 											$comments = $row['comments'];
+											$postid = $row['id'];
 						
-											$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
-											$status_result = mysqli_query($connection,$status_query);
-											$status_row = mysqli_fetch_array($status_result);
-											$count_status = $status_row['cntStatus'];
+											if (isset($_SESSION['userID'])) {
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_result = mysqli_query($connection,$status_query);
+												$status_row = mysqli_fetch_array($status_result);
+												$count_status = $status_row['cntStatus'];
 
-											if($count_status > 0){
-												$type = $status_row['type'];
+												if($count_status > 0){
+													$type = $status_row['type'];
+												}
+							
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_result = mysqli_query($connection,$like_query);
+												$like_row = mysqli_fetch_array($like_result);
+												$total_likes = $like_row['cntLikes'];
+							
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_result = mysqli_query($connection,$unlike_query);
+												$unlike_row = mysqli_fetch_array($unlike_result);
+												$total_unlikes = $unlike_row['cntUnlikes'];
 											}
-						
-											$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
-											$like_result = mysqli_query($connection,$like_query);
-											$like_row = mysqli_fetch_array($like_result);
-											$total_likes = $like_row['cntLikes'];
-						
-											$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
-											$unlike_result = mysqli_query($connection,$unlike_query);
-											$unlike_row = mysqli_fetch_array($unlike_result);
-											$total_unlikes = $unlike_row['cntUnlikes'];
 						
 									?>
 										<li class="list-group-item post-item">
@@ -252,17 +298,60 @@
 														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
 													</div>
 												</div>
-												<div class="interactions">
-													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
-														<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
-													</button>
-													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
-															<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
-													</button>
-													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-														<span class="comment-count"><?php echo ' '.$comments?></span>
-													</button>
-												</div>
+												<?php
+														if (!isset($_SESSION['userID'])) {
+															// get likes and dislikes for each post
+															$sql = 'SELECT * FROM posts where community_name=?;';
+															$statement = mysqli_stmt_init($connection);
+
+															if (!mysqli_stmt_prepare($statement, $sql)) {
+																header("Location: index.php?error=sqlError");
+																exit();
+															}
+															else {
+																mysqli_stmt_bind_param($statement, "s", $cmtyName);
+																mysqli_stmt_execute(($statement));
+											
+																$results = mysqli_stmt_get_result($statement);
+											
+																if ($row = mysqli_fetch_assoc($results)) {
+																	$likes = $row['likes'];
+																	$dislikes = $row['dislikes'];
+																	$comments = $row['comments'];
+																}
+																else {
+																	header("Location: index.php?error=sqlError");
+																	exit();
+																}
+															}
+													?>
+													<div class="interactions">
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
+															<span class="like-count"><?php echo $likes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
+																<span class="dislike-count"><?php echo $dislikes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" onclick="loginAlert()">
+															<span class="comment-count"><?php echo $comments?></span>
+														</button>
+													</div>
+													<?php
+														}
+														else {
+													?>
+													<div class="interactions">
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
+															<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
+																<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+														</button>
+														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+															<span class="comment-count"><?php echo ' '.$comments?></span>
+														</button>
+													</div>
+												<?php } ?>
 											</a>
 										</li>
 									<?php
@@ -314,3 +403,17 @@
 
 	</body>
 </html>
+
+
+$userid = $_SESSION['userID'];
+										$query = "SELECT * FROM posts WHERE community_name=?;";
+
+                                        if (!mysqli_stmt_prepare($statement, $query)) {
+                                            header("Location: ../index.php?error=sqlError");
+                                            exit();
+                                        }
+                                        
+                                        mysqli_stmt_bind_param($statement, "s", $cmtyName);
+                                        mysqli_stmt_execute(($statement));
+
+                                        $results = mysqli_stmt_get_result($statement);

@@ -70,3 +70,8 @@ $(document).ready(function(){
         });
     });
 });
+
+// Log in to interacti with posts
+function loginAlert() {
+    alert("Login to interact with posts!");
+}
