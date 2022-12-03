@@ -19,7 +19,7 @@
             header("Location: ../index.php?error=invalidFields");
             exit();
         }
-        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { 
             header("Location: ../index.php?error=invalidMail&username=".$username);
             exit();
         }
@@ -95,7 +95,7 @@
                             }
                             else {
                                 mysqli_stmt_bind_param($statement, "s", $username);
-                                mysqli_stmt_execute(($statement));
+                                mysqli_stmt_execute($statement);
             
                                 $results = mysqli_stmt_get_result($statement);
             

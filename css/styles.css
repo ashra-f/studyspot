@@ -118,7 +118,7 @@ body {
 
 .all-posts-wrapper {
     background-color: #FFFFFF;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
 }
 
 .posts-wrapper {
@@ -176,7 +176,7 @@ body {
     margin-bottom: 12px;
 }
 
-.bi-hand-thumbs-up, .bi-hand-thumbs-down, .bi-chat-left-text {
+.bi-hand-thumbs-up, .bi-hand-thumbs-down, .bi-chat-left-text, .bi-hand-thumbs-down-fill, .bi-hand-thumbs-up-fill {
     font-size: 18px; 
     color: var(--mich-maize); 
     background-color: var(--mich-blue);
@@ -256,7 +256,7 @@ a:link,  a:visited, a:hover{
 }
 
 #new-post {
-    padding: 10px;
+    padding: 20px;
 }
 
 .create-post-wrapper {
@@ -281,7 +281,7 @@ a:link,  a:visited, a:hover{
 
 .post-btns {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     flex-direction: row;   
 }
 
@@ -372,10 +372,14 @@ a:link,  a:visited, a:hover{
 /* Sticky Notes Styling */
 #stickies-wrapper {
     display: flex;
+    justify-content: center !important;
+    align-items: center;
     height: 100%;
     padding: 0;
     margin: 0;
     overflow-y: auto;
+    background-color: #FFFFFF;
+    border-radius: 0 0 5px 5px;
 }
 
 .sticky-note-title {

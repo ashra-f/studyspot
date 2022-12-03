@@ -1,327 +1,25 @@
-            <?php 
-                session_start();
-                readfile("scripts/header.php");
-            ?>
+<!-- Some issues:
+			- Like/Dislike buttons deactivate after refreshing
+			- Can't unlike or remove a dislike after liking/disliking
+			- All post interaction btns update the top post interactions btns but not themselves
+-->
 
-            <!-- Check if the user is logged in or not -->
-            <?php if (!isset($_SESSION['userID'])){ ?>
-                <!-- USER IS NOT LOGGED IN -->
-                <!-- Navbar -->
-                <nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
-                    <!-- studySpot Brand and Icon -->
-                    <a class="navbar-brand border-bottom" href="index.php">
-                        <div class="brand-wrapper">
-                            <img src="assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
-                        </div>
-                    </a>
-                    <!-- Options -->
-                    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-                        <li class="nav-item">
-                            <!-- Log in btn trigger modal -->						  
-                            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
-                                            data-bs-toggle="modal" data-bs-target="#login-modal"
-                                            data-toggle="tooltip" data-placement="right" title="Login">
-                                Login
-                            </button>	
-                        </li>
-                        <li class="nav-item">
-                            <!-- Sign up btn trigger modal -->
-                            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
-                                            data-bs-toggle="modal" data-bs-target="#signup-modal"
-                                            data-toggle="tooltip" data-placement="right" title="Sign Up">
-                                person_add
-                            </button>      
-                        </li>
-                        <li class="nav-item">
-                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
-                                            data-toggle="tooltip" data-placement="right" title="Browse Communities">
-                                search
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
-                                            data-toggle="tooltip" data-placement="right" title="Help">
-                                    help
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <!-- MODALS -->
-                <!-- Sticky Note Modal -->
-                <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
-                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <small>what community?</small>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
-                                            dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
-                                            rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
-                                    </p>
-                                    <small>username • datetime</small>
-                                    <button>Likes</button>
-                                    <button>Disikes</button>
-                                    <div class="comments">
-                                        comments (scrollable):
-                                        <ul>
-                                            <li>
-                                                username: comment
-                                                <ul>
-                                                    <li>username: reply</li>
-                                                    <li>username: reply</li>
-                                                </ul>
-                                            </li>
-                                            <li>username: comment</li>
-                                            <li>username: comment</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<?php 
+	session_start();
+	require 'scripts/db_handler.php';
+	readfile("scripts/header.php");
 
-                <!-- Sign up Modal -->
-                <div class="modal fade" id="signup-modal" tabindex="-1" aria-labelledby="signup-modalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="signup-modalLabel">Sign Up</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Main Body -->
-                                <div class="container-fluid signup-container" style="padding-bottom: 0;">
-                                    <?php
-                                        if (isset($_GET['error'])) {
-                                            if ($_GET['error'] == "emptyFields") {
-                                                echo '<p class="signuperror" style="color: red">Fill in all fields!</p>';
-                                            }
-                                        }
-                                    ?>
-                                    <form class="signup-form" method="post" action="scripts/signup.php">
-                                        <div class="form-body">
-                                            <!-- User info -->
-                                            <div class="form-group">
-                                                <div class="form-group input-field">
-                                                    <label for="inputUserName">Username:</label>
-                                                    <input type="text" class="form-control" name="username" for="inputUserName" placeholder="">
-                                                </div>
-                                                <div class="form-group input-field">
-                                                    <label for="inputEmail4">Email:</label>
-                                                    <input type="email" class="form-control" name="mail" for="inputEmail4" placeholder="">
-                                                </div>
-                                                <div class="form-group input-field">
-                                                    <label for="inputPassword4">Password:</label>
-                                                    <input type="password" class="form-control" name="password" for="inputPassword4" placeholder="">
-                                                </div>
-                                                <div class="form-group input-field">
-                                                    <label for="inputPassword5">Confirm Password:</label>
-                                                    <input type="password" class="form-control" name="password-repeat" for="inputPassword5" placeholder="">
-                                                </div>
-                                                <!-- Profile photo -->
-                                                <div class="form-group input-field">
-                                                    <label for="file-upload">
-                                                        Upload a profile picture: 
-                                                    </label>
-                                                    <br>
-                                                    <input type="file" name="photo" accept="image/png, image/jpeg, image/jpg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer" style="margin-top: 10px;">
-                                            <button type="submit" class="btn btn-primary" name="signup-submit">Sign up</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+	// Check if the user is logged in or not
+	if (!isset($_SESSION['userID'])) { 
+		readfile("scripts/logged-out.php");
+	} 
+	else {
+		readfile("scripts/logged-in.php");
+	} 
+?>
 
-                <!-- Login in Modal -->
-                <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="signup-modalLabel">Login</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Main Body -->
-                                <div class="container-fluid signup-container" style="padding-bottom: 0;">
-                                    <form method="post" action="scripts/login.php" class="login-form">
-                                        <div class="form-body">
-                                            <!-- User info -->
-                                            <div class="form-group">
-                                                <div class="form-group input-field">
-                                                    <label for="input4">Email or Username:</label>
-                                                    <input type="text" class="form-control" name="mailUsername" id="input4" placeholder="">
-                                                </div>
-                                                <div class="form-group input-field">
-                                                    <label for="inputPassword4">Password:</label>
-                                                    <input type="password" class="form-control" name="pwd" id="inputPassword4" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer" style="margin-top: 20px;">
-                                            <button type="submit" class="btn btn-primary" name="login-submit">Log in</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>    
-            <?php } else { ?>
-                <!-- USER IS LOGGED IN -->
-                <!-- Sidebar -->
-                <nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
-                    <!-- studySpot Brand and Icon -->
-                    <a class="navbar-brand border-bottom" href="index.php">
-                        <div class="brand-wrapper">
-                            <img src="assets/imgs/study.png" alt="studySpot Logo" width="35" title="studySpot">
-                        </div>
-                    </a>
-                    <!-- Options: create post, create cmty, browse cmties, and help -->
-                    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-                        <li class="nav-item">
-                            <button tabindex="-1" onclick="location.href='create.php'" 
-                                            type="button" class="btn material-symbols-outlined create-btn" 
-                                            data-toggle="tooltip" data-placement="right" title="Create Post" id="createPostBtn">
-                                    library_add
-                            </button>			
-                        </li>
-                        <li class="nav-item">
-                            <button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" 
-                                            type="button" class="btn material-symbols-outlined create-btn" 
-                                            data-toggle="tooltip" data-placement="right" title="Create Community" id="createCmtyBtn">
-                                group_add
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
-                                            data-toggle="tooltip" data-placement="right" title="Browse">
-                                search
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
-                                            data-toggle="tooltip" data-placement="right" title="Help">
-                                    help
-                            </button>
-                        </li>
-                    </ul>
-                    <!-- User settings, logout -->
-                    <div class="dropdown border-top user-settings">
-                        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">
-                            <img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small shadow settings-dropdown" aria-labelledby="dropdownUser3">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="scripts/logout.php" class="logout-form" method="post">
-                                    <button type="submit" class="dropdown-item logout-submit">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <!-- Sticky Note Modal -->
-                <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
-                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <small>what community?</small>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
-                                            dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
-                                            rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
-                                    </p>
-                                    <small>username • datetime</small>
-                                    <button>Likes</button>
-                                    <button>Disikes</button>
-                                    <div class="comments">
-                                        comments (scrollable):
-                                        <ul>
-                                            <li>
-                                                username: comment
-                                                <ul>
-                                                    <li>username: reply</li>
-                                                    <li>username: reply</li>
-                                                </ul>
-                                            </li>
-                                            <li>username: comment</li>
-                                            <li>username: comment</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Create Community Modal -->
-                <div class="modal fade" id="cmtyModal" tabindex="-1" aria-labelledby="cmtyModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="cmtyModalLabel">Add a Community</h1>
-                                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" action="">
-                                    <div class="form-body" style="padding: 15px;">
-                                        <!-- Cmty info -->
-                                        <div class="form-group">
-                                            <div class="form-group input-field">
-                                                <label for="inputFirstName">Community Name:</label>
-                                                <input type="text" class="form-control" id="inputCmtyName" placeholder="">
-                                            </div>
-                                            <div class="form-group input-field">
-                                                <label for="inputLastName">About the Community:</label>
-                                                <textarea class="form-control" id="inputAbtCmty" placeholder=""></textarea>
-                                            </div>
-                                            <!-- Profile photo -->
-                                            <div class="form-group input-field">
-                                                <label for="file-upload" class="custom-file">
-                                                    <i class="bi bi-upload"></i>
-                                                    Upload an image
-                                                </label>
-                                                <input type="file" class="form-control-file" accept="image/png, image/jpeg, image/jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button tabindex="-1" type="button" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-
+		<!-- HOME PAGE:  -->
+		<!-- Displays all the posts --> 
             <!-- Main Body -->
 			<div class="container-fluid main-body">
 				<!-- Body -->
@@ -332,7 +30,7 @@
 							<!-- Dropdown Cmty -->
 							<div class="dropdown">
 								<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#00274C; color:#FFCB05">
-									<label style="font-size: 25px;">CompSci</label> 
+									<label style="font-size: 25px;">Home</label> 
 								</button>
 								<ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
 									<li>
@@ -351,24 +49,47 @@
 							<!-- Search bar -->
 							<div class="container" id="searchbar">
 								<button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button>
-								<!-- <form class="d-flex" role="search" method="POST" action="">
-									<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
-								</form> -->
 							</div>
 						</div>
-						<div class="card-body">
-							<h5 class="card-title">About CompSci</h5>
-							<p class="card-text">
+						<div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
+							<h5 class="card-title">Welcome to studySpot</h5>
+							<p class="card-text" style="width: 60%;">
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. 
 								Vel repellat quos quidem commodi excepturi hic! Beatae, necessitatibus enim 
 								possimus saepe quasi consectetur nobis? Veniam obcaecati voluptatem minima soluta, ut aliquid?
 							</p>
-							<a href="#" class="btn" id="join-btn">Join</a>
+							<!-- <a href="#" class="btn" id="join-btn">Join</a> -->
 						</div>
 						<div class="card-footer text-muted">
-							50 Members • 32 Posts
+							<?php
+								$total_post_count = 0;
+								$total_member_count = 0;
+
+								$sql = "SELECT * FROM posts";								
+								$result = mysqli_query($connection, $sql);
+								$total_post_count = mysqli_num_rows($result);
+
+								$sql = "SELECT * FROM users";								
+								$result = mysqli_query($connection, $sql);
+								$total_member_count = mysqli_num_rows($result);
+
+								if ($total_member_count == 1 && $total_post_count == 1) {
+									echo $total_member_count.' Member • '.$total_post_count.' Post';
+								}
+								else if ($total_member_count == 1) {
+									echo $total_member_count.' Member • '.$total_post_count.' Posts';
+								}
+								else if($total_post_count == 1) {
+									echo $total_member_count.' Members • '.$total_post_count.' Post';
+								}
+								else {
+									echo $total_member_count.' Members • '.$total_post_count.' Posts';
+								}
+
+							?>
 						</div>
 					</div>
+
 					<!-- Top Posts Section -->
 					<div class="container-fluid posts-wrapper" id="top-posts">
 						<!-- Top Posts Content -->
@@ -378,336 +99,76 @@
 							</div>
 							<!-- Bulletin Board -->
 							<div class="container" id="stickies-wrapper">
+								<!-- Get all posts from DB -->
 								<ul class="sticky-notes">
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>UMD</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Best Spot to Study at CASL?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>FLYING_4 • 11 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>CompSci</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>edwad2 • 5 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Biology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Any good electives to take?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>youngwizard3 • 2 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Chemistry</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>thinkingishard • 15 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>UMD</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Best Spot to Study at CASL?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>FLYING_4 • 11 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Psychology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>New Psychology Professor at UMD. AMA!</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>profsunshine • 22 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Business</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Final Exams Coming Up</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>-snake-231 • 1 hour ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>CompSci</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?Does anyone wanna team up for CIS 427?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>edwad2 • 5 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Biology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Any good electives to take?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>youngwizard3 • 2 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Chemistry</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Incoming Freshman | Are the Classes Difficult Here?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>thinkingishard • 15 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>UMD</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Best Spot to Study at CASL?</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>FLYING_4 • 11 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Psychology</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>New Psychology Professor at UMD. AMA!</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>profsunshine • 22 hours ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a class="sticky-note">
-											<div class="sticky-note-info">
-												<small>Business</small>
-												<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
-											</div>
-											<div class="sticky-note-title">
-												<h6>Final Exams Coming Up</h6>
-											</div>
-											<div class="sticky-note-info">
-												<small>-snake-231 • 1 hour ago</small> 
-											</div>
-											<div class="interactions">
-												<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
-													<span class="like-count">&nbsp;16</span>
-												</button>
-												<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
-													<span class="dislike-count">&nbsp;3</span>
-												</button>
-												<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-													<span class="comment-count">&nbsp;20</span>
-												</button>
-											</div>
-										</a>
-									</li>
+									<?php
+										$userid = $_SESSION['userID'];
+										$query = "SELECT * FROM posts";
+										$result = mysqli_query($connection, $query);
+										while($row = mysqli_fetch_array($result)) {
+											$postid = $row['id'];
+											$title = $row['title'];
+											$type = -1;
+											$cmtyID = $row['community_id'];
+											$description = $row['descr'];
+											$cmtyName = $row['community_name'];
+											$username = $row['author'];
+											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
+											$comments = $row['comments'];
+						
+											$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+											$status_result = mysqli_query($connection,$status_query);
+											$status_row = mysqli_fetch_array($status_result);
+											$count_status = $status_row['cntStatus'];
+
+											if($count_status > 0){
+												$type = $status_row['type'];
+											}
+						
+											$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+											$like_result = mysqli_query($connection,$like_query);
+											$like_row = mysqli_fetch_array($like_result);
+											$total_likes = $like_row['cntLikes'];
+						
+											$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+											$unlike_result = mysqli_query($connection,$unlike_query);
+											$unlike_row = mysqli_fetch_array($unlike_result);
+											$total_unlikes = $unlike_row['cntUnlikes'];
+						
+									?>
+										<li>
+											<a class="sticky-note">
+												<div class="sticky-note-info">
+													<small><?php echo $cmtyName?></small>
+													<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+												</div>
+												<div class="sticky-note-title">
+													<h6><?php echo $title?></h6>
+												</div>
+												<div class="sticky-note-info">
+													<small><?php echo $username?> • <?php if ($timeDiff < 1) { echo 'just now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+												</div>
+												<div class="interactions">
+													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
+														<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
+															<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+														<span class="comment-count"><?php echo ' '.$comments?></span>
+													</button>
+												</div>
+											</a>
+										</li>
+									<?php
+										}
+									?>
 								</ul>
 							</div>	
 						</div>
 					</div>
+
 					<!-- All Posts Section -->
 					<div class="container-fluid posts-wrapper" id="all-posts">
 						<!-- All Posts Content -->
@@ -718,112 +179,69 @@
 							<!-- All Posts Section Posts-->
 							<div class="container all-posts-wrapper">
 								<ul class="list-group all-posts">
-									<li class="list-group-item post-item">
-										<div class="post">
-											<div class="post-title">
-												<h5>Any good CIS electives to take?</h5>
-											</div>
-											<div class="poster-info">
-												<small>CompSci • Post by youngwizard3 5 hours ago</small>
-											</div>
-										</div>
-										<div class="interactions">
-											<button class="bi bi-hand-thumbs-up interaction-btn">
-												<span class="like-count">&nbsp;16</span>
-											</button>
-											<button class="bi bi-hand-thumbs-down interaction-btn">
-												<span class="dislike-count">&nbsp;3</span>
-											</button>
-											<button class="bi bi-chat-left-text interaction-btn">
-												<span class="comment-count">&nbsp;20</span>
-											</button>
-										</div>
-									</li>
-									<li class="list-group-item post-item">
-										<div class="post">
-											<div class="post-title">
-												<h5>Incoming Freshman | Are the Classes Difficult Here?</h5>
-											</div>
-											<div class="poster-info">
-												<small>Chemistry • Post by thinkingishard 2 hours ago</small>
-											</div>
-										</div>
-										<div class="interactions">
-											<button class="bi bi-hand-thumbs-up interaction-btn">
-												<span class="like-count">&nbsp;16</span>
-											</button>
-											<button class="bi bi-hand-thumbs-down interaction-btn">
-												<span class="dislike-count">&nbsp;3</span>
-											</button>
-											<button class="bi bi-chat-left-text interaction-btn">
-												<span class="comment-count">&nbsp;20</span>
-											</button>
-										</div>
-									</li>
-									<li class="list-group-item post-item">
-										<div class="post">
-											<div class="post-title">
-												<h5>Best Spot to Study at CASL?</h5>
-											</div>
-											<div class="poster-info">
-												<small>UMD • Post by FLYING_4 16 hours ago</small>
-											</div>
-										</div>
-										<div class="interactions">
-											<button class="bi bi-hand-thumbs-up interaction-btn">
-												<span class="like-count">&nbsp;16</span>
-											</button>
-											<button class="bi bi-hand-thumbs-down interaction-btn">
-												<span class="dislike-count">&nbsp;3</span>
-											</button>
-											<button class="bi bi-chat-left-text interaction-btn">
-												<span class="comment-count">&nbsp;20</span>
-											</button>
-										</div>
-									</li>
-									<li class="list-group-item post-item">
-										<div class="post">
-											<div class="post-title">
-												<h5>New Psychology Professor at UMD. AMA!</h5>
-											</div>
-											<div class="poster-info">
-												<small>Psychology • Post by profsunshine 6 hours ago</small>
-											</div>
-										</div>
-										<div class="interactions">
-											<button class="bi bi-hand-thumbs-up interaction-btn">
-												<span class="like-count">&nbsp;16</span>
-											</button>
-											<button class="bi bi-hand-thumbs-down interaction-btn">
-												<span class="dislike-count">&nbsp;3</span>
-											</button>
-											<button class="bi bi-chat-left-text interaction-btn">
-												<span class="comment-count">&nbsp;20</span>
-											</button>
-										</div>
-									</li>
-									<li class="list-group-item post-item">
-										<div class="post">
-											<div class="post-title">
-												<h5>Final Exams Coming Up</h5>
-											</div>
-											<div class="poster-info">
-												<small>Business • Post by -snake-231 1 hour ago</small>
-											</div>
-										</div>
-										<div class="interactions">
-											<button class="bi bi-hand-thumbs-up interaction-btn">
-												<span class="like-count">&nbsp;16</span>
-											</button>
-											<button class="bi bi-hand-thumbs-down interaction-btn">
-												<span class="dislike-count">&nbsp;3</span>
-											</button>
-											<button class="bi bi-chat-left-text interaction-btn">
-												<span class="comment-count">&nbsp;20</span>
-											</button>
-										</div>
-									</li>
+									<?php
+										$userid = $_SESSION['userID'];
+										$query = "SELECT * FROM posts";
+										$result = mysqli_query($connection, $query);
+										while($row = mysqli_fetch_array($result)) {
+											$postid = $row['id'];
+											$title = $row['title'];
+											$type = -1;
+											$cmtyID = $row['community_id'];
+											$description = $row['descr'];
+											$cmtyName = $row['community_name'];
+											$username = $row['author'];
+											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
+											$comments = $row['comments'];
+						
+											$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+											$status_result = mysqli_query($connection,$status_query);
+											$status_row = mysqli_fetch_array($status_result);
+											$count_status = $status_row['cntStatus'];
+
+											if($count_status > 0){
+												$type = $status_row['type'];
+											}
+						
+											$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+											$like_result = mysqli_query($connection,$like_query);
+											$like_row = mysqli_fetch_array($like_result);
+											$total_likes = $like_row['cntLikes'];
+						
+											$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+											$unlike_result = mysqli_query($connection,$unlike_query);
+											$unlike_row = mysqli_fetch_array($unlike_result);
+											$total_unlikes = $unlike_row['cntUnlikes'];
+						
+									?>
+										<li class="list-group-item post-item">
+											<a class="sticky-note" style="text-decoration: none; color: black;">
+												<div class="post">
+													<div class="post-title">
+														<h5><?php echo $title?></h5>
+													</div>
+													<div class="poster-info">
+														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+													</div>
+												</div>
+												<div class="interactions">
+													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
+														<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
+															<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+														<span class="comment-count"><?php echo ' '.$comments?></span>
+													</button>
+												</div>
+											</a>
+										</li>
+									<?php
+										}
+									?>
 								</ul>
+
 								<nav class="nav-pager container-fluid" aria-label="Page navigation example">
 									<ul class="pagination justify-content-center container-fluid m-0 p-0">
 										<li class="page-item">
@@ -865,5 +283,7 @@
 				</div>
 			</div>
         </div>
+
 	</body>
 </html>
+

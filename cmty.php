@@ -1,0 +1,1 @@
+<!-- Handles all community pages -->

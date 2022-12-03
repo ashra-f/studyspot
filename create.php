@@ -89,42 +89,29 @@
 			<div class="modal fade" id="cmtyModal" tabindex="-1" aria-labelledby="cmtyModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<!-- Modal Header -->
 						<div class="modal-header">
 							<h1 class="modal-title fs-5" id="cmtyModalLabel">Add a Community</h1>
 							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
-
-						<!-- Modal Body -->
 						<div class="modal-body">
-							<form method="post" action="">
+							<form method="post" action="scripts/create-cmty.php">
 								<div class="form-body" style="padding: 15px;">
 									<!-- Cmty info -->
 									<div class="form-group">
 										<div class="form-group input-field">
 											<label for="inputFirstName">Community Name:</label>
-											<input type="text" class="form-control" id="inputCmtyName" placeholder="">
+											<input type="text" class="form-control" id="inputCmtyName" name="cmtyName" placeholder="">
 										</div>
 										<div class="form-group input-field">
 											<label for="inputLastName">About the Community:</label>
-											<textarea class="form-control" id="inputAbtCmty" placeholder=""></textarea>
-										</div>
-										<!-- Profile photo -->
-										<div class="form-group input-field">
-											<label for="file-upload" class="custom-file">
-												<i class="bi bi-upload"></i>
-												Upload an image
-											</label>
-											<input type="file" class="form-control-file custom-file" id="file-upload" accept="image/png, image/jpeg, image/jpg">
+											<textarea class="form-control" id="inputAbtCmty" name="aboutCmty" placeholder=""></textarea>
 										</div>
 									</div>
 								</div>
+								<div class="modal-footer">
+									<button tabindex="-1" type="submit" name="create-cmty-submit" class="btn btn-primary">Create</button>
+								</div>
 							</form>
-						</div>
-
-						<!-- Modal Footer -->
-						<div class="modal-footer">
-							<button tabindex="-1" type="button" class="btn btn-primary">Submit</button>
 						</div>
 					</div>
 				</div>
@@ -210,18 +197,19 @@
 							<label>Create a Post</label> 
 							<a tabindex="0" class="btn material-symbols-outlined create-btn" role="button" id="guidelines-popover">info</a>	
 						</div>
-						<form method="post" action="" id="new-post">
+						<form method="post" action="scripts/create-post.php" id="new-post">
 							<div class="form-group">
-								<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+								<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="postTitle">
 							</div>
 							<div class="form-group">
-								<textarea id="my_tinymce" placeholder="Description">
+								<textarea id="my_tinymce" placeholder="Description" name="postBody">
 								</textarea>
 							</div>
 							<div class="forum-options" id="community-options">
 								<div class="form-group col-md-4">
-										<select id="inputState" class="form-select">
-											<option selected>Select a Community</option>
+									<!-- connect to db and get all the communities this user is in -->
+										<select id="inputState" class="form-select" name="cmty">
+											<option selected disabled>Select a Community</option>
 											<option>CompSci</option>
 											<option>UMD</option>
 											<option>Gaming</option>
@@ -231,8 +219,7 @@
 								<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined create-btn" title="Create a Community"  id="add-cmty-btn">group_add</button>
 							</div>
 							<div class="post-btns">
-								<button type="submit" id="cancel-btn" class="btn btn-secondary">Cancel</button>
-								<button type="submit" id="post-btn" class="btn">Post</button>
+								<button type="submit" id="post-btn" name="create-post-submit" class="btn">Post</button>
 							</div>
 						</form>
 					</div>

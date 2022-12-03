@@ -1,5 +1,5 @@
 <?php
-        if (isset($_POST['login-submit']) || isset($_POST['signup-submit'])) {
+        if (isset($_POST['login-submit'])) {
             
             require 'db_handler.php';
 
