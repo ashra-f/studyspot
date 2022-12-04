@@ -3,7 +3,7 @@
 	session_start();
 	require 'scripts/db_handler.php';
 	readfile("scripts/header.php");
-    $cmtyName = $_GET['cmty'];
+    $cmtyName = strtolower($_GET['cmty']);
 
     if (empty($cmtyName)) {
         header("Location: index.php");
@@ -57,16 +57,28 @@
 								</button>
 								<ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
 									<li>
-										<a class="dropdown-item" href="#">								
-											<form class="d-flex" role="search" method="POST" action="">
-												<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
+										<a class="dropdown-item searching">								
+											<form class="d-flex" role="search" method="GET" action="cmty.php">
+												<button class="btn material-symbols-outlined" onclick="location.href='index.php'" id="takeMeHome">home</button>
+												<input class="form-control me-2 search-bar" type="search" placeholder="community search" aria-label="Search" name="cmty" autocomplete="off">
 											</form>
 										</a>
 									</li>
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=chemistry">Chemistry</a></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=bio">Bio</a></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=compsci">CompSci</a></li>
+									<?php 
+										// print out all communities
+										$sql = 'SELECT cmty_name FROM communities;';
+										$results = mysqli_query($connection, $sql);
+
+										if (empty($results)) {
+											echo '<li style="text-align:center;"><span>No Communities Found :(</span></li>';
+										}
+										else {
+											while ($row = mysqli_fetch_array($results)) { 
+												echo '<li><a class="dropdown-item" href="cmty.php?cmty='.$row['cmty_name'].'">'.$row['cmty_name'].'</a></li>';
+											}
+										}
+									?>
 								</ul>
 							</div>
 							<!-- Search bar -->
@@ -403,17 +415,3 @@
 
 	</body>
 </html>
-
-
-$userid = $_SESSION['userID'];
-										$query = "SELECT * FROM posts WHERE community_name=?;";
-
-                                        if (!mysqli_stmt_prepare($statement, $query)) {
-                                            header("Location: ../index.php?error=sqlError");
-                                            exit();
-                                        }
-                                        
-                                        mysqli_stmt_bind_param($statement, "s", $cmtyName);
-                                        mysqli_stmt_execute(($statement));
-
-                                        $results = mysqli_stmt_get_result($statement);

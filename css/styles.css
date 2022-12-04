@@ -30,9 +30,33 @@ body {
 
 .search-bar {
     border-radius: 6px;
-    width: 30vw;
+    width: 200px;
     height: 75%;
-    border: 1px solid var(--mich-maize);
+    border: 1px solid #CAD2DA;
+}
+
+.searching:active {
+    background-color: white !important;
+}
+
+#takeMeHome:hover {
+    background-color: var(--mich-blue);
+    color: white;
+}
+
+#takeMeHome {
+    margin-right: 5px;
+}
+
+.searching {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.dropdown-item:active {
+    background-color: var(--mich-blue);
 }
 
 .navbar-nav > .nav-item {
@@ -58,6 +82,10 @@ body {
     color: #ffcb0b; 
     font-size: 20px;
     border: none !important;
+}
+
+.create-btn:hover {
+    z-index: 5; 
 }
 
 .create-btn:hover, .create-btn:focus, .create-btn:active {
@@ -514,6 +542,22 @@ small {
 /* Dropdown arrow color */
 .navbar .dropdown-toggle:after {
     color: var(--mich-maize);
+}
+
+#dropdownMenuButton2 {
+    cursor: pointer;
+}
+
+#dropdownMenuButton2 label {
+    cursor: pointer;
+}
+
+#dropdownMenuButton2:hover {
+    z-index: 5 !important;
+}
+
+#dropdownMenuButton2:active, #dropdownMenuButton2:focus {
+    border: none !important;
 }
 
 /* Pager */

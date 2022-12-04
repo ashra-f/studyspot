@@ -33,16 +33,28 @@
 								</button>
 								<ul class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton2">
 									<li>
-										<a class="dropdown-item" href="#">								
-											<form class="d-flex" role="search" method="POST" action="">
-												<input class="form-control me-2 search-bar" type="search" placeholder="Search studySpot" aria-label="Search">
+										<a class="dropdown-item searching">								
+											<form class="d-flex" role="search" method="GET" action="cmty.php">
+												<button class="btn material-symbols-outlined" onclick="location.href='index.php'" id="takeMeHome">home</button>
+												<input class="form-control me-2 search-bar" type="search" placeholder="community search" aria-label="Search" name="cmty" autocomplete="off">
 											</form>
 										</a>
 									</li>
 									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=chemistry">Chemistry</a></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=bio">Bio</a></li>
-									<li><a class="dropdown-item" href="cmty.php?cmty=compsci">CompSci</a></li>
+									<?php 
+										// print out all communities
+										$sql = 'SELECT cmty_name FROM communities;';
+										$results = mysqli_query($connection, $sql);
+
+										if (empty($results)) {
+											echo '<li style="text-align:center;"><span>No Communities Found :(</span></li>';
+										}
+										else {
+											while ($row = mysqli_fetch_array($results)) { 
+												echo '<li><a class="dropdown-item" href="cmty.php?cmty='.$row['cmty_name'].'">'.$row['cmty_name'].'</a></li>';
+											}
+										}
+									?>
 								</ul>
 							</div>
 							<!-- Search bar -->
@@ -57,7 +69,7 @@
 								Vel repellat quos quidem commodi excepturi hic! Beatae, necessitatibus enim 
 								possimus saepe quasi consectetur nobis? Veniam obcaecati voluptatem minima soluta, ut aliquid?
 							</p>
-							<!-- <a href="#" class="btn" id="join-btn">Join</a> -->
+							<a href="#" class="btn" id="join-btn">Add a Post</a>
 						</div>
 						<div class="card-footer text-muted">
 							<?php
@@ -364,7 +376,7 @@
 				<!-- Footer -->
 				<div class="container footer-wrapper">
 					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" id="footer">					
-						<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 link-dark text-decoration-none" id="title-img">
+						<a href="index.php" class="col-md-4 d-flex align-items-center justify-content-center mb-3 link-dark text-decoration-none" id="title-img">
 							<img src="assets/imgs/study.png" alt="" width="40">
 						</a>
 						<p class="col-md-4 mb-0" style="color: #00274C; text-align: center;">&copy; 2022 studySpot, Inc</p>

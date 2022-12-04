@@ -102,11 +102,11 @@
                             <div class="form-group">
                                 <div class="form-group input-field">
                                     <label for="inputUserName">Username:</label>
-                                    <input type="text" class="form-control" name="username" for="inputUserName" placeholder="">
+                                    <input type="text" class="form-control" name="username" for="inputUserName" placeholder="" autocomplete="off">
                                 </div>
                                 <div class="form-group input-field">
                                     <label for="inputEmail4">Email:</label>
-                                    <input type="email" class="form-control" name="mail" for="inputEmail4" placeholder="">
+                                    <input type="email" class="form-control" name="mail" for="inputEmail4" placeholder="" autocomplete="off">
                                 </div>
                                 <div class="form-group input-field">
                                     <label for="inputPassword4">Password:</label>
@@ -153,7 +153,7 @@
                             <div class="form-group">
                                 <div class="form-group input-field">
                                     <label for="input4">Email or Username:</label>
-                                    <input type="text" class="form-control" name="mailUsername" id="input4" placeholder="">
+                                    <input type="text" class="form-control" name="mailUsername" id="input4" placeholder="" autocomplete="off">
                                 </div>
                                 <div class="form-group input-field">
                                     <label for="inputPassword4">Password:</label>

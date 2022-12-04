@@ -41,7 +41,7 @@
 				<!-- Options: create post, create cmty, browse cmties, and help -->
 				<ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
 					<li class="nav-item">
-						<button tabindex="-1" onclick="location.href='pages/create.html'" 
+						<button tabindex="-1" onclick="location.href='create.php'" 
 										type="button" class="btn material-symbols-outlined create-btn" 
 										data-toggle="tooltip" data-placement="right" title="Create Post" id="createPostBtn">
 								library_add
