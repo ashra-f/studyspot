@@ -164,7 +164,7 @@ body {
     padding: 0;
 }
 
-#posts-title {
+.posts-title {
     display: flex; 
     align-items: center;
     justify-content: center; 
@@ -176,7 +176,7 @@ body {
     padding: 35px;
 }
 
-#posts-title > label {
+.posts-title > label {
     padding: 0;
     font-size: 20px;
     margin: 0;
@@ -398,7 +398,7 @@ a:link,  a:visited, a:hover{
 }
 
 /* Sticky Notes Styling */
-#stickies-wrapper {
+.stickies-wrapper {
     display: flex;
     justify-content: center !important;
     align-items: center;

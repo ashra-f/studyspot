@@ -101,20 +101,50 @@
 						</div>
 					</div>
 
+					<!-- No Posts in Cmty -->
+					<?php
+						$query = "SELECT * FROM posts";
+						$result = mysqli_query($connection, $query);
+						$total_rows = mysqli_num_rows($result);
+						if ($total_rows == 0) {
+					?>
+					<!-- Posts Section -->
+					<div class="container-fluid posts-wrapper">
+						<!-- Posts Content -->
+						<div class="container-fluid posts-body">
+							<div class="container posts-title">
+								<label>Posts</label>
+							</div>
+							<!-- Bulletin Board -->
+							<div class="container stickies-wrapper">
+								<ul class="sticky-notes" style="display: flex; flex-direction: column;">
+									<img src="assets/imgs/astronaut.png" alt="mdo" width="200" height="200">
+									<br>
+									<h5 style="text-align: center; margin-top: 10px;">Be the first to post!</h5>
+								</ul>
+							</div>	
+						</div>
+					</div>
+					<?php
+						}
+						else {
+					?>
+
 					<!-- Top Posts Section -->
 					<div class="container-fluid posts-wrapper" id="top-posts">
 						<!-- Top Posts Content -->
 						<div class="container-fluid posts-body">
-							<div class="container" id="posts-title">
+							<div class="container posts-title">
 								<label>Top Posts</label>
 							</div>
 							<!-- Bulletin Board -->
-							<div class="container" id="stickies-wrapper">
+							<div class="container stickies-wrapper">
 								<!-- Get all posts from DB -->
 								<ul class="sticky-notes">
 									<?php
 										$query = "SELECT * FROM posts";
 										$result = mysqli_query($connection, $query);
+
 										while($row = mysqli_fetch_array($result)) {
 											$title = $row['title'];
 											$type = -1;
@@ -147,13 +177,12 @@
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
 											}
-						
 									?>
 										<li>
 											<a class="sticky-note">
 												<div class="sticky-note-info">
 													<small><?php echo $cmtyName?></small>
-													<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 												</div>
 												<div class="sticky-note-title">
 													<h6><?php echo $title?></h6>
@@ -229,7 +258,7 @@
 					<div class="container-fluid posts-wrapper" id="all-posts">
 						<!-- All Posts Content -->
 						<div class="container-fluid posts-body">
-							<div class="container" id="posts-title">
+							<div class="container posts-title">
 								<label>All Posts</label>
 							</div>
 							<!-- All Posts Section Posts-->
@@ -371,6 +400,10 @@
 							</div>	
 						</div>
 					</div>
+
+					<?php
+						}
+					?>
 				</div>
 				
 				<!-- Footer -->
@@ -383,6 +416,24 @@
 					</footer>
 				</div>
 			</div>
+
+
+			<!-- Modals -->
+			<!-- Sticky Note Modal -->
+			<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content fetched-data">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
+							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="containter"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
         </div>
 	</body>
 </html>

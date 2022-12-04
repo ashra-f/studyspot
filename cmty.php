@@ -110,16 +110,52 @@
 							?>
 						</div>
 					</div>
+				
+				<!-- No Posts in Cmty -->
+					<?php
+						$query = "SELECT * FROM posts WHERE community_name=?;";
+						if (!mysqli_stmt_prepare($statement, $query)) {
+							header("Location: index.php?error=sqlError");
+							exit();
+						}
+						mysqli_stmt_bind_param($statement, "s", $cmtyName);
+						mysqli_stmt_execute(($statement));
+						$result = mysqli_stmt_get_result($statement);
+
+						$total_rows = mysqli_num_rows($result);
+						if ($total_rows == 0) {
+					?>
+					<!-- Posts Section -->
+					<div class="container-fluid posts-wrapper">
+						<!-- Posts Content -->
+						<div class="container-fluid posts-body">
+							<div class="container posts-title">
+								<label>Posts</label>
+							</div>
+							<!-- Bulletin Board -->
+							<div class="container stickies-wrapper">
+								<ul class="sticky-notes" style="display: flex; flex-direction: column;">
+									<h5 style="text-align: center; margin-top: 10px;">Be the first to post!</h5>
+									<br>
+									<img src="assets/imgs/astronaut.png" alt="mdo" width="200" height="200">
+								</ul>
+							</div>	
+						</div>
+					</div>
+					<?php
+						}
+						else {
+					?>
 
 					<!-- Top Posts Section -->
 					<div class="container-fluid posts-wrapper" id="top-posts">
 						<!-- Top Posts Content -->
 						<div class="container-fluid posts-body">
-							<div class="container" id="posts-title">
+							<div class="container posts-title">
 								<label>Top Posts</label>
 							</div>
 							<!-- Bulletin Board -->
-							<div class="container" id="stickies-wrapper">
+							<div class="container stickies-wrapper">
 								<!-- Get all posts from DB -->
 								<ul class="sticky-notes">
 									<?php
@@ -132,8 +168,8 @@
 
                                         mysqli_stmt_bind_param($statement, "s", $cmtyName);
                                         mysqli_stmt_execute(($statement));
-
                                         $result = mysqli_stmt_get_result($statement);
+
 										while($row = mysqli_fetch_array($result)) {
 											$title = $row['title'];
 											$type = -1;
@@ -248,7 +284,7 @@
 					<div class="container-fluid posts-wrapper" id="all-posts">
 						<!-- All Posts Content -->
 						<div class="container-fluid posts-body">
-							<div class="container" id="posts-title">
+							<div class="container posts-title">
 								<label>All Posts</label>
 							</div>
 							<!-- All Posts Section Posts-->
@@ -399,8 +435,12 @@
 							</div>	
 						</div>
 					</div>
+
+					<?php
+					}
+					?>
 				</div>
-				
+
 				<!-- Footer -->
 				<div class="container footer-wrapper">
 					<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" id="footer">					

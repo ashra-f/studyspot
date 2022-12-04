@@ -19,7 +19,7 @@
             header("Location: ../index.php?error=invalidFields");
             exit();
         }
-        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { 
+        else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             header("Location: ../index.php?error=invalidMail&username=".$username);
             exit();
         }
@@ -73,7 +73,7 @@
                         exit();
                     }
                     else {
-                        $sql = "INSERT INTO users (username, email, pwd) VALUES (?, ?, ?);";
+                        $sql = "INSERT INTO users (username, email, pwd, img_path) VALUES (?, ?, ?, ?);";
                         $statement = mysqli_stmt_init($connection);
 
                         if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -83,7 +83,7 @@
                         else {
                             // SIGNED UP SUCCESSFULLY
                             $hashedPwd = password_hash($password1, PASSWORD_DEFAULT);
-                            mysqli_stmt_bind_param($statement, "sss", $username, $email, $hashedPwd);
+                            mysqli_stmt_bind_param($statement, "ssss", $username, $email, $hashedPwd, $img);
                             mysqli_stmt_execute($statement);
                 
                             $sql = "SELECT * FROM users WHERE username=?;";
@@ -95,7 +95,7 @@
                             }
                             else {
                                 mysqli_stmt_bind_param($statement, "s", $username);
-                                mysqli_stmt_execute($statement);
+                                mysqli_stmt_execute(($statement));
             
                                 $results = mysqli_stmt_get_result($statement);
             

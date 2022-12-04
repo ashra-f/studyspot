@@ -38,7 +38,7 @@
     </ul>
     <!-- User settings, logout -->
     <div class="dropdown border-top user-settings">
-        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">
+        <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">        
             <img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow settings-dropdown" aria-labelledby="dropdownUser3">
@@ -53,48 +53,6 @@
         </ul>
     </div>
 </nav>
-
-<!-- Sticky Note Modal -->
-<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
-                <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <small>what community?</small>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut alias fugit,
-                            dignissimos fugiat atque quos minus, nobis, eius laboriosam perspiciatis 
-                            rerum quaerat in voluptatum maxime eligendi hic libero officia nemo.
-                    </p>
-                    <small>username • datetime</small>
-                    <button>Likes</button>
-                    <button>Disikes</button>
-                    <div class="comments">
-                        comments (scrollable):
-                        <ul>
-                            <li>
-                                username: comment
-                                <ul>
-                                    <li>username: reply</li>
-                                    <li>username: reply</li>
-                                </ul>
-                            </li>
-                            <li>username: comment</li>
-                            <li>username: comment</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button tabindex="-1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Create Community Modal -->
 <div class="modal fade" id="cmtyModal" tabindex="-1" aria-labelledby="cmtyModalLabel" aria-hidden="true">
