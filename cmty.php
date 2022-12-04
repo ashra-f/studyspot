@@ -123,7 +123,6 @@
 								<!-- Get all posts from DB -->
 								<ul class="sticky-notes">
 									<?php
-										$userid = $_SESSION['userID'];
                                         $query = "SELECT * FROM posts WHERE community_name=?;";
 
                                         if (!mysqli_stmt_prepare($statement, $query)) {
@@ -147,6 +146,7 @@
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
+												$userid = $_SESSION['userID'];
 												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
