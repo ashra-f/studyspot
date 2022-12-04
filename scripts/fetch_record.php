@@ -3,6 +3,7 @@
 if($_POST['rowid']) {
     require 'db_handler.php';
     $id = $_POST['rowid'];
+    $bgcolor = $_POST['bgcolor'];
 
     // Run the Query
     $sql = 'SELECT * FROM posts WHERE id=?;';
@@ -32,35 +33,30 @@ if($_POST['rowid']) {
             else {
                 $age = $timeDiff.' hour(s) ago';
             }
-
             echo '
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="noteModalLabel">'.$title.'</h1>
-                    <button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <small>'.$cmtyName.'</small>
-                        <p>'.$descrip.'</p>
-                        <small>'.$author.' • '.$age.'</small>
-                        <button>'.$likes.'</button>
-                        <button>'.$dislikes.'</button>
-                        <div class="comments">
-                            comments (scrollable):
-                            <ul>
-                                <li>
-                                    username: comment
-                                    <ul>
-                                        <li>username: reply</li>
-                                        <li>username: reply</li>
-                                    </ul>
-                                </li>
-                                <li>username: comment</li>
-                                <li>username: comment</li>
-                            </ul>
-                        </div>
+                <div class="modal-content" style="width: 100%; height: 400px; padding: 15px; border-radius: 5px; background-color:'.$bgcolor.';">
+                    <div class="modal-header border-0">
+                        <h1 class="modal-title fs-5" id="noteModalLabel">'.$title.'</h1>
+                        <button tabindex="-1" type="button" class="btn material-symbols-outlined" data-bs-dismiss="modal">close_fullscreen</button>
                     </div>
-                </div>					
+                    <div class="modal-body">
+                        <div class="container" style="padding-left: 15px;">
+                            <div id="descrip">'.$descrip.'</div>
+                            <p style="font-size: 12px;">'.$cmtyName.' • '.$author.' • '.$age.'</p>
+                            <div class="interactions">
+                                <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like">
+                                    <span class="like-count">'.$likes.'</span>
+                                </button>
+                                <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike">
+                                        <span class="dislike-count">'.$dislikes.'</span>
+                                </button>
+                                <button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+                                    <span class="comment-count">'.$comments.'</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>		
+                </div>			
                 ';
         }
         else {

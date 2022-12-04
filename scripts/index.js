@@ -80,10 +80,24 @@ function loginAlert() {
 $(document).ready(function(){
     $('#noteModal').on('show.bs.modal', function (e) {
         var rowid = $(e.relatedTarget).data('id');
+        var method = $(e.relatedTarget).data('method');
+        var bgcolor = 'white';
+        if (method == 0) {
+            bgcolor = "#ffc";
+        }
+        else if (method == 1) {
+            bgcolor = '#cfc';
+        }
+        else {
+            bgcolor = "#ccf";
+        }
         $.ajax({
             type : 'post',
             url : 'scripts/fetch_record.php', //Here you will fetch records 
-            data :  'rowid='+ rowid, //Pass $id
+            data: {  
+                rowid: rowid,
+                bgcolor: bgcolor
+            }, 
             success : function(data){
             $('.fetched-data').html(data); //Show fetched data from database
             }

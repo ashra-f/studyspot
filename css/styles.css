@@ -616,6 +616,18 @@ small {
     margin-bottom: 10px !important;
 }
 
+.modal-body .container p {
+    overflow-wrap: break-word;
+}
+
+#descrip {
+    height: 220px;
+}
+
+#descrip p {
+    width: 75%;
+}
+
 /* Responsiveness */
 @media (max-width: 590px) {
     .body-wrapper, .footer-wrapper, #create-field  {

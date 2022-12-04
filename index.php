@@ -144,8 +144,10 @@
 									<?php
 										$query = "SELECT * FROM posts";
 										$result = mysqli_query($connection, $query);
+										$methodType = 0;
 
 										while($row = mysqli_fetch_array($result)) {
+											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
 											$cmtyID = $row['community_id'];
@@ -182,7 +184,7 @@
 											<a class="sticky-note">
 												<div class="sticky-note-info">
 													<small><?php echo $cmtyName?></small>
-													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid?>' data-method='<?php echo $methodType?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 												</div>
 												<div class="sticky-note-title">
 													<h6><?php echo $title?></h6>
@@ -247,6 +249,7 @@
 											</a>
 										</li>
 									<?php
+										$methodType++;
 										}
 									?>
 								</ul>
@@ -421,16 +424,7 @@
 			<!-- Modals -->
 			<!-- Sticky Note Modal -->
 			<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content fetched-data">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="noteModalLabel">Title of the post</h1>
-							<button tabindex="-1" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="containter"></div>
-						</div>
-					</div>
+				<div class="modal-dialog modal-dialog-centered fetched-data" style="width: 450px; height: 400px;">
 				</div>
 			</div>
 
