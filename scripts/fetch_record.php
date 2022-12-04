@@ -1,5 +1,7 @@
 <?php
 //Include database connection
+session_start();
+
 if($_POST['rowid']) {
     require 'db_handler.php';
     $id = $_POST['rowid'];
@@ -20,6 +22,8 @@ if($_POST['rowid']) {
         $results = mysqli_stmt_get_result($statement);
         if ($row = mysqli_fetch_assoc($results)) {
             $author = $row['author'];
+            $age;
+            $interactions;
             $title = $row['title'];
             $cmtyName = $row['community_name'];
             $descrip = $row['descr'];
@@ -33,36 +37,86 @@ if($_POST['rowid']) {
             else {
                 $age = $timeDiff.' hour(s) ago';
             }
-            echo '
-                <div class="modal-content" style="width: 100%; height: 400px; padding: 15px; border-radius: 5px; background-color:'.$bgcolor.';">
+
+            if (isset($_SESSION['userID'])) {
+                $userid = $_SESSION['userID'];
+                $status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$id;
+                $status_result = mysqli_query($connection,$status_query);
+                $status_row = mysqli_fetch_array($status_result);
+                $count_status = $status_row['cntStatus'];
+
+                if($count_status > 0){
+                    $type = $status_row['type'];
+                }
+
+                $like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$id;
+                $like_result = mysqli_query($connection,$like_query);
+                $like_row = mysqli_fetch_array($like_result);
+                $total_likes = $like_row['cntLikes'];
+
+                $unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$id;
+                $unlike_result = mysqli_query($connection,$unlike_query);
+                $unlike_row = mysqli_fetch_array($unlike_result);
+                $total_unlikes = $unlike_row['cntUnlikes'];
+            
+                ?>
+                <div class="modal-content" style="width: 100%; height: 400px; padding: 15px; border-radius: 5px; background-color: <?php echo $bgcolor; ?>;">
                     <div class="modal-header border-0">
-                        <h1 class="modal-title fs-5" id="noteModalLabel">'.$title.'</h1>
+                        <h1 class="modal-title fs-5" id="noteModalLabel"><?php echo $title ?></h1>
                         <button tabindex="-1" type="button" class="btn material-symbols-outlined" data-bs-dismiss="modal">close_fullscreen</button>
                     </div>
                     <div class="modal-body">
                         <div class="container" style="padding-left: 15px;">
-                            <div id="descrip">'.$descrip.'</div>
-                            <p style="font-size: 12px;">'.$cmtyName.' • '.$author.' • '.$age.'</p>
+                            <div id="descrip"><?php echo $descrip ?></div>
+                            <p style="font-size: 12px;"> <?php echo $cmtyName.' • '.$author.' • '.$age ?></p>
                             <div class="interactions">
-                                <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like">
-                                    <span class="like-count">'.$likes.'</span>
+                                <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
+                                    <span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
                                 </button>
-                                <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike">
-                                        <span class="dislike-count">'.$dislikes.'</span>
+                                <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
+                                        <span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
                                 </button>
                                 <button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
-                                    <span class="comment-count">'.$comments.'</span>
+                                    <span class="comment-count"><?php echo ' '.$comments;?></span>
                                 </button>
-                            </div>
+                            </div>  
+                        </div> 
+                    </div>
+                </div>
+                <?php     
+            }
+            else { ?>
+            <div class="modal-content" style="width: 100%; height: 400px; padding: 15px; border-radius: 5px; background-color:<?php echo $bgcolor;?>">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fs-5" id="noteModalLabel">'<?php echo $title ?></h1>
+                    <button tabindex="-1" type="button" class="btn material-symbols-outlined" data-bs-dismiss="modal">close_fullscreen</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container" style="padding-left: 15px;">
+                        <div id="descrip"><?php echo $descrip ?></div>
+                        <p style="font-size: 12px;"><?php echo $cmtyName.' • '.$author.' • '.$age ?></p>
+                        <div class="interactions">
+                            <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
+                                <span class="like-count"><?php echo $likes; ?></span>
+                            </button>
+                            <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
+                                    <span class="dislike-count"><?php echo $dislikes; ?></span>
+                            </button>
+                            <button tabindex="-1" class="bi bi-chat-left-text interaction-btn" onclick="loginAlert()">
+                                <span class="comment-count"><?php echo $comments?></span>
+                            </button>
                         </div>
-                    </div>		
-                </div>			
-                ';
-        }
-        else {
-            header("Location: ../index.php?error=sqlError");
-            exit();
+                    </div>
+                </div>		
+            </div>		               
+                
+        <?php 
+            }
         }
     }
- }
+
+} else {
+    header("Location: ../index.php?error=sqlError");
+    exit();
+}
 ?>

@@ -160,6 +160,7 @@
 								<ul class="sticky-notes">
 									<?php
                                         $query = "SELECT * FROM posts WHERE community_name=?;";
+										$methodType = 0;
 
                                         if (!mysqli_stmt_prepare($statement, $query)) {
                                             header("Location: index.php?error=sqlError");
@@ -171,6 +172,7 @@
                                         $result = mysqli_stmt_get_result($statement);
 
 										while($row = mysqli_fetch_array($result)) {
+											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
 											$cmtyID = $row['community_id'];
@@ -208,7 +210,7 @@
 											<a class="sticky-note">
 												<div class="sticky-note-info">
 													<small><?php echo $cmtyName?></small>
-													<btn class="bi bi-arrows-angle-expand" data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid?>' data-method='<?php echo $methodType?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 												</div>
 												<div class="sticky-note-title">
 													<h6><?php echo $title?></h6>
@@ -273,6 +275,7 @@
 											</a>
 										</li>
 									<?php
+										$methodType++;
 										}
 									?>
 								</ul>
@@ -340,7 +343,9 @@
 											<a class="sticky-note" style="text-decoration: none; color: black;">
 												<div class="post">
 													<div class="post-title">
-														<h5><?php echo $title?></h5>
+														<h5>
+															<btn data-id='<?php echo $postid?>' data-method='<?php echo $methodType?>' data-bs-toggle="modal" style="cursor: pointer;" data-bs-target="#noteModal"><?php echo $title?></btn>
+														</h5>
 													</div>
 													<div class="poster-info">
 														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
@@ -451,7 +456,14 @@
 					</footer>
 				</div>
 			</div>
-        </div>
 
+			<!-- Modals -->
+			<!-- Sticky Note Modal -->
+			<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered fetched-data" style="width: 450px; height: 400px;">
+				</div>
+			</div>
+
+        </div>
 	</body>
 </html>

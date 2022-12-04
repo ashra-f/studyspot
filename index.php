@@ -69,7 +69,7 @@
 								Vel repellat quos quidem commodi excepturi hic! Beatae, necessitatibus enim 
 								possimus saepe quasi consectetur nobis? Veniam obcaecati voluptatem minima soluta, ut aliquid?
 							</p>
-							<a href="#" class="btn" id="join-btn">Add a Post</a>
+							<a href="create.php" class="btn" id="join-btn">Add a Post</a>
 						</div>
 						<div class="card-footer text-muted">
 							<?php
@@ -308,7 +308,9 @@
 											<a class="sticky-note" style="text-decoration: none; color: black;">
 												<div class="post">
 													<div class="post-title">
-														<h5><?php echo $title?></h5>
+														<h5>
+															<btn data-id='<?php echo $postid?>' data-method='<?php echo $methodType?>' data-bs-toggle="modal" style="cursor: pointer;" data-bs-target="#noteModal"><?php echo $title?></btn>
+														</h5>
 													</div>
 													<div class="poster-info">
 														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 

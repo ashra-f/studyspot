@@ -56,13 +56,13 @@ $(document).ready(function(){
             success: function(data){
                 var likes = data['likes'];
                 var unlikes = data['unlikes'];
-                $("#likes_"+postid).text(likes);       
-                $("#unlikes_"+postid).text(unlikes);   
-                if(type == 1){
+                $("#likes_"+postid).text(likes);
+                $("#unlikes_"+postid).text(unlikes);
+                if(type == 1) {
                     $("#like_"+postid).removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
                     $("#unlike_"+postid).removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
                 }
-                if(type == 0){
+                if(type == 0) {
                     $("#unlike_"+postid).removeClass('bi-hand-thumbs-down').addClass('bi-hand-thumbs-down-fill');
                     $("#like_"+postid).removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
                 }
@@ -93,13 +93,13 @@ $(document).ready(function(){
         }
         $.ajax({
             type : 'post',
-            url : 'scripts/fetch_record.php', //Here you will fetch records 
+            url : 'scripts/fetch_record.php', 
             data: {  
                 rowid: rowid,
                 bgcolor: bgcolor
             }, 
             success : function(data){
-            $('.fetched-data').html(data); //Show fetched data from database
+            $('.fetched-data').html(data); // Show fetched data from database
             }
         });
      });
