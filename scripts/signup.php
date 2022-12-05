@@ -31,8 +31,11 @@
             header("Location: ../index.php?error=passwordCheck&username=".$username."&mail=".$email);
             exit();
         }
-        else {
-
+        else if(strlen($username) > 11) {
+            header("Location: ../index.php?error=usernameTooLong");
+            exit();
+        }
+        else { 
             // checks if username already exists in the db
             $sql = "SELECT username FROM users WHERE username=?;";
             $statement = mysqli_stmt_init($connection);

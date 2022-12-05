@@ -108,7 +108,7 @@ if($_POST['rowid']) {
                             <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
                                     <span class="dislike-count"><?php echo $dislikes; ?></span>
                             </button>
-                            <button tabindex="-1" class="bi bi-chat-left-text interaction-btn" onclick="loginAlert()">
+                            <button tabindex="-1" class="bi bi-chat-left-text interaction-btn"  data-bs-toggle="modal" data-bs-target="#commentModal">
                                 <span class="comment-count"><?php echo $comments?></span>
                             </button>
                         </div>
@@ -126,3 +126,4 @@ if($_POST['rowid']) {
     exit();
 }
 ?>
+

@@ -91,7 +91,7 @@ $(document).ready(function(){
 
 // Log in to interacti with posts
 function loginAlert() {
-    alert("Login to interact with posts!");
+    $('#signup-modal').modal('show');
 }
 
 // Post Modal Get Data
@@ -122,3 +122,27 @@ $(document).ready(function(){
         });
      });
 });
+
+
+// Comment Modal Get Data
+$(document).ready(function(){
+    $('#commentModal').on('show.bs.modal', function (e) {
+        var rowid = $(e.relatedTarget).data('id');
+        $.ajax({
+            type : 'post',
+            url : 'scripts/fetch_comments.php', 
+            data: {  
+                rowid: rowid,
+            }, 
+            success : function(data){
+                $('.fetch-comments').html(data); // Show fetched data from database
+            }
+        });
+     });
+});
+
+// Signup --> Login modal
+function openLoginModal() {
+    $('#signup-modal').modal('hide');
+    $('#login-modal').modal('show');
+}

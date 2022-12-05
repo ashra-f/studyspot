@@ -1,4 +1,5 @@
 <?php 
+	session_start();
 	readfile("scripts/header.php");
 
 	if (!isset($_SESSION['userID'])) { 

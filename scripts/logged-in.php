@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- USER IS LOGGED IN -->
 <!-- Sidebar -->
 <nav class="d-flex flex-column flex-shrink-0 bg-light my-navbar" style="width: 4.5rem;">
@@ -44,6 +45,8 @@
             <img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small shadow settings-dropdown" aria-labelledby="dropdownUser3">
+        
+            <li><a class="dropdown-item" href="#"><?php echo $_SESSION['username']; ?></a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
