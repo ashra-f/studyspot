@@ -99,7 +99,7 @@
             <div class="modal-body">
                 <!-- Main Body -->
                 <div class="container-fluid signup-container" style="padding-bottom: 0;">
-                    <form method="post" action="scripts/search.php" class="login-form">
+                    <form method="post" action="search.php" class="login-form">
                         <div class="form-body">
                             <!-- Query info -->
                             <div class="form-group">
