@@ -83,7 +83,12 @@
 							</div>
 							<!-- Search bar -->
 							<div class="container" id="searchbar">
-								<button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button>
+								<button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
+												data-bs-toggle="modal" data-bs-target="#advancedsearch-modal"
+												data-toggle="tooltip" data-placement="right" title="Advanced Search">
+									search
+								</button>      
+								<!-- <button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button> -->
 							</div>
 						</div>
 						<div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
@@ -175,7 +180,7 @@
 											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
-											$cmtyID = $row['community_id'];
+											//$cmtyID = $row['community_id'];
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
@@ -261,11 +266,11 @@
 														else {
 													?>
 													<div class="interactions">
-														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
-															<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+															<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
 														</button>
-														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
-																<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
 														</button>
 														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
 															<span class="comment-count"><?php echo ' '.$comments?></span>
@@ -309,7 +314,7 @@
 										while($row = mysqli_fetch_array($result)) {
 											$title = $row['title'];
 											$type = -1;
-											$cmtyID = $row['community_id'];
+											//$cmtyID = $row['community_id'];
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
@@ -394,11 +399,11 @@
 														else {
 													?>
 													<div class="interactions">
-														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
-															<span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+															<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
 														</button>
-														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
-																<span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
 														</button>
 														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
 															<span class="comment-count"><?php echo ' '.$comments?></span>

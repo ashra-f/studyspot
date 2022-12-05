@@ -18,16 +18,6 @@
             </button>	
         </li>
         <li class="nav-item">
-
-            <!-- Log in btn trigger modal -->						  
-            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
-                            data-bs-toggle="modal" data-bs-target="#advancedsearch-modal"
-                            data-toggle="tooltip" data-placement="right" title="Advanced Search">
-                search
-            </button>	
-        </li>
-        <li class="nav-item">
-
             <!-- Sign up btn trigger modal -->
             <button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
                             data-bs-toggle="modal" data-bs-target="#signup-modal"
@@ -36,10 +26,12 @@
             </button>      
         </li>
         <li class="nav-item">
-            <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn" 
-                            data-toggle="tooltip" data-placement="right" title="Browse Communities">
+            <!-- Log in btn trigger modal -->						  
+            <button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
+                            data-bs-toggle="modal" data-bs-target="#advancedsearch-modal"
+                            data-toggle="tooltip" data-placement="right" title="Search studySpot">
                 search
-            </button>
+            </button>	
         </li>
         <li class="nav-item">
             <button tabindex="-1" type="button" class="btn material-symbols-outlined create-btn"
@@ -147,6 +139,7 @@
         </div>
     </div>
 </div>   
+
 <!-- Login in Modal -->
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

@@ -210,13 +210,25 @@
 									<!-- connect to db and get all the communities this user is in -->
 										<select id="inputState" class="form-select" name="cmty">
 											<option selected disabled>Select a Community</option>
-											<option>compsci</option>
-											<option>umd</option>
-											<option>gaming</option>
-											<option>chemistry</option>
+											<?php
+												// print out all communities
+												require 'scripts/db_handler.php';
+
+												$sql = 'SELECT cmty_name FROM communities;';
+												$results = mysqli_query($connection, $sql);
+
+												if (empty($results)) {
+													echo '<li style="text-align:center;"><span>No Communities Found :(</span></li>';
+												}
+												else {
+													while ($row = mysqli_fetch_array($results)) { 
+														echo '<option>'.$row['cmty_name'].'</option>';
+													}
+												}
+											?>
 										</select>
 								</div>
-								<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined create-btn" title="Create a Community"  id="add-cmty-btn">group_add</button>
+								<button tabindex="-1" data-bs-toggle="modal" data-bs-target="#cmtyModal" type="button" class="btn material-symbols-outlined" title="Create a Community"  id="add-cmty-btn" style="color:#FFCB05;">group_add</button>
 							</div>
 							<div class="post-btns">
 								<button type="submit" id="post-btn" name="create-post-submit" class="btn">Post</button>
