@@ -59,7 +59,13 @@
 							</div>
 							<!-- Search bar -->
 							<div class="container" id="searchbar">
-								<button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button>
+							<button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
+                                            data-bs-toggle="modal" data-bs-target="#advancedsearch-modal"
+                                            data-toggle="tooltip" data-placement="right" title="Advanced Search">
+                                search
+                            </button>      
+								<!-- <button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button> -->
+
 							</div>
 						</div>
 						<div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
