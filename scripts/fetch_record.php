@@ -5,7 +5,13 @@ session_start();
 if($_POST['rowid']) {
     require 'db_handler.php';
     $id = $_POST['rowid'];
-    $bgcolor = $_POST['bgcolor'];
+    if (isset($_POST['bgcolor'])) {
+        $bgcolor = $_POST['bgcolor'];
+    }
+    else {
+        $bgcolor = 'aaf0c5';
+    }
+
 
     // Run the Query
     $sql = 'SELECT * FROM posts WHERE id=?;';
@@ -30,7 +36,7 @@ if($_POST['rowid']) {
             $likes = $row['likes'];
             $dislikes = $row['dislikes'];
             $comments = $row['comments'];
-            $timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
+            $timeDiff = date("H:i:s",strtotime($row['created_at'])); //date('m/d/Y h:i:s a', time()) - 
             if ($timeDiff < 1) {
                  $age = 'just now';
             } 
@@ -70,11 +76,11 @@ if($_POST['rowid']) {
                             <div id="descrip"><?php echo $descrip ?></div>
                             <p style="font-size: 12px;"> <?php echo $cmtyName.' • '.$author.' • '.$age ?></p>
                             <div class="interactions">
-                                <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like" id="like_<?php echo $postid; ?>">
-                                    <span class="like-count" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+                                <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+                                    <span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
                                 </button>
-                                <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike" id="unlike_<?php echo $postid; ?>">
-                                        <span class="dislike-count" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+                                <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+                                        <span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
                                 </button>
                                 <button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
                                     <span class="comment-count"><?php echo ' '.$comments;?></span>

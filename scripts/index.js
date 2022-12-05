@@ -56,15 +56,33 @@ $(document).ready(function(){
             success: function(data){
                 var likes = data['likes'];
                 var unlikes = data['unlikes'];
-                $("#likes_"+postid).text(likes);
-                $("#unlikes_"+postid).text(unlikes);
+
+                $(".likes_"+postid).each(function() {
+                    $(this).text(likes);
+                });
+
+                $(".unlikes_"+postid).each(function() {
+                    $(this).text(unlikes);
+                });
+
+
                 if(type == 1) {
-                    $("#like_"+postid).removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
-                    $("#unlike_"+postid).removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
+                    $(".like_"+postid).each(function() {
+                        $(this).removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
+                    });
+
+                    $(".unlike_"+postid).each(function() {
+                        $(this).removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
+                    });
                 }
                 if(type == 0) {
-                    $("#unlike_"+postid).removeClass('bi-hand-thumbs-down').addClass('bi-hand-thumbs-down-fill');
-                    $("#like_"+postid).removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+                    $(".unlike_"+postid).each(function() {
+                        $(this).removeClass('bi-hand-thumbs-down').addClass('bi-hand-thumbs-down-fill');
+                    });
+
+                    $(".like_"+postid).each(function() {
+                        $(this).removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
+                    });
                 }
             }
         });
