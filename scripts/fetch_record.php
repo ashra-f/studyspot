@@ -84,7 +84,7 @@ if($_POST['rowid']) {
                                 </button>
                                 <button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
                                     <span class="comment-count"><?php echo ' '.$comments;?></span>
-                                </button>
+                                </button> 
                             </div>  
                         </div> 
                     </div>
