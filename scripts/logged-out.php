@@ -18,6 +18,7 @@
             </button>	
         </li>
         <li class="nav-item">
+
             <!-- Log in btn trigger modal -->						  
             <button type="button" class="btn navbar-btn create-btn material-symbols-outlined"
                             data-bs-toggle="modal" data-bs-target="#advancedsearch-modal"
@@ -26,6 +27,7 @@
             </button>	
         </li>
         <li class="nav-item">
+
             <!-- Sign up btn trigger modal -->
             <button type="button" class="btn navbar-btn create-btn material-symbols-outlined" 
                             data-bs-toggle="modal" data-bs-target="#signup-modal"
@@ -145,8 +147,6 @@
         </div>
     </div>
 </div>   
-
-
 <!-- Login in Modal -->
 <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

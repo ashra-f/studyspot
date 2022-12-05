@@ -65,6 +65,7 @@
                                 search
                             </button>      
 								<!-- <button tabindex="-1" type="submit" class="btn material-symbols-outlined create-btn" title="Browse">search</button> -->
+
 							</div>
 						</div>
 						<div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
