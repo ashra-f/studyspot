@@ -14,7 +14,7 @@ function time_elapsed_string($datetime, $full = false) {
 	} elseif ($seconds_ago >= 60) {
 		return intval($seconds_ago / 60) . " minutes ago";
 	} else {
-		return "Posted less than a minute ago";
+		return "just now";
 	}
 }
 
