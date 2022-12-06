@@ -219,7 +219,7 @@ function time_elapsed_string($datetime, $full = false) {
 														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
 																<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
 														</button>
-														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
+														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
 															<span class="comment-count"><?php echo ' '.$comments?></span>
 														</button>
 													</div>
@@ -241,9 +241,15 @@ function time_elapsed_string($datetime, $full = false) {
 				<div class="modal-dialog modal-dialog-centered fetched-data" style="width: 450px; height: 400px;">
 				</div>
 			</div>
+
+			<!-- Create Comment Modal -->
+			<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+				<div class="modal-dialog fetch-comments">
+				</div>
+			</div>
                         <?php
 
-                    
+                
             }
         }
         
