@@ -5,6 +5,7 @@
     $userid = $_SESSION['userID'];
     $postid = $_POST['postid'];
     $type = $_POST['type'];
+    $isSelected = $_POST['selected'];
     
     $query = "SELECT COUNT(*) AS cntpost FROM like_unlike WHERE postid=".$postid." and userid=".$userid;
     
@@ -12,8 +13,12 @@
 
     $fetchdata = mysqli_fetch_array($result);
     $count = $fetchdata['cntpost'];
-    
-    if($count == 0) {
+
+    if ($isSelected) {
+        $insertquery = "DELETE FROM like_unlike WHERE postid=".$postid." and userid=".$userid;
+        mysqli_query($connection, $insertquery);
+    }
+    else if ($count == 0) {
         $insertquery = "INSERT INTO like_unlike(userid,postid,type) values(".$userid.",".$postid.",".$type.")";
         mysqli_query($connection, $insertquery);
     }

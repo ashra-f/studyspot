@@ -39,18 +39,28 @@ $(document).ready(function(){
         var text = split_id[0];
         var postid = split_id[1]; 
         var type = 0;
+        var selected = 0;
         if(text == "like") {
             type = 1;
+            // check if already selected
+            if (this.matches('.selected')) {
+                selected = 1;
+            }
         } 
         else {
             type = 0;
+            // check if already selected
+            if (this.matches('.selected')) {
+                selected = 1;
+            }
         }
         $.ajax({
             url: 'scripts/likeunlike.php',
             type: 'post',
             data: {
                 postid: postid, 
-                type: type 
+                type: type,
+                selected: selected
             },
             dataType: 'json',
             success: function(data){
@@ -67,22 +77,36 @@ $(document).ready(function(){
 
 
                 if(type == 1) {
-                    $(".like_"+postid).each(function() {
-                        $(this).removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill');
-                    });
+                    if (selected == 1) {
+                        $(".like_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-thumbs-up-fill selected').addClass('bi-hand-thumbs-up');
+                        });
+                    }
+                    else {
+                        $(".like_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-thumbs-up').addClass('bi-hand-thumbs-up-fill selected');
+                        });
 
-                    $(".unlike_"+postid).each(function() {
-                        $(this).removeClass('bi-hand-thumbs-down-fill').addClass('bi-hand-thumbs-down');
-                    });
+                        $(".unlike_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-thumbs-down-fill selected').addClass('bi-hand-thumbs-down');
+                        });
+                    }
                 }
                 if(type == 0) {
-                    $(".unlike_"+postid).each(function() {
-                        $(this).removeClass('bi-hand-thumbs-down').addClass('bi-hand-thumbs-down-fill');
-                    });
+                    if (selected == 1) {
+                        $(".unlike_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-downs-fill selected').addClass('bi-hand-thumbs-down');
+                        });
+                    }
+                    else {
+                        $(".unlike_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-thumbs-down').addClass('bi-hand-thumbs-down-fill selected');
+                        });
 
-                    $(".like_"+postid).each(function() {
-                        $(this).removeClass('bi-hand-thumbs-up-fill').addClass('bi-hand-thumbs-up');
-                    });
+                        $(".like_"+postid).each(function() {
+                            $(this).removeClass('bi-hand-thumbs-up-fill selected').addClass('bi-hand-thumbs-up');
+                        });
+                    }
                 }
             }
         });
@@ -146,3 +170,9 @@ function openLoginModal() {
     $('#signup-modal').modal('hide');
     $('#login-modal').modal('show');
 }
+
+// Check if buttons are clicked
+$(document).ready(function() {
+
+
+});
