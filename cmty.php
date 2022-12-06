@@ -322,12 +322,12 @@ function time_elapsed_string($datetime, $full = false) {
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
@@ -455,12 +455,12 @@ function time_elapsed_string($datetime, $full = false) {
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
