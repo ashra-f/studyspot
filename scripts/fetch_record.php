@@ -1,4 +1,26 @@
 <?php
+date_default_timezone_set('America/Detroit');
+function time_elapsed_string($datetime, $full = false) {
+	$seconds_ago = (time() - strtotime($datetime));
+
+	if ($seconds_ago >= 31536000) {
+		return intval($seconds_ago / 31536000) . " years ago";
+	} elseif ($seconds_ago >= 2419200) {
+		return intval($seconds_ago / 2419200) . " months ago";
+	} elseif ($seconds_ago >= 86400) {
+		return intval($seconds_ago / 86400) . " days ago";
+	} elseif ($seconds_ago >= 3600) {
+		return intval($seconds_ago / 3600) . " hours ago";
+	} elseif ($seconds_ago >= 60) {
+		return intval($seconds_ago / 60) . " minutes ago";
+	} else {
+		return "Posted less than a minute ago";
+	}
+}
+
+?>
+
+<?php
 //Include database connection
 session_start();
 
@@ -28,7 +50,6 @@ if($_POST['rowid']) {
         $results = mysqli_stmt_get_result($statement);
         if ($row = mysqli_fetch_assoc($results)) {
             $author = $row['author'];
-            $age;
             $interactions;
             $title = $row['title'];
             $cmtyName = $row['community_name'];
@@ -36,17 +57,11 @@ if($_POST['rowid']) {
             $likes = $row['likes'];
             $dislikes = $row['dislikes'];
             $comments = $row['comments'];
-            $timeDiff = date("H:i:s",strtotime($row['created_at'])); //date('m/d/Y h:i:s a', time()) - 
-            if ($timeDiff < 1) {
-                 $age = 'just now';
-            } 
-            else {
-                $age = $timeDiff.' hour(s) ago';
-            }
+            $timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 
             if (isset($_SESSION['userID'])) {
                 $userid = $_SESSION['userID'];
-                $status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$id;
+                $status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$id." GROUP BY id;";
                 $status_result = mysqli_query($connection,$status_query);
                 $status_row = mysqli_fetch_array($status_result);
                 $count_status = $status_row['cntStatus'];
@@ -55,12 +70,12 @@ if($_POST['rowid']) {
                     $type = $status_row['type'];
                 }
 
-                $like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$id;
+                $like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$id." GROUP BY id;";
                 $like_result = mysqli_query($connection,$like_query);
                 $like_row = mysqli_fetch_array($like_result);
                 $total_likes = $like_row['cntLikes'];
 
-                $unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$id;
+                $unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$id." GROUP BY id;";
                 $unlike_result = mysqli_query($connection,$unlike_query);
                 $unlike_row = mysqli_fetch_array($unlike_result);
                 $total_unlikes = $unlike_row['cntUnlikes'];
@@ -74,7 +89,7 @@ if($_POST['rowid']) {
                     <div class="modal-body">
                         <div class="container" style="padding-left: 15px;">
                             <div id="descrip"><?php echo $descrip ?></div>
-                            <p style="font-size: 12px;"> <?php echo $cmtyName.' • '.$author.' • '.$age ?></p>
+                            <p style="font-size: 12px;"> <?php echo $cmtyName.' • '.$author.' • '.$timeDiff ?></p>
                             <div class="interactions">
                                 <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
                                     <span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
@@ -100,7 +115,7 @@ if($_POST['rowid']) {
                 <div class="modal-body">
                     <div class="container" style="padding-left: 15px;">
                         <div id="descrip"><?php echo $descrip ?></div>
-                        <p style="font-size: 12px;"><?php echo $cmtyName.' • '.$author.' • '.$age ?></p>
+                        <p style="font-size: 12px;"><?php echo $cmtyName.' • '.$author.' • '.$timeDiff ?></p>
                         <div class="interactions">
                             <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
                                 <span class="like-count"><?php echo $likes; ?></span>

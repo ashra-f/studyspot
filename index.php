@@ -4,6 +4,28 @@
 			- All post interaction btns update the top post interactions btns but not themselves
 -->
 
+<?php
+date_default_timezone_set('America/Detroit');
+function time_elapsed_string($datetime, $full = false) {
+	$seconds_ago = (time() - strtotime($datetime));
+
+	if ($seconds_ago >= 31536000) {
+		return intval($seconds_ago / 31536000) . " years ago";
+	} elseif ($seconds_ago >= 2419200) {
+		return intval($seconds_ago / 2419200) . " months ago";
+	} elseif ($seconds_ago >= 86400) {
+		return intval($seconds_ago / 86400) . " days ago";
+	} elseif ($seconds_ago >= 3600) {
+		return intval($seconds_ago / 3600) . " hours ago";
+	} elseif ($seconds_ago >= 60) {
+		return intval($seconds_ago / 60) . " minutes ago";
+	} else {
+		return "Posted less than a minute ago";
+	}
+}
+
+?>
+
 <?php 
 	session_start();
 	require 'scripts/db_handler.php';
@@ -267,17 +289,18 @@
 
 								$sql = "SELECT * FROM communities";								
 								$result = mysqli_query($connection, $sql);
-								$total_cmt_count = mysqli_num_rows($result);
+								$total_cmty_count = mysqli_num_rows($result);
 
 								$sql = "SELECT * FROM users";								
 								$result = mysqli_query($connection, $sql);
 								$total_member_count = mysqli_num_rows($result);
 
-								if ($total_cmt_count == 1) {
-									echo $total_cmt_count.' Community • ';
+								if ($total_cmty_count == 1) {
+									echo $total_cmty_count.' Community • ';
 								}
 								else {
-									echo $total_cmt_count.' Communities • ';
+									echo 232;
+									echo $total_cmty_count.' Communities • ';
 								}
 
 								if ($total_member_count == 1 && $total_post_count == 1) {
@@ -299,7 +322,7 @@
 
 					<!-- No Posts in Cmty -->
 					<?php
-						$query = "SELECT * FROM posts";
+						$query = "SELECT * FROM posts;";
 						$result = mysqli_query($connection, $query);
 						$total_rows = mysqli_num_rows($result);
 						if ($total_rows == 0) {
@@ -349,13 +372,13 @@
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
-											$timeDiff = date("H:i:s",strtotime($row['created_at'])); //date('m/d/Y h:i:s a', time()) - 
+											$timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 											$comments = $row['comments'];
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
 												$userid = $_SESSION['userID'];
-												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid." GROUP BY id;";
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
 												$count_status = $status_row['cntStatus'];
@@ -364,12 +387,12 @@
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
@@ -378,14 +401,14 @@
 										<li>
 											<a class="sticky-note">
 												<div class="sticky-note-info">
-													<small><?php echo $cmtyName?></small>
-													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid?>' data-method='<?php echo $methodType?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
+													<small><?php echo $cmtyName;?></small>
+													<btn class="bi bi-arrows-angle-expand" data-id='<?php echo $postid;?>' data-method='<?php echo $methodType;?>' data-bs-toggle="modal" data-bs-target="#noteModal"></btn>
 												</div>
 												<div class="sticky-note-title">
-													<h6><?php echo $title?></h6>
+													<h6><?php echo $title;?></h6>
 												</div>
 												<div class="sticky-note-info">
-													<small><?php echo $username?> • <?php if ($timeDiff < 1) { echo 'just now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+													<small><?php echo $username;?> • <?php echo $timeDiff; ?></small> 
 												</div>
 													<?php
 														if (!isset($_SESSION['userID'])) {
@@ -414,17 +437,17 @@
 																}
 															}
 													?>
-													<div class="interactions">
-														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
-															<span class="like-count"><?php echo $likes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
-																<span class="dislike-count"><?php echo $dislikes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
-															<span class="comment-count"><?php echo $comments?></span>
-														</button>
-													</div>
+														<div class="interactions">
+															<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
+																<span class="like-count"><?php echo $likes; ?></span>
+															</button>
+															<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
+																	<span class="dislike-count"><?php echo $dislikes; ?></span>
+															</button>
+															<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+																<span class="comment-count"><?php echo $comments?></span>
+															</button>
+														</div>
 													<?php
 														}
 														else {
@@ -471,13 +494,13 @@
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
-											$timeDiff = date("H:i:s",strtotime($row['created_at'])); // date('m/d/Y h:i:s a', time()) - 
+											$timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 											$comments = $row['comments'];
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
 												$userid = $_SESSION['userID'];
-												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid." GROUP BY id;";
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
 												$count_status = $status_row['cntStatus'];
@@ -486,12 +509,12 @@
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
@@ -507,7 +530,7 @@
 														</h5>
 													</div>
 													<div class="poster-info">
-														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php echo $timeDiff;?></small> 
 													</div>
 												</div>
 												<?php

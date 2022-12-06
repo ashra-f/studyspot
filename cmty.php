@@ -1,4 +1,26 @@
 <!-- Handles all community pages -->
+<?php
+date_default_timezone_set('America/Detroit');
+function time_elapsed_string($datetime, $full = false) {
+	$seconds_ago = (time() - strtotime($datetime));
+
+	if ($seconds_ago >= 31536000) {
+		return intval($seconds_ago / 31536000) . " years ago";
+	} elseif ($seconds_ago >= 2419200) {
+		return intval($seconds_ago / 2419200) . " months ago";
+	} elseif ($seconds_ago >= 86400) {
+		return intval($seconds_ago / 86400) . " days ago";
+	} elseif ($seconds_ago >= 3600) {
+		return intval($seconds_ago / 3600) . " hours ago";
+	} elseif ($seconds_ago >= 60) {
+		return intval($seconds_ago / 60) . " minutes ago";
+	} else {
+		return "Posted less than a minute ago";
+	}
+}
+
+?>
+
 <?php 
 	session_start();
 	require 'scripts/db_handler.php';
@@ -171,6 +193,7 @@
 									else {
 										while ($row = mysqli_fetch_array($results)) { 
 											if ($row['usr_id'] == $_SESSION['userID']) {
+												
 												echo '	<div style="display: flex;">
 																<a href="#" class="btn" id="leave-btn" data-id="'.$currUsr.'" style="background-color:#FFCB05; color: #00274C;">Leave</a>;
 																<button style="margin-left: 5px; color: #FFCB05; background-color: #00274C;" tabindex="-1" onclick="location.href=`create.php`" 
@@ -284,13 +307,13 @@
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
-											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
+											$timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 											$comments = $row['comments'];
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
 												$userid = $_SESSION['userID'];
-												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid." GROUP BY id;";
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
 												$count_status = $status_row['cntStatus'];
@@ -299,12 +322,12 @@
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
@@ -321,7 +344,7 @@
 													<h6><?php echo $title?></h6>
 												</div>
 												<div class="sticky-note-info">
-													<small><?php echo $username?> • <?php if ($timeDiff < 1) { echo 'just now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+													<small><?php echo $username?> • <?php echo $timeDiff;?></small> 
 												</div>
 													<?php
 														if (!isset($_SESSION['userID'])) {
@@ -418,12 +441,12 @@
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
-											$timeDiff = date('m/d/Y h:i:s a', time()) - date("H:i:s",strtotime($row['created_at']));
+											$timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 											$comments = $row['comments'];
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
-												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid." GROUP BY id;";
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
 												$count_status = $status_row['cntStatus'];
@@ -432,12 +455,12 @@
 													$type = $status_row['type'];
 												}
 							
-												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid;
+												$like_query = "SELECT COUNT(*) AS cntLikes FROM like_unlike WHERE type=1 and postid=".$postid." GROUP BY id;";
 												$like_result = mysqli_query($connection,$like_query);
 												$like_row = mysqli_fetch_array($like_result);
 												$total_likes = $like_row['cntLikes'];
 							
-												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid;
+												$unlike_query = "SELECT COUNT(*) AS cntUnlikes FROM like_unlike WHERE type=0 and postid=".$postid." GROUP BY id;";
 												$unlike_result = mysqli_query($connection,$unlike_query);
 												$unlike_row = mysqli_fetch_array($unlike_result);
 												$total_unlikes = $unlike_row['cntUnlikes'];
@@ -453,7 +476,7 @@
 														</h5>
 													</div>
 													<div class="poster-info">
-														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php echo $timeDiff;?></small> 
 													</div>
 												</div>
 												<?php
