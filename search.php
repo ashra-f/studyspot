@@ -1,3 +1,24 @@
+<?php
+date_default_timezone_set('America/Detroit');
+function time_elapsed_string($datetime, $full = false) {
+	$seconds_ago = (time() - strtotime($datetime));
+
+	if ($seconds_ago >= 31536000) {
+		return intval($seconds_ago / 31536000) . " years ago";
+	} elseif ($seconds_ago >= 2419200) {
+		return intval($seconds_ago / 2419200) . " months ago";
+	} elseif ($seconds_ago >= 86400) {
+		return intval($seconds_ago / 86400) . " days ago";
+	} elseif ($seconds_ago >= 3600) {
+		return intval($seconds_ago / 3600) . " hours ago";
+	} elseif ($seconds_ago >= 60) {
+		return intval($seconds_ago / 60) . " minutes ago";
+	} else {
+		return "just now";
+	}
+}
+
+?>
 <?php 
 	session_start();
 	readfile("scripts/header.php");
@@ -110,13 +131,13 @@
 											$description = $row['descr'];
 											$cmtyName = $row['community_name'];
 											$username = $row['author'];
-											$timeDiff = date("H:i:s",strtotime($row['created_at'])); // date('m/d/Y h:i:s a', time()) - 
+											$timeDiff = time_elapsed_string($row['created_at']); //date('m/d/Y h:i:s a', time()) - 
 											$comments = $row['comments'];
 											$postid = $row['id'];
 						
 											if (isset($_SESSION['userID'])) {
 												$userid = $_SESSION['userID'];
-												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid;
+												$status_query = "SELECT count(*) as cntStatus,type FROM like_unlike WHERE userid=".$userid." and postid=".$postid." GROUP BY id;";
 												$status_result = mysqli_query($connection,$status_query);
 												$status_row = mysqli_fetch_array($status_result);
 												$count_status = $status_row['cntStatus'];
@@ -146,7 +167,7 @@
 														</h5>
 													</div>
 													<div class="poster-info">
-														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php if ($timeDiff < 1) { echo 'Just Now';} else {echo $timeDiff.' hour(s) ago';} ?></small> 
+														<small><?php echo $cmtyName.' • Post by '.$username?> • <?php echo $timeDiff; ?></small> 
 													</div>
 												</div>
 												<?php
@@ -214,7 +235,7 @@
                         </div>
 					</div>
                     </div>
-                    <!-- Modals -->
+            <!-- Modals -->
 			<!-- Sticky Note Modal -->
 			<div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered fetched-data" style="width: 450px; height: 400px;">
