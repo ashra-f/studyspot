@@ -123,9 +123,10 @@ function time_elapsed_string($datetime, $full = false) {
 							<div class="container all-posts-wrapper">
 								<ul class="list-group all-posts">
 									<?php
-										
+										$methodType = 0;
 										$result = mysqli_query($connection, $sql);
 										while($row = mysqli_fetch_array($result)) {
+											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
 											$description = $row['descr'];
@@ -227,6 +228,7 @@ function time_elapsed_string($datetime, $full = false) {
 											</a>
 										</li>
 									<?php
+										$methodType++;
 										}
 									?>
 								</ul>

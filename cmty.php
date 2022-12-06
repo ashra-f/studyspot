@@ -432,9 +432,11 @@ function time_elapsed_string($datetime, $full = false) {
 
                                         mysqli_stmt_bind_param($statement, "s", $cmtyName);
                                         mysqli_stmt_execute(($statement));
+										$methodType = 0;
 
                                         $result = mysqli_stmt_get_result($statement);
 										while($row = mysqli_fetch_array($result)) {
+											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
 											//$cmtyID = $row['community_id'];
@@ -536,6 +538,7 @@ function time_elapsed_string($datetime, $full = false) {
 											</a>
 										</li>
 									<?php
+									$methodType++;
 										}
 									?>
 								</ul>
