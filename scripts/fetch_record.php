@@ -4,15 +4,15 @@ function time_elapsed_string($datetime, $full = false) {
 	$seconds_ago = (time() - strtotime($datetime));
 
 	if ($seconds_ago >= 31536000) {
-		return intval($seconds_ago / 31536000) . " years ago";
+		return intval($seconds_ago / 31536000)." years ago";
 	} elseif ($seconds_ago >= 2419200) {
-		return intval($seconds_ago / 2419200) . " months ago";
+		return intval($seconds_ago / 2419200)." months ago";
 	} elseif ($seconds_ago >= 86400) {
-		return intval($seconds_ago / 86400) . " days ago";
+		return intval($seconds_ago / 86400)." days ago";
 	} elseif ($seconds_ago >= 3600) {
-		return intval($seconds_ago / 3600) . " hours ago";
+		return intval($seconds_ago / 3600)." hours ago";
 	} elseif ($seconds_ago >= 60) {
-		return intval($seconds_ago / 60) . " minutes ago";
+		return intval($seconds_ago / 60)." minutes ago";
 	} else {
 		return "just now";
 	}
@@ -117,13 +117,13 @@ if($_POST['rowid']) {
                         <div id="descrip"><?php echo $descrip ?></div>
                         <p style="font-size: 12px;"><?php echo $cmtyName.' • '.$author.' • '.$timeDiff ?></p>
                         <div class="interactions">
-                            <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn" onclick="loginAlert()">
+                            <button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn">
                                 <span class="like-count"><?php echo $likes; ?></span>
                             </button>
-                            <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn" onclick="loginAlert()">
+                            <button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn">
                                     <span class="dislike-count"><?php echo $dislikes; ?></span>
                             </button>
-                            <button tabindex="-1" class="bi bi-chat-left-text interaction-btn"  data-bs-toggle="modal" data-bs-target="#commentModal">
+                            <button tabindex="-1" class="bi bi-chat-left-text interaction-btn">
                                 <span class="comment-count"><?php echo $comments?></span>
                             </button>
                         </div>
@@ -142,3 +142,6 @@ if($_POST['rowid']) {
 }
 ?>
 
+
+
+                                               

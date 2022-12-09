@@ -124,7 +124,21 @@ function time_elapsed_string($datetime, $full = false) {
 				<!-- User settings, logout -->
 				<div class="dropdown border-top user-settings">
 					<a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown">        
-						<img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
+					<?php 
+						// $sql = 'SELECT img_path FROM users WHERE username='.$_SESSION['username'];
+						// $results = mysqli_query($connection, $sql);
+						// if ($row = mysqli_fetch_array($results)) { 
+						// 	$img = $row['img_path'];
+						// 	if (empty($img)) {
+
+						// 	}
+						// 	else {
+						// 		echo '<img src = "data:image/png;base64,' . base64_encode($img) . '" width="24" height="24" class="rounded-circle"/>';
+						// 	}
+						// }
+					?>
+					
+					<img src="assets/imgs/homer.jpg" alt="mdo" width="24" height="24" class="rounded-circle">
 					</a>
 					<ul class="dropdown-menu text-small shadow settings-dropdown" aria-labelledby="dropdownUser3">
 						<b style="margin-left: 15px;">Welcome <?php echo $_SESSION['username']; ?>!</b>
@@ -272,11 +286,17 @@ function time_elapsed_string($datetime, $full = false) {
 						<div class="card-body" style="display: flex; align-items: center; flex-direction: column;">
 							<h5 class="card-title">Welcome to studySpot</h5>
 							<p class="card-text" style="width: 60%;">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-								Vel repellat quos quidem commodi excepturi hic! Beatae, necessitatibus enim 
-								possimus saepe quasi consectetur nobis? Veniam obcaecati voluptatem minima soluta, ut aliquid?
+								For students struggling to find information about specific topics such as tuition, 
+								class tutoring, advising for their degree, etc. It can open an easy way to speak to 
+								students that have gone through similar situations and what paths they took to overcome these issues.
 							</p>
+							<?php 
+							if (!isset($_SESSION['userID'])) {
+								echo('<a class="btn" id="join-btn" style="background-color:#FFCB05; color:#00274C; cursor: pointer;" onclick="loginAlert()">Add a Post</a>');
+							} else {
+							?>
 							<a href="create.php" class="btn" id="join-btn" style="background-color:#FFCB05; color:#00274C;">Add a Post</a>
+						<?php } ?>
 						</div>
 						<div class="card-footer text-muted">
 							<?php
@@ -299,7 +319,6 @@ function time_elapsed_string($datetime, $full = false) {
 									echo $total_cmty_count.' Community • ';
 								}
 								else {
-									echo 232;
 									echo $total_cmty_count.' Communities • ';
 								}
 
@@ -413,7 +432,7 @@ function time_elapsed_string($datetime, $full = false) {
 													<?php
 														if (!isset($_SESSION['userID'])) {
 															// get likes and dislikes for each post
-															$sql = 'SELECT * FROM posts where community_name=?;';
+															$sql = 'SELECT * FROM posts where id=?;';
 															$statement = mysqli_stmt_init($connection);
 
 															if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -421,7 +440,7 @@ function time_elapsed_string($datetime, $full = false) {
 																exit();
 															}
 															else {
-																mysqli_stmt_bind_param($statement, "s", $cmtyName);
+																mysqli_stmt_bind_param($statement, "s", $postid);
 																mysqli_stmt_execute(($statement));
 											
 																$results = mysqli_stmt_get_result($statement);
@@ -453,16 +472,51 @@ function time_elapsed_string($datetime, $full = false) {
 														else {
 													?>
 													<div class="interactions">
-														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
-															<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
-																<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
-															<span class="comment-count"><?php echo $comments?></span>
-														</button>
-													</div>
+														<?php 
+															// check if any button was clicked by this user
+															$sql= 'SELECT * FROM like_unlike WHERE userid='.$_SESSION['userID'].' AND postid='.$postid;
+															$results = mysqli_query($connection, $sql);
+
+															if ($row = mysqli_fetch_array($results)) {
+																$type1 = $row['type'];
+																if ($type1 == 0) { ?>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+																		<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-down-fill selected interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																			<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+																		<span class="comment-count"><?php echo $comments;?></span>
+																	</button>
+																<?php 
+																}
+																else { ?>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-up-fill selected interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+																		<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-down  interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																			<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+																		<span class="comment-count"><?php echo $comments;?></span>
+																	</button>
+																<?php 
+																}
+														?>
+												<?php }
+												else { ?>
+													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+														<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+															<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+														<span class="comment-count"><?php echo $comments;?></span>
+													</button>
+													<?php } ?>
+												</div>
 												<?php } ?>
 											</a>
 										</li>
@@ -488,7 +542,10 @@ function time_elapsed_string($datetime, $full = false) {
 									<?php
 										$query = "SELECT * FROM posts";
 										$result = mysqli_query($connection, $query);
+										$methodType = 0;
+
 										while($row = mysqli_fetch_array($result)) {
+											$methodType = $methodType % 3;
 											$title = $row['title'];
 											$type = -1;
 											$description = $row['descr'];
@@ -536,7 +593,7 @@ function time_elapsed_string($datetime, $full = false) {
 												<?php
 														if (!isset($_SESSION['userID'])) {
 															// get likes and dislikes for each post
-															$sql = 'SELECT * FROM posts where community_name=?;';
+															$sql = 'SELECT * FROM posts where id=?;';
 															$statement = mysqli_stmt_init($connection);
 
 															if (!mysqli_stmt_prepare($statement, $sql)) {
@@ -544,7 +601,7 @@ function time_elapsed_string($datetime, $full = false) {
 																exit();
 															}
 															else {
-																mysqli_stmt_bind_param($statement, "s", $cmtyName);
+																mysqli_stmt_bind_param($statement, "s", $postid);
 																mysqli_stmt_execute(($statement));
 											
 																$results = mysqli_stmt_get_result($statement);
@@ -576,20 +633,56 @@ function time_elapsed_string($datetime, $full = false) {
 														else {
 													?>
 													<div class="interactions">
-														<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
-															<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
-																<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
-														</button>
-														<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
-															<span class="comment-count"><?php echo $comments?></span>
-														</button>
-													</div>
+														<?php 
+															// check if any button was clicked by this user
+															$sql= 'SELECT * FROM like_unlike WHERE userid='.$_SESSION['userID'].' AND postid='.$postid;
+															$results = mysqli_query($connection, $sql);
+
+															if ($row = mysqli_fetch_array($results)) {
+																$type1 = $row['type'];
+																if ($type1 == 0) { ?>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+																		<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-down-fill selected interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																			<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+																		<span class="comment-count"><?php echo $comments;?></span>
+																	</button>
+																<?php 
+																}
+																else { ?>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-up-fill selected interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+																		<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-hand-thumbs-down  interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+																			<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+																	</button>
+																	<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+																		<span class="comment-count"><?php echo $comments;?></span>
+																	</button>
+																<?php 
+																}
+														?>
+												<?php }
+												else { ?>
+													<button tabindex="-1" class="bi bi-hand-thumbs-up interaction-btn like like_<?php echo $postid; ?>" id="like_<?php echo $postid; ?>">
+														<span class="like-count likes_<?php echo $postid; ?>" id="likes_<?php echo $postid; ?>"><?php echo $total_likes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-hand-thumbs-down interaction-btn unlike unlike_<?php echo $postid; ?>" id="unlike_<?php echo $postid; ?>">
+															<span class="dislike-count unlikes_<?php echo $postid; ?>" id="unlikes_<?php echo $postid; ?>"><?php echo $total_unlikes; ?></span>
+													</button>
+													<button tabindex="-1" class="bi bi-chat-left-text interaction-btn" data-id='<?php echo $postid?>' data-bs-toggle="modal" data-bs-target="#commentModal">
+														<span class="comment-count"><?php echo $comments;?></span>
+													</button>
+												<?php } ?>
+												</div>
 												<?php } ?>
 											</a>
 										</li>
 									<?php
+										$methodType++;
 										}
 									?>
 								</ul>

@@ -141,7 +141,7 @@ $(document).ready(function(){
                 bgcolor: bgcolor
             }, 
             success : function(data){
-            $('.fetched-data').html(data); // Show fetched data from database
+                $('.fetched-data').html(data); // Show fetched data from database
             }
         });
      });
@@ -173,6 +173,6 @@ function openLoginModal() {
 
 // Check if buttons are clicked
 $(document).ready(function() {
-
+    
 
 });

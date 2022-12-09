@@ -621,7 +621,8 @@ small {
 }
 
 #descrip {
-    height: 200px;
+    max-height: 215px;
+    min-height: 215px;
 }
 
 #descrip p {
